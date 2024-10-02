@@ -41,12 +41,12 @@
         <Compute
           #default="{ data: {labelClass, pageLabel} }"
           :data="{
-            labelClass: 'font-bold text-lg',
+            labelClass: 'text-gray-500 font-medium',
             pageLabel: $route.meta?.pageLabel || ''
           }"
         >
           <slot name="header" :labelClass="labelClass" :pageLabel="pageLabel">
-            <p :class="labelClass">{{ $t(pageLabel) }}</p>
+            <p :class="labelClass">{{ pageLabel }}</p>
           </slot>
         </Compute>
       </div>
@@ -67,7 +67,8 @@ const localeRouteName = useLocaleRouteName()
 
 const navigation = computed(() => [
   { label: t('navigation.home'), routeName: localeRouteName('index') },
-  { label: t('navigation.about'), routeName: localeRouteName('about') },
-  { label: t('navigation.contacts'), routeName: localeRouteName('contacts') }
+  { label: t('navigation.comparison'), routeName: localeRouteName('comparison') },
+  { label: t('navigation.calculator'), routeName: localeRouteName('calculator') },
+  { label: t('navigation.news'), routeName: localeRouteName('news') }
 ])
 </script>

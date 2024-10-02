@@ -1,9 +1,14 @@
 <template>
-  <div>About child 2</div>
+  <div>
+    <p> News </p>
+  </div>
 </template>
 
 <script lang="ts" setup>
+
 definePageMeta({
-  pageLabel: 'About child 2'
+  pageLabel: 'News',
+  navOrder: 1
 })
+
 </script>

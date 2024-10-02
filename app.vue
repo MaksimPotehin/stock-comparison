@@ -10,6 +10,7 @@
     </NuxtLayout>
   </ElConfigProvider>
 </template>
+
 <script lang="ts" setup>
 import type { TranslatePair } from 'element-plus/lib/locale'
 

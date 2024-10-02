@@ -1,5 +1,6 @@
 export const navigationMessages = {
   home: 'Home',
-  about: 'About',
-  contacts: 'Contacts'
+  comparison: 'Stocks comparison',
+  calculator: 'Invest calculator',
+  news: 'News'
 }

@@ -24,7 +24,5 @@ export default defineNuxtConfig({
       vueI18n: './i18n/i18n.config.ts'
     }],
     'unplugin-icons/nuxt'
-  ],
-
-  compatibilityDate: '2024-09-18'
+  ]
 })

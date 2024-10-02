@@ -1,7 +1,7 @@
 @forward 'element-plus/theme-chalk/src/common/var' with (
   $colors: (
     'primary': (
-      'base': #fd823E,
+      'base': #3b82f6,
     ),
     'success': (
       'base': #5E8A4F,
@@ -12,7 +12,10 @@
   ),
  );
 
+@use "element-plus/theme-chalk/src/var";
+@use "element-plus/theme-chalk/src/base";
 @use "element-plus/theme-chalk/src/button";
+
 @use "element-plus/theme-chalk/src/form";
 @use "element-plus/theme-chalk/src/form-item";
 @use "element-plus/theme-chalk/src/input";
@@ -26,7 +29,10 @@
 @use "element-plus/theme-chalk/src/checkbox";
 @use "element-plus/theme-chalk/src/checkbox-group";
 @use "element-plus/theme-chalk/src/radio";
+@use "element-plus/theme-chalk/src/radio-button";
 @use "element-plus/theme-chalk/src/radio-group";
 @use "element-plus/theme-chalk/src/popper";
 @use "element-plus/theme-chalk/src/card";
 @use "element-plus/theme-chalk/src/scrollbar";
+@use "element-plus/theme-chalk/src/dialog";
+@use "element-plus/theme-chalk/src/message-box";
