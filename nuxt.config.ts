@@ -3,7 +3,7 @@ import { localesConfig } from './i18n'
 export default defineNuxtConfig({
   runtimeConfig: {
     public: {
-      BASE_URL: process.env.BASE_URL
+      finnhubApiKey: process.env.FINNHUB_API_KEY
     }
   },
 

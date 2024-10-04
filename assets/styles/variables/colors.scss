@@ -1,0 +1,15 @@
+$color-primary: #adb5bd;
+$color-success: #5cd59e;
+$color-warning: #fda135;
+$color-danger: #f27363;
+$color-error: #D01E1E;
+$color-info: #00bff5;
+
+:root {
+  --color-primary: #{$color-primary};
+  --color-success: #{$color-success};
+  --color-warning: #{$color-warning};
+  --color-danger: #{$color-danger};
+  --color-error: #{$color-error};
+  --color-info: #{$color-info};
+}

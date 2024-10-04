@@ -1,59 +1,44 @@
 <template>
-  <div class="flex h-full">
-    <!-- SIDEBAR -->
-    <div class="w-[300px] border-r border-gray-300 flex flex-col">
-      <!-- LANG SWITCHER -->
-      <div class="h-20 flex items-center justify-center shrink-0 border-b border-gray-300 shadow px-5">
-        <client-only>
-          <el-select
-            v-model="locale"
-            @update:modelValue="navigateTo(switchLocalePath(locale))"
-          >
-            <el-option
-              v-for="l in locales"
-              :key="l.code"
-              :label="l.name"
-              :value="l.code"
-            />
-          </el-select>
-        </client-only>
-      </div>
-
-      <div class="flex-grow p-5">
-        <NuxtLink
-          v-for="item in navigation"
-          :key="item.label"
-          :to="{ name: item.routeName }"
-          :class="[
-            'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-            'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
-          ]"
-          active-class="bg-gray-100 text-gray-900"
-        >
-          {{ item.label }}
-        </NuxtLink>
-      </div>
+  <div class="flex items-center w-full gap-x-6 px-5 py-3">
+    <div class="logo w-12 h-12" />
+    <div class="flex flex-grow gap-x-3">
+      <NuxtLink
+        v-for="item in navigation"
+        :key="item.label"
+        :to="{ name: item.routeName }"
+        :class="[
+          'hover:bg-gray-600/60 flex items-center px-4 py-2 text-sm font-medium rounded-md transition-all'
+        ]"
+        active-class="bg-gray-600 text-white"
+      >
+        {{ item.label }}
+      </NuxtLink>
     </div>
 
-    <div class="flex-grow flex flex-col">
-      <!-- HEADER -->
-      <div class="shrink-0 flex items-center h-20 bg-white shadow border-b border-gray-300 px-5">
-        <Compute
-          #default="{ data: {labelClass, pageLabel} }"
-          :data="{
-            labelClass: 'text-gray-500 font-medium',
-            pageLabel: $route.meta?.pageLabel || ''
-          }"
-        >
-          <slot name="header" :labelClass="labelClass" :pageLabel="pageLabel">
-            <p :class="labelClass">{{ pageLabel }}</p>
-          </slot>
-        </Compute>
-      </div>
+    <client-only>
+      <div class="flex gap-x-4 w-[300px]">
+        <el-input v-model="search" />
 
+        <div class="flex flex-col">
+          <AppIconGbFlag
+            class="w-4 hover:brightness-90 cursor-pointer transition-all"
+            :class="locale === locales[0].code ? 'brightness-100' : 'brightness-50'"
+            @click="locale = locales[0].code"
+          />
+          <AppIconUkraineFlag
+            class="w-4 hover:brightness-90 cursor-pointer transition-all"
+            :class="locale === locales[1].code ? 'brightness-100' : 'brightness-50'"
+            @click="locale = locales[1].code"
+          />
+        </div>
+      </div>
+    </client-only>
+  </div>
+  <div class="flex h-full bg-gray-800">
+    <div class="flex-grow flex flex-col">
       <!-- MAIN -->
-      <main class="flex-grow p-5">
-        <slot />
+      <main class="flex-grow flex w-full h-full p-5">
+        <slot class="bg-gray-600" />
       </main>
     </div>
   </div>
@@ -65,10 +50,16 @@ const { locale, locales, t } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
 const localeRouteName = useLocaleRouteName()
 
+const search = ref()
+
 const navigation = computed(() => [
   { label: t('navigation.home'), routeName: localeRouteName('index') },
-  { label: t('navigation.comparison'), routeName: localeRouteName('comparison') },
   { label: t('navigation.calculator'), routeName: localeRouteName('calculator') },
+  { label: t('navigation.comparison'), routeName: localeRouteName('comparison') },
   { label: t('navigation.news'), routeName: localeRouteName('news') }
 ])
+
+watch(() => locale.value, newVal => {
+  navigateTo(switchLocalePath(newVal))
+})
 </script>

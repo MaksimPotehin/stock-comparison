@@ -1,15 +1,33 @@
+@use '../variables/colors';
+
 @forward 'element-plus/theme-chalk/src/common/var' with (
   $colors: (
     'primary': (
-      'base': #3b82f6,
+      'base': colors.$color-primary,
     ),
     'success': (
-      'base': #5E8A4F,
+      'base': colors.$color-success,
+    ),
+    'warning': (
+      'base': colors.$color-warning,
     ),
     'danger': (
-      'base': #fd3e3e,
+      'base': colors.$color-danger,
+    ),
+    'error': (
+      'base': colors.$color-error,
+    ),
+    'info': (
+      'base': colors.$color-info,
     ),
   ),
+  $input: (
+    'text-color': theme('colors.primary'),
+    'border-color':  theme('colors.gray.600'),
+    'hover-border-color': theme('colors.gray.500'),
+    'focus-border-color': theme('colors.gray.500'),
+    'bg-color': theme('colors.gray.600'),
+  )
  );
 
 @use "element-plus/theme-chalk/src/var";
