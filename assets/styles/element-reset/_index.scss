@@ -27,7 +27,13 @@
     'hover-border-color': theme('colors.gray.500'),
     'focus-border-color': theme('colors.gray.500'),
     'bg-color': theme('colors.gray.600'),
-  )
+  ),
+  $radio-button: (
+    'checked-bg-color':  colors.$color-info,
+    'checked-text-color':  #FFFFFF,
+    'checked-border-color':  colors.$color-info,
+    'disabled-checked-fill':  colors.$color-success,
+  ),
  );
 
 @use "element-plus/theme-chalk/src/var";

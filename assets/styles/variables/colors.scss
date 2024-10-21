@@ -1,12 +1,14 @@
 $color-primary: #adb5bd;
-$color-success: #5cd59e;
+$color-secondary: #D0D5DD;
+$color-success: #5bd49a;
 $color-warning: #fda135;
 $color-danger: #f27363;
-$color-error: #D01E1E;
+$color-error: hsl(0, 75%, 47%);
 $color-info: #00bff5;
 
 :root {
   --color-primary: #{$color-primary};
+  --color-secondary: #{$color-secondary};
   --color-success: #{$color-success};
   --color-warning: #{$color-warning};
   --color-danger: #{$color-danger};
