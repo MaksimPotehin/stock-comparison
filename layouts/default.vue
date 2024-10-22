@@ -41,7 +41,7 @@
 
     <div class="max-w-[1440px] w-full flex flex-col flex-grow overflow-auto m-auto p-5">
       <!-- MAIN -->
-      <main class="flex w-full flex-grow overflow-auto bg-gray-800 p-5 rounded-md">
+      <main class="flex w-full flex-grow overflow-hidden bg-gray-800 p-5 rounded-md">
         <slot />
       </main>
     </div>

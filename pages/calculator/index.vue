@@ -1,80 +1,109 @@
 <template>
-  <div сlass="flex-grow">
-    <div class="mb-8">
+  <div class="flex flex-col gap-y-8">
+    <div>
       <p class="text-warning text-2xl mb-4">Інвестиційний калькулятор</p>
       <p class="text-white-400 leading-7">
-        Розраховуйте прибуток із врахуванням складних відсотків
+        Розраховуйте прибуток із врахуванням складних відсотків.
         Цей калькулятор допоможе вам легко розрахувати зростання капіталу, показати динаміку на графіку та порівняти
         інвестиційні стратегії для досягнення найвищого результату.
       </p>
     </div>
 
-    <div class="">
-      <p class="mb-4">Введіть данні для розрухунків:</p>
-      <div class="max-w-[300px] border-r border-gray-500">
-        <el-form
-          label-position="top"
-          class="w-full max-w-[250px]"
-        >
-          <el-form-item class="mb-3" label="Реінвестування ">
-            <el-switch
-              v-model="formModel.reinvestment"
-              style="--el-switch-on-color: #13ce66; --el-switch-off-color: #adb5bd"
-            />
-          </el-form-item>
+    <div class="flex w-full h-full space-x-8 overflow-hidden">
+      <CalculatorForm v-model="formModel" />
 
-          <el-form-item class="flex-grow mb-3" label="Початковий депозит">
-            <el-input v-model.number="formModel.start" />
-          </el-form-item>
+      <div class="flex flex-col w-full h-full overflow-hidden">
+        <div class="flex items-center gap-x-3 mb-3">
+          <p>Оберіть спосіб перегляду результатів:</p>
 
-          <el-form-item class="flex-grow mb-3" :label="depositLabel + ' внесок'">
-            <el-input v-model.number="formModel.deposit" class="mb-2" />
-            <el-radio-group v-model="formModel.frequency">
-              <el-radio-button label="weekly">Щотижня</el-radio-button>
-              <el-radio-button label="monthly">Щомісяця</el-radio-button>
-            </el-radio-group>
-          </el-form-item>
+          <el-radio-group v-model="resultViewType">
+            <el-radio-button label="chart">Графік</el-radio-button>
+            <el-radio-button label="table">Таблиця</el-radio-button>
+          </el-radio-group>
+        </div>
 
-          <el-form-item class="flex-grow mb-3" label="Відсоткова ставка">
-            <el-input v-model.number="formModel.percent" />
-          </el-form-item>
-
-          <el-form-item class="flex-grow mb-3" label="Тривалість">
-            <el-input v-model.number="formModel.duration" class="mb-2" />
-            <el-radio-group v-model="formModel.durationUnit">
-              <el-radio-button label="weeks">Тижні</el-radio-button>
-              <el-radio-button label="months">Місяці</el-radio-button>
-              <el-radio-button label="years">Роки</el-radio-button>
-            </el-radio-group>
-          </el-form-item>
-
-          <el-form-item class="flex-grow" label="Інфляція">
-            <el-input v-model.number="formModel.inflation" class="mb-2" />
-          </el-form-item>
-        </el-form>
+        <div class="w-full h-full overflow-auto">
+          <CalculatorTable v-if="resultViewType === 'table'" :table-data="tableData" />
+          <div v-else class="w-full h-[1000px] bg-purple" />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { ref, computed } from 'vue'
+import CalculatorForm from './components/CalculatorForm.vue'
+import CalculatorTable from './components/CalculatorTable.vue'
 
 definePageMeta({
   pageLabel: 'Calculator',
   navOrder: 1
 })
 
+const resultViewType = ref('table')
+
 const formModel = ref({
-  start: 0,
+  start: 1000,
   deposit: 0,
-  percent: 0,
-  duration: 0,
-  frequency: '',
-  durationUnit: '',
+  percent: 10,
+  duration: 10,
+  frequency: 'monthly', // частота реінвестування
+  durationUnit: 'years', // одиниця тривалості інвестицій
   inflation: '',
   reinvestment: true
 })
 
-const depositLabel = computed(() => formModel.value.frequency === 'weekly' ? 'Щотижневий' : 'Щомісячний')
+// Computed property to calculate the table data based on user input
+const tableData = computed(() => {
+  const { duration, durationUnit, frequency, deposit } = formModel.value
+  let totalPeriods = 0
+  const start = formModel.value.start // Початкова сума
+  let currentAmount = start // Поточна сума для реінвестування
+
+  // Визначення загальної кількості періодів на основі тривалості та одиниці
+  if (durationUnit === 'years') {
+    totalPeriods = duration * (frequency === 'monthly' ? 12 : 52) // 12 місяців або 52 тижні на рік
+  } else if (durationUnit === 'months') {
+    totalPeriods = duration * (frequency === 'weekly' ? 4.33 : 1) // Перетворення місяців на тижні
+  } else if (durationUnit === 'weeks') {
+    totalPeriods = frequency === 'monthly' ? Math.floor(duration / 4.33) : duration // Округлення до меншого
+  }
+
+  // Генерація даних таблиці
+  const data = []
+  for (let record = 0; record < totalPeriods; record++) {
+    const currentDate = new Date()
+    currentDate.setDate(currentDate.getDate() + (frequency === 'weekly' ? record * 7 : record * 30)) // Корекція для тижнів або місяців
+
+    const interest = calculateInterest(currentAmount, formModel.value.percent, frequency) // Розрахунок відсотків за період
+    const totalAmount = currentAmount + interest // Загальна сума включаючи відсотки
+
+    // Додавання нового запису в масив даних
+    data.push({
+      period: record + 1, // Період (індекс з 1)
+      initialDeposit: currentAmount.toFixed(), // Поточна сума
+      interestPerPeriod: interest.toFixed(), // Відсотки за цей період
+      totalAmount: totalAmount.toFixed(), // Загальна сума після відсотків
+      date: currentDate.toLocaleDateString() // Формат дати за потребою
+    })
+
+    // Оновлення початкової суми для наступного періоду, якщо реінвестування
+    if (formModel.value.reinvestment) {
+      currentAmount = totalAmount // Реінвестування прибутку в загальну суму
+    }
+
+    // Додаємо депозит лише після обчислення поточного періоду
+    currentAmount += deposit
+  }
+
+  return data
+})
+
+// Function to calculate interest based on principal, rate, and frequency
+function calculateInterest (principal, rate, frequency) {
+  const interestRate = rate / 100 // Convert percentage to decimal
+  return principal * interestRate / (frequency === 'monthly' ? 12 : 52) // Adjust based on frequency
+}
 
 </script>
