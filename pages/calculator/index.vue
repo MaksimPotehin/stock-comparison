@@ -17,14 +17,14 @@
           <p>Select a view mode:</p>
 
           <el-radio-group v-model="resultViewType">
-            <el-radio-button label="chart">Chart</el-radio-button>
             <el-radio-button label="table">Table</el-radio-button>
+            <el-radio-button label="chart">Chart</el-radio-button>
           </el-radio-group>
         </div>
 
-        <div class="w-full h-full overflow-auto">
-          <CalculatorTable v-if="resultViewType === 'table'" :table-data="tableData" />
-          <div v-else class="w-full h-[1000px] bg-purple" />
+        <div class="w-full h-full overflow-hidden">
+          <TableModule v-if="resultViewType === 'table'" :data="tableData" :headings="headings" />
+          <CalculatorTable v-else :table-data="tableData" />
         </div>
       </div>
     </div>
@@ -39,7 +39,7 @@ import CalculatorTable from './components/CalculatorTable.vue'
 enum EFrequency {
   Weekly = 'weekly',
   Monthly = 'monthly',
-  Yearly = 'yearly' // Added yearly frequency
+  Yearly = 'yearly'
 }
 
 enum EDurationUnit {
@@ -83,6 +83,14 @@ const formModel = ref<IFormModel>({
   reinvestment: true
 })
 
+const headings = [
+  { value: 'period', label: 'Period', minWidth: 80 },
+  { value: 'date', label: 'Date', minWidth: 180 },
+  { value: 'initialDeposit', label: 'Acc value', minWidth: 180 },
+  { value: 'interestPerPeriod', label: 'Interest per period', minWidth: 180 },
+  { value: 'totalAmount', label: 'Total amount', minWidth: 180 }
+]
+
 // Computed property to calculate the table data based on user input
 const tableData = computed<ITableRecord[]>(() => {
   const { duration, durationUnit, frequency, deposit } = formModel.value
@@ -116,8 +124,8 @@ const tableData = computed<ITableRecord[]>(() => {
 
     // Add new record to the data array
     data.push({
-      date: currentDate.toLocaleDateString(), // Date format if needed
       period: record + 1, // Period (index starting from 1)
+      date: currentDate.toLocaleDateString(), // Date format if needed
       initialDeposit: currentAmount.toFixed(), // Current amount
       interestPerPeriod: interest.toFixed(), // Interest for this period
       totalAmount: totalAmount.toFixed() // Total amount after interest
