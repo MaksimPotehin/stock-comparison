@@ -3,9 +3,9 @@
     <div>
       <p class="text-warning text-2xl mb-4">Інвестиційний калькулятор</p>
       <p class="text-white-400 leading-7">
-        Розраховуйте прибуток із врахуванням складних відсотків.
-        Цей калькулятор допоможе вам легко розрахувати зростання капіталу, показати динаміку на графіку та порівняти
-        інвестиційні стратегії для досягнення найвищого результату.
+        Calculate profit with compound interest.
+        This calculator helps you easily calculate capital growth, visualize the dynamics on a graph, and compare
+        investment strategies to achieve the best result.
       </p>
     </div>
 
@@ -14,11 +14,11 @@
 
       <div class="flex flex-col w-full h-full overflow-hidden">
         <div class="flex items-center gap-x-3 mb-3">
-          <p>Оберіть спосіб перегляду результатів:</p>
+          <p>Select a view mode:</p>
 
           <el-radio-group v-model="resultViewType">
-            <el-radio-button label="chart">Графік</el-radio-button>
-            <el-radio-button label="table">Таблиця</el-radio-button>
+            <el-radio-button label="chart">Chart</el-radio-button>
+            <el-radio-button label="table">Table</el-radio-button>
           </el-radio-group>
         </div>
 
@@ -36,64 +36,99 @@ import { ref, computed } from 'vue'
 import CalculatorForm from './components/CalculatorForm.vue'
 import CalculatorTable from './components/CalculatorTable.vue'
 
+enum EFrequency {
+  Weekly = 'weekly',
+  Monthly = 'monthly',
+  Yearly = 'yearly' // Added yearly frequency
+}
+
+enum EDurationUnit {
+  Years = 'years',
+  Months = 'months',
+  Weeks = 'weeks'
+}
+
+interface IFormModel {
+  start: number
+  deposit: number
+  percent: number
+  duration: number
+  frequency: EFrequency
+  durationUnit: EDurationUnit
+  reinvestment: boolean
+}
+
+interface ITableRecord {
+  period: number
+  initialDeposit: string
+  interestPerPeriod: string
+  totalAmount: string
+  date: string
+}
+
 definePageMeta({
   pageLabel: 'Calculator',
   navOrder: 1
 })
 
-const resultViewType = ref('table')
+const resultViewType = ref<'chart' | 'table'>('table')
 
-const formModel = ref({
+const formModel = ref<IFormModel>({
   start: 1000,
   deposit: 0,
   percent: 10,
   duration: 10,
-  frequency: 'monthly', // частота реінвестування
-  durationUnit: 'years', // одиниця тривалості інвестицій
-  inflation: '',
+  frequency: EFrequency.Monthly, // Reinvestment frequency
+  durationUnit: EDurationUnit.Years, // Investment duration unit
   reinvestment: true
 })
 
 // Computed property to calculate the table data based on user input
-const tableData = computed(() => {
+const tableData = computed<ITableRecord[]>(() => {
   const { duration, durationUnit, frequency, deposit } = formModel.value
   let totalPeriods = 0
-  const start = formModel.value.start // Початкова сума
-  let currentAmount = start // Поточна сума для реінвестування
+  const start = formModel.value.start // Initial amount
+  let currentAmount = start // Current amount for reinvestment
 
-  // Визначення загальної кількості періодів на основі тривалості та одиниці
-  if (durationUnit === 'years') {
-    totalPeriods = duration * (frequency === 'monthly' ? 12 : 52) // 12 місяців або 52 тижні на рік
-  } else if (durationUnit === 'months') {
-    totalPeriods = duration * (frequency === 'weekly' ? 4.33 : 1) // Перетворення місяців на тижні
-  } else if (durationUnit === 'weeks') {
-    totalPeriods = frequency === 'monthly' ? Math.floor(duration / 4.33) : duration // Округлення до меншого
+  // Determine the total number of periods based on duration and unit
+  if (durationUnit === EDurationUnit.Years) {
+    totalPeriods = duration * (frequency === EFrequency.Monthly ? 12 : frequency === EFrequency.Weekly ? 52 : 1) // 12 months, 52 weeks, or 1 year
+  } else if (durationUnit === EDurationUnit.Months) {
+    totalPeriods = duration * (frequency === EFrequency.Weekly ? 4.33 : frequency === EFrequency.Yearly ? 1 / 12 : 1) // Convert months to weeks or yearly
+  } else if (durationUnit === EDurationUnit.Weeks) {
+    totalPeriods = frequency === EFrequency.Monthly
+      ? Math.floor(duration / 4.33)
+      : frequency === EFrequency.Yearly
+        ? Math.floor(duration / 52)
+        : duration // Round down for weeks
   }
 
-  // Генерація даних таблиці
-  const data = []
+  // Generate table data
+  const data: ITableRecord[] = []
   for (let record = 0; record < totalPeriods; record++) {
     const currentDate = new Date()
-    currentDate.setDate(currentDate.getDate() + (frequency === 'weekly' ? record * 7 : record * 30)) // Корекція для тижнів або місяців
+    currentDate.setDate(currentDate.getDate() + (frequency === EFrequency.Weekly ? record * 7 : 0)) // Adjust for weeks
+    currentDate.setMonth(currentDate.getMonth() + (frequency === EFrequency.Monthly ? record : 0)) // Adjust for months
+    currentDate.setFullYear(currentDate.getFullYear() + (frequency === EFrequency.Yearly ? record : 0)) // Adjust for years
 
-    const interest = calculateInterest(currentAmount, formModel.value.percent, frequency) // Розрахунок відсотків за період
-    const totalAmount = currentAmount + interest // Загальна сума включаючи відсотки
+    const interest = calculateInterest(currentAmount, formModel.value.percent, frequency) // Calculate interest per period
+    const totalAmount = currentAmount + interest // Total amount including interest
 
-    // Додавання нового запису в масив даних
+    // Add new record to the data array
     data.push({
-      period: record + 1, // Період (індекс з 1)
-      initialDeposit: currentAmount.toFixed(), // Поточна сума
-      interestPerPeriod: interest.toFixed(), // Відсотки за цей період
-      totalAmount: totalAmount.toFixed(), // Загальна сума після відсотків
-      date: currentDate.toLocaleDateString() // Формат дати за потребою
+      date: currentDate.toLocaleDateString(), // Date format if needed
+      period: record + 1, // Period (index starting from 1)
+      initialDeposit: currentAmount.toFixed(), // Current amount
+      interestPerPeriod: interest.toFixed(), // Interest for this period
+      totalAmount: totalAmount.toFixed() // Total amount after interest
     })
 
-    // Оновлення початкової суми для наступного періоду, якщо реінвестування
+    // Update the initial amount for the next period if reinvesting
     if (formModel.value.reinvestment) {
-      currentAmount = totalAmount // Реінвестування прибутку в загальну суму
+      currentAmount = totalAmount // Reinvest profit into total amount
     }
 
-    // Додаємо депозит лише після обчислення поточного періоду
+    // Add deposit only after calculating the current period
     currentAmount += deposit
   }
 
@@ -101,9 +136,16 @@ const tableData = computed(() => {
 })
 
 // Function to calculate interest based on principal, rate, and frequency
-function calculateInterest (principal, rate, frequency) {
+function calculateInterest (principal: number, rate: number, frequency: EFrequency): number {
   const interestRate = rate / 100 // Convert percentage to decimal
-  return principal * interestRate / (frequency === 'monthly' ? 12 : 52) // Adjust based on frequency
+  if (frequency === EFrequency.Monthly) {
+    return principal * interestRate / 12 // Adjust based on monthly frequency
+  } else if (frequency === EFrequency.Weekly) {
+    return principal * interestRate / 52 // Adjust based on weekly frequency
+  } else if (frequency === EFrequency.Yearly) {
+    return principal * interestRate // Adjust based on yearly frequency
+  }
+  return 0
 }
 
 </script>

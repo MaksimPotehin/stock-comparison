@@ -1,5 +1,13 @@
 <template>
-  <el-table class="rounded" :data="tableData" border style="width: 100%">
+  <el-table
+    class="rounded"
+    :data="tableData"
+    border
+    show-summary
+    sum-text="Sum"
+    height="100%"
+    style="width: 100%"
+  >
     <el-table-column
       v-for="key in getTableColumns"
       :key="key"
