@@ -32,7 +32,7 @@
     'checked-bg-color':  colors.$color-info,
     'checked-text-color':  #FFFFFF,
     'checked-border-color':  colors.$color-info,
-    'disabled-checked-fill':  colors.$color-success,
+    'disabled-checked-fill':  theme('colors.gray.500'),
   ),
  );
 

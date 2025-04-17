@@ -1,43 +1,49 @@
 <template>
   <div class="flex-shrink-0 border-r border-gray-500 pr-8">
-    <p class="mb-4">Введіть данні для розрахунків:</p>
-
+    <p class="mb-4">Введіть дані для розрахунків:</p>
     <div class="w-full max-w-[300px]">
-      <el-form
-        v-model="modelValue"
-        label-position="top"
-        class="w-full"
-      >
+      <el-form v-model="modelValue" label-position="top" class="w-full">
+        <!-- Реінвестування -->
         <el-form-item class="mb-3" label="Реінвестування">
           <el-switch
             v-model="modelValue.reinvestment"
-            style="--el-switch-on-color: #13ce66; --el-switch-off-color: #adb5bd"
+            class="mb-2"
+            style="--el-switch-on-color: #00bff5; --el-switch-off-color: #adb5bd"
           />
+          <el-radio-group v-model="modelValue.reinvestmentFrequency" :disabled="!modelValue.reinvestment">
+            <el-radio-button :value="EFrequency.Weekly">Щотижня</el-radio-button>
+            <el-radio-button :value="EFrequency.Monthly">Щомісяця</el-radio-button>
+            <el-radio-button :value="EFrequency.Yearly">Щороку</el-radio-button>
+          </el-radio-group>
         </el-form-item>
 
+        <!-- Початковий депозит -->
         <el-form-item class="flex-grow mb-3" label="Початковий депозит">
           <el-input v-model.number="modelValue.start" />
         </el-form-item>
 
-        <el-form-item class="flex-grow mb-3" :label="depositLabel + ' внесок і реінвестування'">
+        <!-- Щомісячний/Щотижневий/Щорічний внесок -->
+        <el-form-item class="flex-grow mb-3" :label="depositLabel + ' внесок'">
           <el-input v-model.number="modelValue.deposit" class="mb-2" />
-          <el-radio-group v-model="modelValue.frequency">
-            <el-radio-button label="weekly">Щотижня</el-radio-button>
-            <el-radio-button label="monthly">Щомісяця</el-radio-button>
-            <el-radio-button label="yearly">Щороку</el-radio-button>
+          <el-radio-group v-model="modelValue.depositFrequency">
+            <el-radio-button :value="EFrequency.Weekly">Щотижня</el-radio-button>
+            <el-radio-button :value="EFrequency.Monthly">Щомісяця</el-radio-button>
+            <el-radio-button :value="EFrequency.Yearly">Щороку</el-radio-button>
           </el-radio-group>
         </el-form-item>
 
-        <el-form-item class="flex-grow mb-3" label="Відсоткова ставка">
+        <!-- Річна відсоткова ставка -->
+        <el-form-item class="flex-grow mb-3" label="Річна відсоткова ставка">
           <el-input v-model.number="modelValue.percent" />
         </el-form-item>
 
+        <!-- Тривалість -->
         <el-form-item class="flex-grow mb-3" label="Тривалість">
           <el-input v-model.number="modelValue.duration" class="mb-2" />
           <el-radio-group v-model="modelValue.durationUnit">
-            <el-radio-button label="weeks">Тижні</el-radio-button>
-            <el-radio-button label="months">Місяці</el-radio-button>
-            <el-radio-button label="years">Роки</el-radio-button>
+            <el-radio-button :value="EDurationUnit.Weeks">Тижні</el-radio-button>
+            <el-radio-button :value="EDurationUnit.Months">Місяці</el-radio-button>
+            <el-radio-button :value="EDurationUnit.Years">Роки</el-radio-button>
           </el-radio-group>
         </el-form-item>
       </el-form>
@@ -47,13 +53,15 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
+import type { IFormModel } from '../types'
+import { EFrequency, EDurationUnit } from '../types'
 
-const modelValue = defineModel<any>({ required: true })
+const modelValue = defineModel<IFormModel>({ required: true })
 
-// Adjust the label for deposit based on frequency
+// Динамічний підпис для внеску
 const depositLabel = computed(() => {
-  if (modelValue.value.frequency === 'weekly') return 'Щотижневий'
-  if (modelValue.value.frequency === 'monthly') return 'Щомісячний'
+  if (modelValue.value.depositFrequency === EFrequency.Weekly) return 'Щотижневий'
+  if (modelValue.value.depositFrequency === EFrequency.Monthly) return 'Щомісячний'
   return 'Щорічний'
 })
 </script>
