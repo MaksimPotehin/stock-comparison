@@ -45,26 +45,50 @@ function validateDisplayPeriods (duration: number, durationUnit: TTimeUnit, disp
 
 /** Основна функція симуляції інвестицій */
 export function simulateInvestment (params: IInvestmentParameters): IInvestmentResult[] {
+  // Set default values for undefined parameters
+  const safeParams = {
+    ...params,
+    initialDeposit: params.initialDeposit || 0,
+    contributionAmount: params.contributionAmount || 0,
+    annualInterestRate: params.annualInterestRate || 0,
+    duration: params.duration || 0
+  }
+
   const results: IInvestmentResult[] = []
   let currentDate = new Date()
-  let totalBalance = params.initialDeposit
-  let accumulatedDeposits = params.initialDeposit // Track only deposits
+  let totalBalance = safeParams.initialDeposit
+  let accumulatedDeposits = safeParams.initialDeposit
   let accumulatedInterest = 0
   let displayPeriodInterest = 0
 
+  // Return empty results if duration is 0
+  if (safeParams.duration === 0) {
+    return [{
+      period: 1,
+      date: currentDate,
+      deposits: accumulatedDeposits,
+      periodInterest: 0,
+      totalBalance
+    }]
+  }
+
   // Convert annual rate to decimal and get weekly rate
-  const annualRate = params.annualInterestRate / 100
+  const annualRate = safeParams.annualInterestRate / 100
   const monthlyRate = annualRate / 12
   const weeklyRate = monthlyRate / 4
 
   // Calculate total weeks for simulation
-  const totalWeeks = convertDurationToWeeks(params.duration, params.durationUnit)
+  const totalWeeks = convertDurationToWeeks(safeParams.duration, safeParams.durationUnit)
 
   // Define display period in weeks
-  const displayPeriodInWeeks = getDisplayPeriodInWeeks(params.displayedPeriod)
+  const displayPeriodInWeeks = getDisplayPeriodInWeeks(safeParams.displayedPeriod)
 
   // Calculate total display periods
-  const totalDisplayPeriods = validateDisplayPeriods(params.duration, params.durationUnit, params.displayedPeriod)
+  const totalDisplayPeriods = validateDisplayPeriods(
+    safeParams.duration,
+    safeParams.durationUnit,
+    safeParams.displayedPeriod
+  )
 
   let lastDisplayPeriod = 0
   let weekInPeriod = 0
@@ -75,18 +99,18 @@ export function simulateInvestment (params: IInvestmentParameters): IInvestmentR
 
     // Add contributions based on frequency
     if (week > 1) { // Skip first week as we have initial deposit
-      const contributionInterval = getIntervalInWeeks(params.contributionPeriod)
+      const contributionInterval = getIntervalInWeeks(safeParams.contributionPeriod)
       if (week % contributionInterval === 0) {
-        accumulatedDeposits += params.contributionAmount
-        totalBalance += params.contributionAmount
+        accumulatedDeposits += safeParams.contributionAmount
+        totalBalance += safeParams.contributionAmount
       }
     }
 
     // Calculate interest for this week
     const weeklyInterest = totalBalance * weeklyRate
 
-    if (params.reinvesting) {
-      const reinvestInterval = getIntervalInWeeks(params.reinvestingPeriod)
+    if (safeParams.reinvesting) {
+      const reinvestInterval = getIntervalInWeeks(safeParams.reinvestingPeriod)
       if (week % reinvestInterval === 0) {
         // Add accumulated interest at reinvestment period
         totalBalance += accumulatedInterest + weeklyInterest
@@ -116,7 +140,7 @@ export function simulateInvestment (params: IInvestmentParameters): IInvestmentR
           date: new Date(currentDate),
           deposits: accumulatedDeposits,
           periodInterest: displayPeriodInterest,
-          totalBalance: params.reinvesting ? totalBalance : totalBalance + accumulatedInterest
+          totalBalance: safeParams.reinvesting ? totalBalance : totalBalance + accumulatedInterest
         })
 
         lastDisplayPeriod = currentDisplayPeriod
