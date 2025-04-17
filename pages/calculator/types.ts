@@ -28,3 +28,26 @@ export interface ITableRecord {
   interestPerPeriod: string
   totalAmount: string
 }
+
+export type TTimeUnit = 'weeks' | 'months' | 'years'
+export type TFrequency = 'weekly' | 'monthly' | 'yearly'
+
+export interface IInvestmentResult {
+  period: number
+  date: Date
+  deposits: number
+  periodInterest: number
+  totalBalance: number
+}
+
+export interface IInvestmentParameters {
+  initialDeposit: number
+  contributionAmount: number
+  contributionPeriod: TFrequency
+  annualInterestRate: number
+  duration: number
+  durationUnit: TTimeUnit
+  reinvesting: boolean
+  reinvestingPeriod: TFrequency
+  displayedPeriod: TTimeUnit
+}

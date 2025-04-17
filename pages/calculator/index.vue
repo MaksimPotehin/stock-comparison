@@ -21,22 +21,13 @@
               <el-radio-button value="chart">Chart</el-radio-button>
             </el-radio-group>
           </div>
-
-          <div v-if="resultViewType === 'table'" class="flex items-center gap-x-3 mb-3">
-            <p>Period view:</p>
-            <el-radio-group v-model="tablePeriodView">
-              <el-radio-button :value="EFrequency.Weekly">Week</el-radio-button>
-              <el-radio-button :value="EFrequency.Monthly">Month</el-radio-button>
-              <el-radio-button :value="EFrequency.Yearly">Year</el-radio-button>
-            </el-radio-group>
-          </div>
         </div>
 
         <div class="w-full h-full overflow-hidden">
           <!-- Відображення таблиці -->
           <TableModule
             v-if="resultViewType === 'table'"
-            :key="tableData.length + tablePeriodView"
+            :key="tableData.length"
             :data="tableData"
             :headings="headings"
           />
@@ -56,8 +47,9 @@ import { ref, computed } from 'vue'
 import CalculatorForm from './components/CalculatorForm.vue'
 import CalculatorChart from './components/CalculatorChart.vue'
 import TableModule from '@/components/TableModule.vue'
-import { simulateInvestment, type InvestmentParameters, type InvestmentResult } from '~/utils/investment-calculator'
-import { EFrequency, EDurationUnit, type IFormModel, type ITableRecord } from './types'
+import { EDurationUnit, EFrequency } from './types'
+import type { IFormModel, ITableRecord, IInvestmentResult, IInvestmentParameters, TTimeUnit } from './types'
+import { simulateInvestment } from '@/utils/investment-calculator'
 
 // Початкові значення форми
 const formModel = ref<IFormModel>({
@@ -73,7 +65,6 @@ const formModel = ref<IFormModel>({
 
 // Режим відображення результатів
 const resultViewType = ref<'chart' | 'table'>('table')
-const tablePeriodView = ref<EFrequency>(EFrequency.Monthly)
 
 // Заголовки таблиці
 const headings = [
@@ -88,26 +79,20 @@ const headings = [
 const validateInputs = (model: IFormModel): boolean => {
   if (model.start < 0) return false
   if (model.deposit < 0) return false
-  if (model.percent < 0 || model.percent > 100) return false
   if (model.duration <= 0) return false
   return true
 }
 
-/**
- * Обгортка для вибірки даних із симуляції
- * – оскільки наша функція симуляції працює за тижневими періодами,
- *   ми вибираємо записи згідно з обраним "tablePeriodView"
- */
-function sampleResults (results: InvestmentResult[], frequency: EFrequency): InvestmentResult[] {
-  let interval = 1
-  if (frequency === EFrequency.Weekly) interval = 1
-  else if (frequency === EFrequency.Monthly) interval = 4
-  else if (frequency === EFrequency.Yearly) interval = 52
-  return results.filter((_, index) => index % interval === 0)
-}
-
 // Перетворення даних форми у параметри для симуляції
-const simulationParams = computed<InvestmentParameters>(() => {
+const simulationParams = computed<IInvestmentParameters>(() => {
+  // Визначення періоду відображення на основі вибраної одиниці тривалості
+  let displayPeriod: TTimeUnit
+  if (formModel.value.durationUnit === EDurationUnit.Weeks) {
+    displayPeriod = 'weeks'
+  } else {
+    displayPeriod = 'months' // і для місяців, і для років показуємо щомісячні дані
+  }
+
   const params = {
     reinvesting: formModel.value.reinvestment,
     reinvestingPeriod: formModel.value.reinvestmentFrequency as 'weekly' | 'monthly' | 'yearly',
@@ -117,14 +102,7 @@ const simulationParams = computed<InvestmentParameters>(() => {
     annualInterestRate: formModel.value.percent,
     duration: formModel.value.duration,
     durationUnit: formModel.value.durationUnit as 'weeks' | 'months' | 'years',
-    resultViewMode: resultViewType.value,
-    displayedPeriod: (
-      tablePeriodView.value === EFrequency.Weekly
-        ? 'week'
-        : tablePeriodView.value === EFrequency.Monthly
-          ? 'month'
-          : 'year'
-    ) as 'week' | 'month' | 'year'
+    displayedPeriod: displayPeriod
   }
 
   if (!validateInputs(formModel.value)) {
@@ -141,7 +119,7 @@ const simulationParams = computed<InvestmentParameters>(() => {
 })
 
 // Результати симуляції
-const simulationResults = computed<InvestmentResult[]>(() => {
+const simulationResults = computed<IInvestmentResult[]>(() => {
   console.log('Simulation params changed:', simulationParams.value)
   const results = simulateInvestment(simulationParams.value)
   console.log('Simulation results:', results)
@@ -150,8 +128,7 @@ const simulationResults = computed<InvestmentResult[]>(() => {
 
 // Обчислення даних для таблиці
 const tableData = computed<ITableRecord[]>(() => {
-  const sampled = sampleResults(simulationResults.value, tablePeriodView.value)
-  return sampled.map(result => ({
+  return simulationResults.value.map(result => ({
     period: result.period,
     date: result.date.toLocaleDateString(),
     initialDeposit: parseFloat(result.deposits?.toString() || '0').toFixed(2),
