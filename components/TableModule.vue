@@ -136,28 +136,29 @@ function calculateSummary ({ columns, data }: { columns: ITableColumn[]; data: T
       // Acc value: беремо значення з останнього рядка
       const lastRow = data[data.length - 1]
       const value = lastRow?.initialDeposit
-      return value !== undefined && value !== null ? parseFloat(value.toString()).toFixed(2) : '0.00'
+      return value !== undefined && value !== null ? value : '0.00'
     } else if (column.property === 'totalAmount') {
       // Total amount: останнє значення або сума Acc value + всі відсотки
       const lastRow = data[data.length - 1]
       if (lastRow?.totalAmount !== undefined && lastRow?.totalAmount !== null) {
-        return parseFloat(lastRow.totalAmount.toString()).toFixed(2)
+        return lastRow.totalAmount
       }
       const totalAccValue = data.reduce((sum, row: T) => {
         const value = row?.initialDeposit
-        return sum + (value !== undefined && value !== null ? parseFloat(value.toString()) : 0)
+        return sum + (value !== undefined && value !== null ? Number(value.replace(/,/g, '')) : 0)
       }, 0)
       const totalInterest = data.reduce((sum, row: T) => {
         const value = row?.interestPerPeriod
-        return sum + (value !== undefined && value !== null ? parseFloat(value.toString()) : 0)
+        return sum + (value !== undefined && value !== null ? Number(value.replace(/,/g, '')) : 0)
       }, 0)
-      return (totalAccValue + totalInterest).toFixed(2)
+      return (totalAccValue + totalInterest)
+        .toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
     } else if (column.property === 'interestPerPeriod') {
       // InterestPerPeriod: сума всіх відсотків
       return data.reduce((sum, row: T) => {
         const value = row?.interestPerPeriod
-        return sum + (value !== undefined && value !== null ? parseFloat(value.toString()) : 0)
-      }, 0).toFixed(2)
+        return sum + (value !== undefined && value !== null ? Number(value.replace(/,/g, '')) : 0)
+      }, 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
     }
     return ''
   })

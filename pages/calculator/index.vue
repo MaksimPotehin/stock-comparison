@@ -51,7 +51,7 @@ import { simulateInvestment } from '@/utils/investment-calculator'
 // Початкові значення форми
 const formModel = ref<IFormModel>({
   start: 1000,
-  deposit: 100,
+  deposit: 0,
   percent: 12,
   duration: 1,
   depositFrequency: EFrequency.Monthly,
@@ -129,9 +129,9 @@ const tableData = computed<ITableRecord[]>(() => {
   return simulationResults.value.map(result => ({
     period: result.period,
     date: result.date.toLocaleDateString(),
-    initialDeposit: parseFloat(result.deposits?.toString() || '0').toFixed(2),
-    interestPerPeriod: parseFloat(result.periodInterest?.toString() || '0').toFixed(2),
-    totalAmount: parseFloat(result.totalBalance?.toString() || '0').toFixed(2)
+    initialDeposit: parseFloat(result.deposits?.toString() || '0').toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+    interestPerPeriod: parseFloat(result.periodInterest?.toString() || '0').toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+    totalAmount: parseFloat(result.totalBalance?.toString() || '0').toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
   }))
 })
 </script>
