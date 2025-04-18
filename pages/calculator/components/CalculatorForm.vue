@@ -35,7 +35,7 @@
 
         <!-- Річна відсоткова ставка -->
         <el-form-item class="flex-grow mb-3" :label="$t('calculator.form.annualInterestRate')">
-          <el-input v-model.number="modelValue.percent" type="number" min="0" />
+          <el-input v-model.number="modelValue.percent" />
         </el-form-item>
 
         <!-- Тривалість -->
