@@ -1,3 +1,3 @@
 export const generalMessages = {
-  welcome: 'Bienvenue'
+  welcome: 'Вітаємо'
 }

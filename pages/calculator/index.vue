@@ -1,11 +1,8 @@
 <template>
-  <div class="flex flex-col gap-y-8">
+  <div class="w-full flex flex-col gap-y-8">
     <div>
-      <p class="text-warning text-2xl mb-4">Інвестиційний калькулятор</p>
-      <p class="text-white-400 leading-7">
-        Calculate profit with compound interest. This calculator helps you easily calculate capital growth,
-        visualize the dynamics on a graph, and compare investment strategies to achieve the best result.
-      </p>
+      <p class="text-warning text-2xl mb-4">{{ $t('calculator.title') }}</p>
+      <p class="text-white-400 leading-7">{{ $t('calculator.description') }}</p>
     </div>
 
     <div class="flex w-full h-full space-x-8 overflow-hidden">
@@ -15,10 +12,10 @@
       <div class="flex flex-col w-full h-full overflow-hidden">
         <div class="flex items-center gap-x-10">
           <div class="flex items-center gap-x-3 mb-3">
-            <p>View mode:</p>
+            <p>{{ $t('calculator.viewMode') }}:</p>
             <el-radio-group v-model="resultViewType">
-              <el-radio-button value="table">Table</el-radio-button>
-              <el-radio-button value="chart">Chart</el-radio-button>
+              <el-radio-button value="table">{{ $t('calculator.table') }}</el-radio-button>
+              <el-radio-button value="chart">{{ $t('calculator.chart') }}</el-radio-button>
             </el-radio-group>
           </div>
         </div>
@@ -68,11 +65,11 @@ const resultViewType = ref<'chart' | 'table'>('table')
 
 // Заголовки таблиці
 const headings = [
-  { value: 'period', label: 'Period', minWidth: 80 },
-  { value: 'date', label: 'Date', minWidth: 180 },
-  { value: 'initialDeposit', label: 'Acc Value', minWidth: 180 },
-  { value: 'interestPerPeriod', label: 'Interest per period', minWidth: 180 },
-  { value: 'totalAmount', label: 'Total Amount', minWidth: 180 }
+  { value: 'period', label: 'calculator.tableHeaders.period', minWidth: 80 },
+  { value: 'date', label: 'calculator.tableHeaders.date', minWidth: 180 },
+  { value: 'initialDeposit', label: 'calculator.tableHeaders.accValue', minWidth: 180 },
+  { value: 'interestPerPeriod', label: 'calculator.tableHeaders.interestPerPeriod', minWidth: 180 },
+  { value: 'totalAmount', label: 'calculator.tableHeaders.totalAmount', minWidth: 180 }
 ]
 
 // Валідація вхідних даних
@@ -80,6 +77,7 @@ const validateInputs = (model: IFormModel): boolean => {
   if (model.start < 0) return false
   if (model.deposit < 0) return false
   if (model.duration <= 0) return false
+  if (model.percent < 0) return false
   return true
 }
 

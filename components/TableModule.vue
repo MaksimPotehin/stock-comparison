@@ -8,7 +8,7 @@
       height="100%"
       style="width: 100%"
       show-summary
-      sum-text="Sum"
+      :sum-text="$t('calculator.tableHeaders.sum')"
       :summary-method="calculateSummary"
       :row-key="rowKey"
       :border="withBorder"
@@ -38,7 +38,7 @@
       >
         <template #header="{ column, $index }">
           <slot :name="`${heading.value}_heading`" :column="column" :index="$index">
-            {{ heading.label }}
+            {{ $t(heading.label) }}
           </slot>
         </template>
 
@@ -53,7 +53,7 @@
               v-if="!row[heading.value] || (heading.formatter && !heading.formatter(row[heading.value]))"
               type="warning"
             >
-              Not defined
+              {{ $t('calculator.tableHeaders.notDefined') }}
             </el-tag>
             <span v-else :class="heading.colClassName || 'text-black-600'">
               {{

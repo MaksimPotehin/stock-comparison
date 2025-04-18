@@ -1,2 +1,4 @@
-export * from './en'
-export * from './ua'
+import { en } from './en'
+import { ua } from './ua'
+
+export { en, ua }

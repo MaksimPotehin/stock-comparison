@@ -1,4 +1,4 @@
-import { en, fr } from './messages'
+import { en, ua } from './messages'
 
 export default defineI18nConfig(() => ({
   legacy: false,
@@ -12,7 +12,7 @@ export default defineI18nConfig(() => ({
         day: '2-digit'
       }
     },
-    de: {
+    ua: {
       short: {
         year: 'numeric',
         month: '2-digit',
@@ -22,7 +22,7 @@ export default defineI18nConfig(() => ({
   },
 
   messages: {
-    ...en,
-    ...fr
+    en,
+    ua
   }
 }))

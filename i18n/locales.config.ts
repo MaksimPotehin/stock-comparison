@@ -8,9 +8,9 @@ export const localesConfig = {
       name: 'English'
     },
     {
-      code: 'fr',
-      iso: 'fr-FR',
-      name: 'Français'
+      code: 'ua',
+      iso: 'uk-UA',
+      name: 'Українська'
     }
   ],
   defaultLocale: 'en'
