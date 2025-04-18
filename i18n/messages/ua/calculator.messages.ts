@@ -1,6 +1,7 @@
 export const calculatorMessages = {
   title: 'Інвестиційний калькулятор',
-  description: 'Розрахуйте потенційну прибутковість ваших інвестицій з різними параметрами',
+  description: 'Розрахуйте потенційну прибутковість ваших інвестицій з різними параметрами.',
+  results: 'Результати',
   form: {
     enterData: 'Введіть дані для розрахунку',
     weekly: 'Щотижнево',
@@ -27,5 +28,9 @@ export const calculatorMessages = {
     totalAmount: 'Загальна сума',
     sum: 'Сума',
     notDefined: 'Не визначено'
-  }
+  },
+  resultSummary: 'Підсумки інвестування',
+  totalInvested: 'Загальна інвестована сума',
+  totalInterest: 'Загальний зароблений відсоток',
+  finalAmount: 'Кінцева сума'
 }

@@ -1,11 +1,13 @@
-import uaLocale from 'element-plus/es/locale/lang/uk'
+import ukLocale from 'element-plus/es/locale/lang/uk'
 import { generalMessages as general } from './general.messages'
 import { navigationMessages as navigation } from './navigation.messages'
 import { calculatorMessages as calculator } from './calculator.messages'
+import { faqMessages as faq } from './faq.messages'
 
 export const ua = {
-  el: uaLocale.el,
+  el: ukLocale.el,
   general,
   navigation,
-  calculator
+  calculator,
+  faq
 }

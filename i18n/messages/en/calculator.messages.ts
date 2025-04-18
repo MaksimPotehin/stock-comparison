@@ -1,6 +1,7 @@
 export const calculatorMessages = {
   title: 'Investment Calculator',
-  description: 'Calculate your potential investment returns with different parameters',
+  description: 'Calculate your potential investment returns with different parameters.',
+  results: 'Results',
   form: {
     enterData: 'Enter your investment data',
     weekly: 'Weekly',
@@ -27,5 +28,9 @@ export const calculatorMessages = {
     totalAmount: 'Total Amount',
     sum: 'Sum',
     notDefined: 'Not defined'
-  }
+  },
+  resultSummary: 'Investment Summary',
+  totalInvested: 'Total Invested Amount',
+  totalInterest: 'Total Interest Earned',
+  finalAmount: 'Final Amount'
 }

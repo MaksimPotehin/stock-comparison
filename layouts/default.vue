@@ -60,7 +60,8 @@ const navigation = computed(() => [
   { label: t('navigation.home'), routeName: localeRouteName('index') },
   { label: t('navigation.calculator'), routeName: localeRouteName('calculator') },
   { label: t('navigation.comparison'), routeName: localeRouteName('comparison') },
-  { label: t('navigation.news'), routeName: localeRouteName('news') }
+  { label: t('navigation.news'), routeName: localeRouteName('news') },
+  { label: t('navigation.faq'), routeName: localeRouteName('faq') }
 ])
 
 watch(() => locale.value, newVal => {

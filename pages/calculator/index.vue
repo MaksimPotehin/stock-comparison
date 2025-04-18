@@ -1,7 +1,7 @@
 <template>
   <div class="w-full flex flex-col gap-y-8">
     <div>
-      <p class="text-warning text-2xl mb-4">{{ $t('calculator.title') }}</p>
+      <h1 class="text-warning text-2xl mb-4">{{ $t('calculator.title') }}</h1>
       <p class="text-white-400 leading-7">{{ $t('calculator.description') }}</p>
     </div>
 
@@ -12,6 +12,7 @@
       <div class="flex flex-col w-full h-full overflow-hidden">
         <div class="flex items-center gap-x-10">
           <div class="flex items-center gap-x-3 mb-3">
+            <h2 class="text-lg mr-2">{{ $t('calculator.results') }}</h2>
             <p>{{ $t('calculator.viewMode') }}:</p>
             <el-radio-group v-model="resultViewType">
               <el-radio-button value="table">{{ $t('calculator.table') }}</el-radio-button>
@@ -47,6 +48,10 @@ import TableModule from '@/components/TableModule.vue'
 import { EDurationUnit, EFrequency } from './types'
 import type { IFormModel, ITableRecord, IInvestmentResult, IInvestmentParameters, TTimeUnit } from './types'
 import { simulateInvestment } from '@/utils/investment-calculator'
+import { useSeo } from '~/composables/useSeo'
+
+// SEO метадані
+useSeo('calculator')
 
 // Початкові значення форми
 const formModel = ref<IFormModel>({
