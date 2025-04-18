@@ -7,10 +7,10 @@
 <script lang="ts" setup>
 import { ref, onMounted, watch } from 'vue'
 import { Chart, type ChartData, type ChartOptions } from 'chart.js/auto'
-import type { InvestmentResult } from '~/utils/investment-calculator'
+import type { IInvestmentResult } from '../types'
 
 const props = defineProps<{
-  data: InvestmentResult[]
+  data: IInvestmentResult[]
 }>()
 
 const chartRef = ref<HTMLCanvasElement | null>(null)
@@ -47,7 +47,7 @@ const createChart = () => {
       },
       {
         label: 'Interest',
-        data: props.data.map(d => d.cumulativeInterest),
+        data: props.data.map(d => d.periodInterest),
         borderColor: '#f59e0b',
         backgroundColor: 'rgba(245, 158, 11, 0.1)',
         fill: true,
