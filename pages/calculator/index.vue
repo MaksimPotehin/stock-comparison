@@ -1,13 +1,13 @@
 <template>
-  <div class="w-full flex flex-col gap-y-8">
+  <div class="w-full flex flex-col gap-y-8 overflow-auto md:overflow-hidden">
     <div>
       <h1 class="text-warning text-2xl mb-4">{{ $t('calculator.title') }}</h1>
       <p class="text-white-400 leading-7">{{ $t('calculator.description') }}</p>
     </div>
 
-    <div class="flex w-full h-full space-x-8 overflow-hidden">
+    <div class="flex w-full md:space-x-8 flex-col md:flex-row gap-16 md:gap-0 md:overflow-hidden">
       <!-- Форма для введення даних -->
-      <CalculatorForm v-model="formModel" />
+      <CalculatorForm v-model="formModel" class="w-full max-w-full md:max-w-[350px]" />
 
       <div class="flex flex-col w-full h-full overflow-hidden">
         <div class="flex items-center gap-x-10">
@@ -71,10 +71,10 @@ const resultViewType = ref<'chart' | 'table'>('table')
 // Заголовки таблиці
 const headings = [
   { value: 'period', label: 'calculator.tableHeaders.period', minWidth: 80 },
-  { value: 'date', label: 'calculator.tableHeaders.date', minWidth: 180 },
-  { value: 'initialDeposit', label: 'calculator.tableHeaders.accValue', minWidth: 180 },
-  { value: 'interestPerPeriod', label: 'calculator.tableHeaders.interestPerPeriod', minWidth: 180 },
-  { value: 'totalAmount', label: 'calculator.tableHeaders.totalAmount', minWidth: 180 }
+  { value: 'date', label: 'calculator.tableHeaders.date', minWidth: 100 },
+  { value: 'initialDeposit', label: 'calculator.tableHeaders.accValue', minWidth: 120 },
+  { value: 'interestPerPeriod', label: 'calculator.tableHeaders.interestPerPeriod', minWidth: 150 },
+  { value: 'totalAmount', label: 'calculator.tableHeaders.totalAmount', minWidth: 150 }
 ]
 
 // Валідація вхідних даних
