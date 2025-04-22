@@ -1,18 +1,15 @@
 import { localesConfig } from './i18n'
 
 export default defineNuxtConfig({
-  ssr: true,
-  nitro: {
-    preset: 'static'
-  },
+  ssr: false,
   runtimeConfig: {
     public: {
       finnhubApiKey: process.env.FINNHUB_API_KEY
     }
   },
 
-  // Add redirect rule
   nitro: {
+    preset: 'static',
     routeRules: {
       '/': { redirect: '/calculator' }
     }
@@ -43,14 +40,17 @@ export default defineNuxtConfig({
         { property: 'og:title', content: 'Інвестиційний калькулятор | Розрахунок складних відсотків' },
         { property: 'og:description', content: 'Безкоштовний онлайн калькулятор для планування інвестицій' },
         { property: 'og:image', content: '/og-image.jpg' },
+        { property: 'og:site_name', content: 'Investing Space' },
+        { property: 'og:url', content: 'https://investing-space.tech' },
         // Twitter Card
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: 'Інвестиційний калькулятор' },
-        { name: 'twitter:description', content: 'Розрахуйте майбутню вартість ваших інвестицій' }
+        { name: 'twitter:description', content: 'Розрахуйте майбутню вартість ваших інвестицій' },
+        { name: 'twitter:image', content: '/og-image.jpg' }
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-        { rel: 'canonical', href: 'https://yourdomain.com' }
+        { rel: 'canonical', href: 'https://investing-space.tech' }
       ],
       script: [
         // Google Analytics
@@ -66,12 +66,6 @@ export default defineNuxtConfig({
             gtag('config', 'G-XXXXXXXXXX');
           `
         }
-        // TODO: Implement Google AdSense
-        // {
-        //   src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX',
-        //   async: true,
-        //   crossorigin: 'anonymous'
-        // }
       ]
     }
   },
@@ -84,28 +78,10 @@ export default defineNuxtConfig({
       ...localesConfig,
       vueI18n: './i18n/i18n.config.ts'
     }],
-    'unplugin-icons/nuxt',
-    '@nuxtjs/sitemap',
-    '@nuxtjs/robots'
+    'unplugin-icons/nuxt'
   ],
 
-  sitemap: {
-    hostname: 'https://yourdomain.com',
-    gzip: true,
-    exclude: ['/404'],
-    routes: [
-      '/',
-      '/calculator',
-      '/faq',
-      '/en',
-      '/en/calculator',
-      '/en/faq'
-    ]
-  },
-
-  robots: {
-    UserAgent: '*',
-    Allow: '/calculator',
-    Sitemap: 'https://yourdomain.com/sitemap.xml'
+  build: {
+    transpile: ['element-plus']
   }
 })

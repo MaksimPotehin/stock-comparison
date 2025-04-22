@@ -18,11 +18,11 @@ export default defineNuxtPlugin((nuxtApp) => {
           ? 'Free online calculator for investment planning with compound interest.'
           : 'Безкоштовний онлайн калькулятор для планування інвестицій зі складними відсотками.',
         category: 'Financial Tool',
-        url: `https://yourdomain.com/${i18n.locale}/calculator`,
+        url: `https://investing-space.tech/${i18n.locale}/calculator`,
         provider: {
           '@type': 'Organization',
           name: 'Your Company Name',
-          url: 'https://yourdomain.com'
+          url: 'https://investing-space.tech'
         },
         offers: {
           '@type': 'Offer',

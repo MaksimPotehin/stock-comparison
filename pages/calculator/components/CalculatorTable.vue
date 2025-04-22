@@ -162,7 +162,7 @@ defineSlots<{
 
 <style lang="scss">
 .el-checkbox .el-checkbox__inner {
-  @apply w-16 h-16 !important;
+  @apply w-16 h-16 #{!important};
 }
 .el-table__empty-block {
   @apply min-h-[200px];
