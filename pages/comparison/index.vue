@@ -25,10 +25,10 @@ onMounted(async () => {
   console.log(Object.getOwnPropertyNames(Object.getPrototypeOf($finnhubClient)))
 
   // Виконуємо запит на котирування акцій
-  const { data4 } = await $finnhubClient.companyNews({ symbol: 'AAPL', from: '2023-01-01', to: '2023-12-31' })
-  const { data3 } = await $finnhubClient.earningsCalendar()
-  const { data2 } = await $finnhubClient.marketNews({ category: 'general' })
-  const { data1 } = await $finnhubClient.companyProfile2({ symbol: 'AAPL' })
-  console.log('Дані про акції:', data1)
+  // const { data4 } = await $finnhubClient.companyNews({ symbol: 'AAPL', from: '2023-01-01', to: '2023-12-31' })
+  // const { data3 } = await $finnhubClient.earningsCalendar()
+  // const { data2 } = await $finnhubClient.marketNews({ category: 'general' })
+  // const { data1 } = await $finnhubClient.companyProfile2({ symbol: 'AAPL' })
+  // console.log('Дані про акції:', data1)
 })
 </script>

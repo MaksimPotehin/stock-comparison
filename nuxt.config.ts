@@ -1,6 +1,10 @@
 import { localesConfig } from './i18n'
 
 export default defineNuxtConfig({
+  ssr: true,
+  nitro: {
+    preset: 'static'
+  },
   runtimeConfig: {
     public: {
       finnhubApiKey: process.env.FINNHUB_API_KEY
