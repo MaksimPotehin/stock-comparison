@@ -16,11 +16,9 @@
   "dependencies": {
     "@nuxtjs/robots": "^5.2.10",
     "@nuxtjs/sitemap": "^7.2.10",
-    "@unhead/vue": "^2.0.8",
     "chart.js": "^4.4.8",
     "element-plus": "^2.8.4",
-    "finnhub": "^1.2.18",
-    "unhead": "^1.8.19"
+    "finnhub": "^1.2.18"
   },
   "devDependencies": {
     "@element-plus/nuxt": "^1.0.9",

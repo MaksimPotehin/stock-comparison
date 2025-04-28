@@ -4,12 +4,12 @@ export const localesConfig = {
   locales: [
     {
       code: 'en',
-      language: 'en-US',
+      iso: 'en-US',
       name: 'English'
     },
     {
       code: 'ua',
-      language: 'uk-UA',
+      iso: 'uk-UA',
       name: 'Українська'
     }
   ],

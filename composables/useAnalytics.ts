@@ -1,17 +1,13 @@
-import { useI18n } from 'vue-i18n'
-
 declare global {
-  interface Window {
+  interface IWindow {
     gtag: (...args: any[]) => void
   }
 }
 
 export const useAnalytics = () => {
-  const { locale } = useI18n()
-
   const trackEvent = (category: string, action: string, label?: string, value?: number) => {
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', action, {
+    if (typeof window !== 'undefined' && (window as unknown as IWindow).gtag) {
+      (window as unknown as IWindow).gtag('event', action, {
         event_category: category,
         event_label: label,
         value,

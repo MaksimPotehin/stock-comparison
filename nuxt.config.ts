@@ -1,17 +1,27 @@
-import { localesConfig } from './i18n/locales.config'
+import { localesConfig } from './i18n'
 
 export default defineNuxtConfig({
-  ssr: true,
+  ssr: false,
   runtimeConfig: {
     public: {
-      finnhubApiKey: process.env.FINNHUB_API_KEY,
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://investing-space.tech'
+      finnhubApiKey: process.env.FINNHUB_API_KEY
+    }
+  },
+
+  nitro: {
+    preset: 'static',
+    routeRules: {
+      '/': { redirect: '/calculator' }
     }
   },
 
   css: [
     '@/assets/styles/main.scss'
   ],
+
+  experimental: {
+    typedPages: true
+  },
 
   app: {
     head: {

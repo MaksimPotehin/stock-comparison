@@ -18,27 +18,17 @@ definePageMeta({
 })
 
 const stockData = ref(null) as any
-let finnhubClient = null
 
-// Wrap in try-catch for SSR safety
-try {
-  const nuxtApp = useNuxtApp()
-  finnhubClient = nuxtApp.$finnhubClient
-} catch (e) {
-  console.error('Failed to access nuxtApp during SSR', e)
-}
+const { $finnhubClient } = useNuxtApp()
 
-// Only execute on client side
 onMounted(async () => {
-  if (process.client && finnhubClient) {
-    console.log(Object.getOwnPropertyNames(Object.getPrototypeOf(finnhubClient)))
+  console.log(Object.getOwnPropertyNames(Object.getPrototypeOf($finnhubClient)))
 
-    // Виконуємо запит на котирування акцій
-    // const { data4 } = await finnhubClient.companyNews({ symbol: 'AAPL', from: '2023-01-01', to: '2023-12-31' })
-    // const { data3 } = await finnhubClient.earningsCalendar()
-    // const { data2 } = await finnhubClient.marketNews({ category: 'general' })
-    // const { data1 } = await finnhubClient.companyProfile2({ symbol: 'AAPL' })
-    // console.log('Дані про акції:', data1)
-  }
+  // Виконуємо запит на котирування акцій
+  // const { data4 } = await $finnhubClient.companyNews({ symbol: 'AAPL', from: '2023-01-01', to: '2023-12-31' })
+  // const { data3 } = await $finnhubClient.earningsCalendar()
+  // const { data2 } = await $finnhubClient.marketNews({ category: 'general' })
+  // const { data1 } = await $finnhubClient.companyProfile2({ symbol: 'AAPL' })
+  // console.log('Дані про акції:', data1)
 })
 </script>

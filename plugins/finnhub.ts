@@ -3,18 +3,28 @@ import { defineNuxtPlugin } from '#app'
 // import { ApiClient, DefaultApi } from 'finnhub'
 
 export default defineNuxtPlugin(() => {
-  // Mock finnhub client for SSR safety
-  const finnhubClient = {
-    // Add mock methods that would be available on the real client
-    companyNews: async () => ({ data: [] }),
-    earningsCalendar: async () => ({ data: [] }),
-    marketNews: async () => ({ data: [] }),
-    companyProfile2: async () => ({ data: {} })
-  }
+  // const config = useRuntimeConfig()
+
+  // Ініціалізація клієнта Finnhub
+  // const apiClient = ApiClient.instance
+
+  // Переконайтеся, що ключ аутентифікації існує
+  // const apiKeyAuth = apiClient.authentications.api_key
+
+  // if (!apiKeyAuth) {
+  //   console.error('Authentication for API key is not defined.')
+  //   return
+  // }
+
+  // Призначення вашого API ключа
+  // apiKeyAuth.apiKey = config.public.finnhubApiKey // Використовуйте API ключ з конфігурації
+
+  // Створення клієнта Finnhub
+  // const finnhubClient = new DefaultApi(apiClient) // Передайте apiClient в конструктор
 
   return {
     provide: {
-      finnhubClient
+      // finnhubClient // Доступ до клієнта через this.$finnhubClient
     }
   }
 })

@@ -41,6 +41,7 @@
 </template>
 
 <script lang="ts" setup>
+import { ref, computed, onMounted, watch } from 'vue'
 import CalculatorForm from './components/CalculatorForm.vue'
 import CalculatorChart from './components/CalculatorChart.vue'
 import TableModule from '@/components/TableModule.vue'
