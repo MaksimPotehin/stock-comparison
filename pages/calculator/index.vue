@@ -41,7 +41,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue'
 import CalculatorForm from './components/CalculatorForm.vue'
 import CalculatorChart from './components/CalculatorChart.vue'
 import TableModule from '@/components/TableModule.vue'
@@ -49,9 +48,12 @@ import { EDurationUnit, EFrequency } from './types'
 import type { IFormModel, ITableRecord, IInvestmentResult, IInvestmentParameters, TTimeUnit } from './types'
 import { simulateInvestment } from '@/utils/investment-calculator'
 import { useSeo } from '~/composables/useSeo'
+import { useAnalytics } from '~/composables/useAnalytics'
 
 // SEO метадані
 useSeo('calculator')
+
+const { trackCalculatorEvent, trackNavigation } = useAnalytics()
 
 // Початкові значення форми
 const formModel = ref<IFormModel>({
@@ -138,5 +140,19 @@ const tableData = computed<ITableRecord[]>(() => {
     interestPerPeriod: parseFloat(result.periodInterest?.toString() || '0').toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
     totalAmount: parseFloat(result.totalBalance?.toString() || '0').toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
   }))
+})
+
+onMounted(() => {
+  trackNavigation('calculator')
+})
+
+// Додати відстеження при зміні параметрів
+watch(simulationParams, (newParams) => {
+  trackCalculatorEvent('parameter_change', JSON.stringify(newParams))
+}, { deep: true })
+
+// Додати відстеження при зміні типу відображення
+watch(resultViewType, (newType) => {
+  trackCalculatorEvent('view_type_change', newType)
 })
 </script>

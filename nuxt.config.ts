@@ -1,27 +1,17 @@
-import { localesConfig } from './i18n'
+import { localesConfig } from './i18n/locales.config'
 
 export default defineNuxtConfig({
-  ssr: false,
+  ssr: true,
   runtimeConfig: {
     public: {
-      finnhubApiKey: process.env.FINNHUB_API_KEY
-    }
-  },
-
-  nitro: {
-    preset: 'static',
-    routeRules: {
-      '/': { redirect: '/calculator' }
+      finnhubApiKey: process.env.FINNHUB_API_KEY,
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://investing-space.tech'
     }
   },
 
   css: [
     '@/assets/styles/main.scss'
   ],
-
-  experimental: {
-    typedPages: true
-  },
 
   app: {
     head: {
@@ -55,7 +45,7 @@ export default defineNuxtConfig({
       script: [
         // Google Analytics
         {
-          src: 'https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX',
+          src: 'https://www.googletagmanager.com/gtag/js?id=G-BK379KJZQW',
           async: true
         },
         {
@@ -63,7 +53,7 @@ export default defineNuxtConfig({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-XXXXXXXXXX');
+            gtag('config', 'G-BK379KJZQW');
           `
         }
       ]

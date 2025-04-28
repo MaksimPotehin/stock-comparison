@@ -11,7 +11,7 @@
             <NuxtLink
               v-for="item in navigation"
               :key="item.label"
-              :to="{ name: item.routeName }"
+              :to="item.routePath"
               class="hover:bg-gray-600/60 flex items-center px-4 py-2 text-sm rounded-md transition-all"
               active-class="bg-gray-600 text-white"
             >
@@ -46,18 +46,7 @@
             </div>
 
             <!-- Language switcher -->
-            <div class="flex flex-col">
-              <AppIconGbFlag
-                class="w-4 hover:brightness-90 cursor-pointer transition-all"
-                :class="locale === locales[0].code ? 'brightness-100' : 'brightness-50'"
-                @click="locale = locales[0].code"
-              />
-              <AppIconUkraineFlag
-                class="w-4 hover:brightness-90 cursor-pointer transition-all"
-                :class="locale === locales[1].code ? 'brightness-100' : 'brightness-50'"
-                @click="locale = locales[1].code"
-              />
-            </div>
+            <LanguageSwitcher />
           </client-only>
         </div>
       </div>
@@ -73,7 +62,7 @@
             <NuxtLink
               v-for="item in navigation"
               :key="item.label"
-              :to="{ name: item.routeName }"
+              :to="item.routePath"
               class="block px-3 py-2 text-[14px] hover:bg-gray-600/60 rounded-md transition-all"
               active-class="bg-gray-600 text-white"
               @click="isMobileMenuOpen = false"
@@ -95,22 +84,61 @@
 </template>
 
 <script lang="ts" setup>
-const { locale, locales, t } = useI18n()
-const switchLocalePath = useSwitchLocalePath()
-const localeRouteName = useLocaleRouteName()
+import { ref, computed, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+// Default values in case i18n is not available during prerendering
+let locale = ref('en')
+let t = (key: string) => key
+let switchLocalePath: any = () => '/'
+
+// Try to get i18n and navigation utilities
+try {
+  const i18n = useI18n()
+  locale = ref(i18n.locale.value)
+  t = i18n.t
+
+  switchLocalePath = useSwitchLocalePath()
+} catch (e) {
+  console.error('Failed to initialize i18n in layout during prerendering', e)
+}
 
 const search = ref()
 const isMobileMenuOpen = ref(false)
 
-const navigation = computed(() => [
-  // { label: t('navigation.home'), routeName: localeRouteName('index') },
-  { label: t('navigation.calculator'), routeName: localeRouteName('calculator') },
-  // { label: t('navigation.comparison'), routeName: localeRouteName('comparison') },
-  // { label: t('navigation.news'), routeName: localeRouteName('news') },
-  { label: t('navigation.faq'), routeName: localeRouteName('faq') }
-])
-
-watch(() => locale.value, newVal => {
-  navigateTo(switchLocalePath(newVal))
+// Navigation items - using direct paths instead of named routes to avoid type issues
+const navigation = computed(() => {
+  try {
+    return [
+      {
+        label: t('navigation.calculator'),
+        routePath: '/calculator'
+      },
+      {
+        label: t('navigation.faq'),
+        routePath: '/faq'
+      }
+    ]
+  } catch (e) {
+    console.error('Failed to compute navigation', e)
+    return [
+      {
+        label: 'Calculator',
+        routePath: '/calculator'
+      },
+      {
+        label: 'FAQ',
+        routePath: '/faq'
+      }
+    ]
+  }
 })
+
+// Only watch on client side
+if (process.client) {
+  watch(() => locale.value, (newVal) => {
+    // Type safety with any to avoid linter errors
+    navigateTo(switchLocalePath(newVal))
+  })
+}
 </script>

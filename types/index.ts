@@ -1,0 +1,25 @@
+// Route name types for strong typing
+export type TRouteNames =
+  | 'index'
+  | 'calculator'
+  | 'faq'
+  | 'comparison'
+  | 'calendar'
+  | 'news'
+  | 'profile'
+
+export type TRouteNamedMapKeys =
+  | 'index___en'
+  | 'calculator___en'
+  | 'faq___en'
+  | 'comparison___en'
+  | 'calendar___en'
+  | 'news___en'
+  | 'profile___en'
+  | 'index___ua'
+  | 'calculator___ua'
+  | 'faq___ua'
+  | 'comparison___ua'
+  | 'calendar___ua'
+  | 'news___ua'
+  | 'profile___ua'
