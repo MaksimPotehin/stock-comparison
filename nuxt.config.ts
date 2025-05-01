@@ -1,7 +1,7 @@
 import { localesConfig } from './i18n'
 
 export default defineNuxtConfig({
-  ssr: false,
+  ssr: true,
   runtimeConfig: {
     public: {
       // finnhubApiKey removed as it appears unused (the client is commented out in plugins)
@@ -9,7 +9,6 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'static',
     routeRules: {
       '/': { redirect: '/calculator' }
     }
@@ -78,11 +77,33 @@ export default defineNuxtConfig({
       ...localesConfig,
       vueI18n: './i18n/i18n.config.ts'
     }],
-    'unplugin-icons/nuxt'
-    // Removed robots and sitemap modules as they don't appear to be configured in the modules list
+    'unplugin-icons/nuxt',
+    '@nuxtjs/sitemap',
+    '@nuxtjs/robots'
   ],
 
   build: {
     transpile: ['element-plus']
   }
 })
+
+// Sitemap configuration
+export const sitemap = {
+  hostname: 'https://investing-space.tech',
+  gzip: true,
+  routes: [
+    '/calculator',
+    '/faq'
+  ],
+  i18n: {
+    locales: ['en', 'uk'],
+    defaultLocale: 'uk'
+  }
+}
+
+// Robots configuration
+export const robots = {
+  UserAgent: '*',
+  Allow: '/',
+  Sitemap: 'https://investing-space.tech/sitemap.xml'
+}

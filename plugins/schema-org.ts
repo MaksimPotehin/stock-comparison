@@ -42,28 +42,18 @@ export default defineNuxtPlugin((nuxtApp) => {
             acceptedAnswer: {
               '@type': 'Answer',
               text: i18n.locale === 'en'
-                ? 'Compound interest is interest calculated not only on the initial principal but also on the accumulated interest. This significantly accelerates the growth of your investments over time.'
-                : 'Складні відсотки — це нарахування відсотків не тільки на початкову суму, але й на вже накопичені відсотки. Це значно прискорює зростання ваших інвестицій з часом.'
+                ? 'Compound interest is interest calculated on the initial principal and also on the accumulated interest of previous periods.'
+                : 'Складні відсотки - це відсотки, які нараховуються на початкову суму вкладу та на накопичені відсотки попередніх періодів.'
             }
           },
           {
             '@type': 'Question',
-            name: i18n.locale === 'en' ? 'How to use the calculator?' : 'Як використовувати калькулятор?',
+            name: i18n.locale === 'en' ? 'How to use the investment calculator?' : 'Як користуватися інвестиційним калькулятором?',
             acceptedAnswer: {
               '@type': 'Answer',
               text: i18n.locale === 'en'
-                ? 'Enter the initial amount, regular contribution, interest rate, and investment period. Choose the frequency of contributions and the period unit. Enable or disable reinvestment as needed.'
-                : 'Введіть початкову суму, регулярний внесок, відсоткову ставку та період інвестування. Виберіть частоту внесків та одиницю виміру періоду. Увімкніть або вимкніть реінвестування за потреби.'
-            }
-          },
-          {
-            '@type': 'Question',
-            name: i18n.locale === 'en' ? 'How does reinvestment differ from regular interest calculation?' : 'Чим відрізняється реінвестування від звичайного нарахування відсотків?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: i18n.locale === 'en'
-                ? 'With reinvestment, earned interest is added to the principal and also earns interest. Without reinvestment, interest is calculated only on the initial amount.'
-                : 'При реінвестуванні зароблені відсотки додаються до основної суми і також приносять дохід. Без реінвестування відсотки нараховуються лише на початкову суму.'
+                ? 'Enter your initial investment, regular contributions, interest rate, and investment period to calculate potential returns.'
+                : 'Введіть початкову суму інвестицій, регулярні внески, відсоткову ставку та період інвестування для розрахунку потенційного доходу.'
             }
           }
         ]
@@ -83,11 +73,42 @@ export default defineNuxtPlugin((nuxtApp) => {
       }
     }
 
+    // Add breadcrumbs schema
+    const breadcrumbsSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          item: {
+            '@id': 'https://investing-space.tech',
+            name: i18n.locale === 'en' ? 'Home' : 'Головна'
+          }
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          item: {
+            '@id': `https://investing-space.tech${path}`,
+            name: i18n.locale === 'en'
+              ? (path.includes('/calculator') ? 'Calculator' : 'FAQ')
+              : (path.includes('/calculator') ? 'Калькулятор' : 'Часті запитання')
+          }
+        }
+      ]
+    }
+
+    // Add both schemas to the page
     useHead({
       script: [
         {
           type: 'application/ld+json',
-          innerHTML: JSON.stringify(schema)
+          children: JSON.stringify(schema)
+        },
+        {
+          type: 'application/ld+json',
+          children: JSON.stringify(breadcrumbsSchema)
         }
       ]
     })

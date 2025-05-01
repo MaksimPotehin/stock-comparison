@@ -98,7 +98,7 @@ interface ITableHeading {
 }
 
 const {
-  data,
+  data = [],
   headings,
   withBorder = true,
   showCheckbox = false,
@@ -110,7 +110,7 @@ const {
   showPlaceholderIcon = true,
   defaultSort,
   rowClassName
-} = withDefaults(defineProps<{
+} = defineProps<{
   data: T[]
   headings: ITableHeading[]
   withBorder?: boolean
@@ -123,14 +123,7 @@ const {
   showPlaceholderIcon?: boolean
   defaultSort?: Sort
   rowClassName?: () => string
-}>(), {
-  data: () => ([]),
-  withBorder: true,
-  rowKey: 'id',
-  showHeader: true,
-  withoutScroll: true,
-  showPlaceholderIcon: true
-})
+}>()
 
 function calculateSummary ({ columns, data }: { columns: any[]; data: T[] }): string[] {
   const summary = columns.map((column: any) => {
