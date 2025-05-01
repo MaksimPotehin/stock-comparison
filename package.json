@@ -14,11 +14,8 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@nuxtjs/robots": "^5.2.10",
-    "@nuxtjs/sitemap": "^7.2.10",
     "chart.js": "^4.4.8",
-    "element-plus": "^2.8.4",
-    "finnhub": "^1.2.18"
+    "element-plus": "^2.8.4"
   },
   "devDependencies": {
     "@element-plus/nuxt": "^1.0.9",

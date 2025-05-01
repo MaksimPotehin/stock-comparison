@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   ssr: false,
   runtimeConfig: {
     public: {
-      finnhubApiKey: process.env.FINNHUB_API_KEY
+      // finnhubApiKey removed as it appears unused (the client is commented out in plugins)
     }
   },
 
@@ -79,6 +79,7 @@ export default defineNuxtConfig({
       vueI18n: './i18n/i18n.config.ts'
     }],
     'unplugin-icons/nuxt'
+    // Removed robots and sitemap modules as they don't appear to be configured in the modules list
   ],
 
   build: {
