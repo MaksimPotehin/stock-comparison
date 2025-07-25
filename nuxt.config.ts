@@ -88,12 +88,6 @@ export default defineNuxtConfig({
       hostname: process.env.NUXT_PUBLIC_SITE_URL || 'https://investing-space.tech',
       gzip: true,
       routes: ['/calculator', '/faq']
-    }],
-    ['@nuxtjs/robots', {
-      UserAgent: '*',
-      Allow: '/',
-      Sitemap: (process.env.NUXT_PUBLIC_SITE_URL || 'https://investing-space.tech') + '/sitemap.xml',
-      locales: ['ua', 'en']
     }]
   ],
 
