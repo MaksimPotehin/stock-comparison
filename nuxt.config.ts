@@ -92,7 +92,8 @@ export default defineNuxtConfig({
     ['@nuxtjs/robots', {
       UserAgent: '*',
       Allow: '/',
-      Sitemap: (process.env.NUXT_PUBLIC_SITE_URL || 'https://investing-space.tech') + '/sitemap.xml'
+      Sitemap: (process.env.NUXT_PUBLIC_SITE_URL || 'https://investing-space.tech') + '/sitemap.xml',
+      locales: ['ua', 'en']
     }]
   ],
 
