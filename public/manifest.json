@@ -1,0 +1,16 @@
+{
+  "name": "Investment Calculator",
+  "short_name": "InvestCalc",
+  "description": "Free online investment calculator with compound interest",
+  "start_url": "/calculator",
+  "display": "standalone",
+  "theme_color": "#fda135",
+  "background_color": "#1f2937",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "32x32",
+      "type": "image/x-icon"
+    }
+  ]
+} 

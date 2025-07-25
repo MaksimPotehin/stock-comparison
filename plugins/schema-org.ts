@@ -104,11 +104,11 @@ export default defineNuxtPlugin((nuxtApp) => {
       script: [
         {
           type: 'application/ld+json',
-          children: JSON.stringify(schema)
+          innerHTML: JSON.stringify(schema)
         },
         {
           type: 'application/ld+json',
-          children: JSON.stringify(breadcrumbsSchema)
+          innerHTML: JSON.stringify(breadcrumbsSchema)
         }
       ]
     })

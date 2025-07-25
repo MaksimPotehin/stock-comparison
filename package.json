@@ -16,12 +16,19 @@
   "dependencies": {
     "@nuxtjs/robots": "^5.2.10",
     "@nuxtjs/sitemap": "^7.2.10",
+    "@unhead/vue": "^1.11.10",
     "chart.js": "^4.4.8",
-    "element-plus": "^2.8.4"
+    "dayjs": "^1.11.13",
+    "element-plus": "^2.8.4",
+    "nuxt": "^3.17.2",
+    "unhead": "^1.11.10"
+  },
+  "overrides": {
+    "estree-walker": "^2.0.2"
   },
   "devDependencies": {
     "@element-plus/nuxt": "^1.0.9",
-    "@nuxtjs/i18n": "^8.3.0",
+    "@nuxtjs/i18n": "^8.5.5",
     "@nuxtjs/tailwindcss": "^6.12.0",
     "@rushstack/eslint-patch": "^1.10.2",
     "@tsconfig/node20": "^20.1.4",
@@ -37,7 +44,6 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-vue": "^9.25.0",
     "npm-run-all2": "^6.1.2",
-    "nuxt": "^3.11.2",
     "postcss-custom-properties": "^13.3.8",
     "sass": "^1.75.0",
     "typescript": "~5.4.5",

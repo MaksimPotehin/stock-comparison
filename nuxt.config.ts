@@ -2,13 +2,15 @@ import { localesConfig } from './i18n'
 
 export default defineNuxtConfig({
   ssr: true,
+  compatibilityDate: '2025-07-25',
   runtimeConfig: {
     public: {
-      // finnhubApiKey removed as it appears unused (the client is commented out in plugins)
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://investing-space.tech'
     }
   },
 
   nitro: {
+    preset: process.env.VERCEL ? 'vercel' : undefined,
     routeRules: {
       '/': { redirect: '/calculator' }
     }
@@ -31,6 +33,8 @@ export default defineNuxtConfig({
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'format-detection', content: 'telephone=no' },
+        { name: 'robots', content: 'index, follow' },
+        { name: 'author', content: 'Investing Space' },
         // Default meta tags
         { name: 'description', content: 'Безкоштовний онлайн калькулятор для планування інвестицій. Розрахуйте майбутню вартість ваших вкладень з урахуванням реінвестування та регулярних внесків.' },
         { name: 'keywords', content: 'інвестиційний калькулятор, калькулятор складних відсотків, інвестиції, фінансове планування' },
@@ -49,7 +53,9 @@ export default defineNuxtConfig({
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-        { rel: 'canonical', href: 'https://investing-space.tech' }
+        { rel: 'canonical', href: 'https://investing-space.tech' },
+        { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
+        { rel: 'manifest', href: '/manifest.json' }
       ],
       script: [
         // Google Analytics
@@ -58,7 +64,7 @@ export default defineNuxtConfig({
           async: true
         },
         {
-          children: `
+          innerHTML: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
@@ -78,32 +84,19 @@ export default defineNuxtConfig({
       vueI18n: './i18n/i18n.config.ts'
     }],
     'unplugin-icons/nuxt',
-    '@nuxtjs/sitemap',
-    '@nuxtjs/robots'
+    ['@nuxtjs/sitemap', {
+      hostname: process.env.NUXT_PUBLIC_SITE_URL || 'https://investing-space.tech',
+      gzip: true,
+      routes: ['/calculator', '/faq']
+    }],
+    ['@nuxtjs/robots', {
+      UserAgent: '*',
+      Allow: '/',
+      Sitemap: (process.env.NUXT_PUBLIC_SITE_URL || 'https://investing-space.tech') + '/sitemap.xml'
+    }]
   ],
 
   build: {
     transpile: ['element-plus']
   }
 })
-
-// Sitemap configuration
-export const sitemap = {
-  hostname: 'https://investing-space.tech',
-  gzip: true,
-  routes: [
-    '/calculator',
-    '/faq'
-  ],
-  i18n: {
-    locales: ['en', 'uk'],
-    defaultLocale: 'uk'
-  }
-}
-
-// Robots configuration
-export const robots = {
-  UserAgent: '*',
-  Allow: '/',
-  Sitemap: 'https://investing-space.tech/sitemap.xml'
-}

@@ -11,9 +11,8 @@
             <NuxtLink
               v-for="item in navigation"
               :key="item.label"
-              :to="{ name: item.routeName }"
-              class="hover:bg-gray-600/60 flex items-center px-4 py-2 text-sm rounded-md transition-all"
-              active-class="bg-gray-600 text-white"
+              :to="item.routeName"
+              class="text-base leading-6 font-medium text-white hover:text-warning transition-colors"
               @click="handleNavigation(item.routeName)"
             >
               {{ item.label }}
@@ -77,7 +76,7 @@
             <NuxtLink
               v-for="item in navigation"
               :key="item.label"
-              :to="{ name: item.routeName }"
+              :to="item.routeName"
               class="block px-3 py-2 text-[14px] hover:bg-gray-600/60 rounded-md transition-all"
               active-class="bg-gray-600 text-white"
               @click="handleNavigation(item.routeName)"
@@ -111,14 +110,14 @@ const isMobileMenuOpen = ref(false)
 
 const navigation = computed(() => [
   // { label: t('navigation.home'), routeName: localeRouteName('index') },
-  { label: t('navigation.calculator'), routeName: localeRouteName('calculator') },
+  { label: t('navigation.calculator'), routeName: '/calculator' },
   // { label: t('navigation.comparison'), routeName: localeRouteName('comparison') },
   // { label: t('navigation.news'), routeName: localeRouteName('news') },
-  { label: t('navigation.faq'), routeName: localeRouteName('faq') }
+  { label: t('navigation.faq'), routeName: '/faq' }
 ])
 
-const handleNavigation = (routeName: string) => {
-  trackNavigation(routeName)
+const handleNavigation = (routeName: string | number | symbol) => {
+  trackNavigation(String(routeName))
   isMobileMenuOpen.value = false
 }
 

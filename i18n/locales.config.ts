@@ -13,5 +13,6 @@ export const localesConfig = {
       name: 'Українська'
     }
   ],
-  defaultLocale: 'en'
+  defaultLocale: 'ua',
+  fallbackLocale: 'en'
 }

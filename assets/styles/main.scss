@@ -1,7 +1,6 @@
+@use 'base';
+@use "element-reset";
+
 @tailwind base;
-
-@import 'base';
-@import "element-reset";
-
 @tailwind components;
 @tailwind utilities;
