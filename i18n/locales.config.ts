@@ -1,18 +1,19 @@
 export const localesConfig = {
   baseUrl: process.env.BASE_URL,
+  strategy: 'prefix_except_default',
 
   locales: [
     {
       code: 'en',
-      iso: 'en-US',
+      language: 'en-US',
       name: 'English'
     },
     {
       code: 'ua',
-      iso: 'uk-UA',
+      language: 'uk-UA',
       name: 'Українська'
     }
   ],
-  defaultLocale: 'ua',
+  defaultLocale: 'en',
   fallbackLocale: 'en'
 }

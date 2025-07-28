@@ -1,0 +1,93 @@
+interface IGeoResponse {
+  country_code: string
+}
+
+const CACHED_COUNTRY_KEY = 'user_country'
+const CACHE_DURATION = 24 * 60 * 60 * 1000 // 24 години
+
+export const useGeoLocale = () => {
+  const { locale } = useI18n()
+
+  const detectUserCountry = async (): Promise<string | null> => {
+    // Перевіряємо кеш
+    if (process.client) {
+      const cached = localStorage.getItem(CACHED_COUNTRY_KEY)
+      if (cached) {
+        const { country, timestamp } = JSON.parse(cached)
+        if (Date.now() - timestamp < CACHE_DURATION) {
+          return country
+        }
+      }
+    }
+
+    try {
+      // Використовуємо швидкий і надійний сервіс
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 3000)
+
+      const response = await fetch('https://ipapi.co/json/', {
+        signal: controller.signal,
+        headers: {
+          Accept: 'application/json'
+        }
+      })
+
+      clearTimeout(timeoutId)
+
+      if (!response.ok) throw new Error('API response not ok')
+
+      const data: IGeoResponse = await response.json()
+      const country = data.country_code
+
+      // Зберігаємо в кеш
+      if (process.client && country) {
+        localStorage.setItem(CACHED_COUNTRY_KEY, JSON.stringify({
+          country,
+          timestamp: Date.now()
+        }))
+      }
+
+      return country
+    } catch (error) {
+      console.warn('Geo detection failed:', error)
+      return null
+    }
+  }
+
+  const getPreferredLocale = async (): Promise<'ua' | 'en'> => {
+    // 1. Спробуємо геолокацію
+    const country = await detectUserCountry()
+    if (country === 'UA') return 'ua'
+
+    // 2. Fallback до браузерної мови
+    if (process.client) {
+      const browserLang = navigator.language.toLowerCase()
+      if (browserLang.startsWith('uk') || browserLang.startsWith('ua')) {
+        return 'ua'
+      }
+    }
+
+    // 3. Дефолт - англійська
+    return 'en'
+  }
+
+  const initializeLocale = async () => {
+    // Ініціалізуємо тільки якщо ще не встановлено користувачем
+    const hasUserPreference = process.client && localStorage.getItem('nuxt-i18n-lang')
+    if (hasUserPreference) return
+
+    const preferredLocale = await getPreferredLocale()
+
+    // Змінюємо мову тільки якщо вона відрізняється
+    if (locale.value !== preferredLocale) {
+      const switchLocalePath = useSwitchLocalePath()
+      await navigateTo(switchLocalePath(preferredLocale))
+    }
+  }
+
+  return {
+    detectUserCountry,
+    getPreferredLocale,
+    initializeLocale
+  }
+}

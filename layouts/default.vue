@@ -13,6 +13,7 @@
               :key="item.label"
               :to="item.routeName"
               class="text-base leading-6 font-medium text-white hover:text-warning transition-colors"
+              active-class="!text-warning"
               @click="handleNavigation(item.routeName)"
             >
               {{ item.label }}
@@ -41,12 +42,12 @@
 
           <client-only>
             <!-- Search - desktop only -->
-            <div class="hidden md:block w-[300px]">
+            <!-- <div class="hidden md:block w-[300px]">
               <el-input
                 v-model="search"
                 @keyup.enter="handleSearch"
               />
-            </div>
+            </div> -->
 
             <!-- Language switcher -->
             <div class="flex flex-col">
@@ -78,7 +79,7 @@
               :key="item.label"
               :to="item.routeName"
               class="block px-3 py-2 text-[14px] hover:bg-gray-600/60 rounded-md transition-all"
-              active-class="bg-gray-600 text-white"
+              active-class="bg-warning/20 text-warning"
               @click="handleNavigation(item.routeName)"
             >
               {{ item.label }}
@@ -99,42 +100,50 @@
 
 <script lang="ts" setup>
 import { useAnalytics } from '~/composables/useAnalytics'
+import { useGeoLocale } from '~/composables/useGeoLocale'
 
 const { locale, locales, t } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
-const localeRouteName = useLocaleRouteName()
-const { trackLanguageSwitch, trackNavigation, trackEvent } = useAnalytics()
+const localePath = useLocalePath()
+const { trackLanguageSwitch, trackNavigation } = useAnalytics()
+const { initializeLocale } = useGeoLocale()
 
-const search = ref()
 const isMobileMenuOpen = ref(false)
 
+// Ініціалізація локалі на основі геолокації
+onMounted(() => {
+  initializeLocale().catch(error => {
+    console.warn('Locale initialization failed:', error)
+  })
+})
+
 const navigation = computed(() => [
-  // { label: t('navigation.home'), routeName: localeRouteName('index') },
-  { label: t('navigation.calculator'), routeName: '/calculator' },
-  // { label: t('navigation.comparison'), routeName: localeRouteName('comparison') },
-  // { label: t('navigation.news'), routeName: localeRouteName('news') },
-  { label: t('navigation.faq'), routeName: '/faq' }
+  {
+    label: t('navigation.calculator'),
+    routeName: localePath('/calculator')
+  },
+  {
+    label: t('navigation.faq'),
+    routeName: localePath('/faq')
+  }
 ])
 
-const handleNavigation = (routeName: string | number | symbol) => {
-  trackNavigation(String(routeName))
+const handleNavigation = (routeName: string) => {
+  trackNavigation(routeName)
   isMobileMenuOpen.value = false
 }
 
-const handleSearch = () => {
-  if (search.value) {
-    trackEvent('search', 'query', search.value)
-  }
-}
+const switchLanguage = async (newLocale: string) => {
+  if (locale.value === newLocale) return
 
-const switchLanguage = (newLocale: string) => {
   const currentLocale = locale.value
-  locale.value = newLocale
   trackLanguageSwitch(currentLocale, newLocale)
-  navigateTo(switchLocalePath(newLocale))
-}
 
-watch(() => locale.value, newVal => {
-  switchLanguage(newVal)
-})
+  // Зберігаємо вибір користувача
+  if (process.client) {
+    localStorage.setItem('nuxt-i18n-lang', newLocale)
+  }
+
+  await navigateTo(switchLocalePath(newLocale))
+}
 </script>
