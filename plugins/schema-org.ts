@@ -1,18 +1,19 @@
-import { useRoute } from 'vue-router'
+// no import needed
 
-export default defineNuxtPlugin((nuxtApp) => {
+export default defineNuxtPlugin(() => {
   // Simplified schema.org plugin
-  if (process.client) {
+  const isClient = typeof window !== 'undefined'
+  if (isClient) {
     try {
-      const route = useRoute()
-      
+      // const route = useRoute()
+
       const baseSchema = {
         '@context': 'https://schema.org',
         '@type': 'WebApplication',
         name: 'Investment Calculator',
         applicationCategory: 'FinanceApplication',
         description: 'Free online investment calculator with compound interest',
-        url: 'https://stock-comparison-psi.vercel.app'
+        url: 'https://www.investing-space.tech'
       }
 
       useHead({

@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-25',
   runtimeConfig: {
     public: {
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://investing-space.tech'
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.investing-space.tech'
     }
   },
 
@@ -44,7 +44,7 @@ export default defineNuxtConfig({
         { property: 'og:description', content: 'Безкоштовний онлайн калькулятор для планування інвестицій' },
         { property: 'og:image', content: '/og-image.jpg' },
         { property: 'og:site_name', content: 'Investing Space' },
-        { property: 'og:url', content: 'https://investing-space.tech' },
+        { property: 'og:url', content: 'https://www.investing-space.tech' },
         // Twitter Card
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: 'Інвестиційний калькулятор' },
@@ -53,7 +53,7 @@ export default defineNuxtConfig({
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-        { rel: 'canonical', href: 'https://investing-space.tech' },
+        { rel: 'canonical', href: 'https://www.investing-space.tech' },
         { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
         { rel: 'manifest', href: '/manifest.json' }
       ],
@@ -85,7 +85,7 @@ export default defineNuxtConfig({
     }],
     'unplugin-icons/nuxt',
     ['@nuxtjs/sitemap', {
-      hostname: process.env.NUXT_PUBLIC_SITE_URL || 'https://investing-space.tech',
+      hostname: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.investing-space.tech',
       gzip: true,
       routes: ['/calculator', '/faq']
     }]

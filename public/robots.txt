@@ -9,4 +9,4 @@ Allow: /faq
 Disallow: /_nuxt/
 Disallow: /api/
 
-Sitemap: https://stock-comparison-psi.vercel.app/sitemap.xml 
+Sitemap: https://www.investing-space.tech/sitemap.xml 
