@@ -49,10 +49,17 @@ import { EDurationUnit, EFrequency } from './types'
 import type { IFormModel, ITableRecord, IInvestmentResult, IInvestmentParameters, TTimeUnit } from './types'
 import { simulateInvestment } from '@/utils/investment-calculator'
 import { useSeo } from '~/composables/useSeo'
+import { useStructuredData } from '~/composables/useStructuredData'
 import { useAnalytics } from '~/composables/useAnalytics'
 
 // SEO метадані
 useSeo('calculator')
+
+// Розширені структуровані дані
+const { addCalculatorSchema } = useStructuredData()
+onMounted(() => {
+  addCalculatorSchema()
+})
 
 const { trackCalculatorEvent, trackNavigation } = useAnalytics()
 

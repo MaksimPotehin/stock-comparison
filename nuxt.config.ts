@@ -12,7 +12,24 @@ export default defineNuxtConfig({
   nitro: {
     preset: process.env.VERCEL ? 'vercel' : undefined,
     routeRules: {
-      '/': { redirect: '/calculator' }
+      '/': { redirect: '/calculator' },
+      // SEO та performance оптимізації
+      '/calculator': {
+        headers: { 'cache-control': 's-maxage=31536000' },
+        prerender: true
+      },
+      '/faq': {
+        headers: { 'cache-control': 's-maxage=31536000' },
+        prerender: true
+      },
+      '/ua/calculator': {
+        headers: { 'cache-control': 's-maxage=31536000' },
+        prerender: true
+      },
+      '/ua/faq': {
+        headers: { 'cache-control': 's-maxage=31536000' },
+        prerender: true
+      }
     }
   },
 
@@ -35,21 +52,7 @@ export default defineNuxtConfig({
         { name: 'format-detection', content: 'telephone=no' },
         { name: 'robots', content: 'index, follow' },
         { name: 'author', content: 'Investing Space' },
-        // Default meta tags
-        { name: 'description', content: 'Безкоштовний онлайн калькулятор для планування інвестицій. Розрахуйте майбутню вартість ваших вкладень з урахуванням реінвестування та регулярних внесків.' },
-        { name: 'keywords', content: 'інвестиційний калькулятор, калькулятор складних відсотків, інвестиції, фінансове планування' },
-        // Open Graph
-        { property: 'og:type', content: 'website' },
-        { property: 'og:title', content: 'Інвестиційний калькулятор | Розрахунок складних відсотків' },
-        { property: 'og:description', content: 'Безкоштовний онлайн калькулятор для планування інвестицій' },
-        { property: 'og:image', content: '/og-image.jpg' },
-        { property: 'og:site_name', content: 'Investing Space' },
-        { property: 'og:url', content: 'https://www.investing-space.tech' },
-        // Twitter Card
-        { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: 'Інвестиційний калькулятор' },
-        { name: 'twitter:description', content: 'Розрахуйте майбутню вартість ваших інвестицій' },
-        { name: 'twitter:image', content: '/og-image.jpg' }
+        { name: 'theme-color', content: '#00bff5' }
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon/favicon.ico' },
@@ -88,7 +91,12 @@ export default defineNuxtConfig({
     ['@nuxtjs/sitemap', {
       hostname: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.investing-space.tech',
       gzip: true,
-      routes: ['/calculator', '/faq', '/ua/calculator', '/ua/faq']
+      routes: ['/calculator', '/faq', '/ua/calculator', '/ua/faq'],
+      defaults: {
+        changefreq: 'monthly',
+        priority: 0.8,
+        lastmod: new Date().toISOString()
+      }
     }]
   ],
 
