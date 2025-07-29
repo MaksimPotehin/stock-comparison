@@ -52,10 +52,11 @@ export default defineNuxtConfig({
         { name: 'twitter:image', content: '/og-image.jpg' }
       ],
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-        { rel: 'canonical', href: 'https://www.investing-space.tech' },
-        { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
-        { rel: 'manifest', href: '/manifest.json' }
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon/favicon.ico' },
+        { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon/favicon-16x16.png' },
+        { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon/favicon-32x32.png' },
+        { rel: 'apple-touch-icon', href: '/favicon/apple-touch-icon.png' },
+        { rel: 'manifest', href: '/favicon/site.webmanifest' }
       ],
       script: [
         // Google Analytics
@@ -87,7 +88,7 @@ export default defineNuxtConfig({
     ['@nuxtjs/sitemap', {
       hostname: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.investing-space.tech',
       gzip: true,
-      routes: ['/calculator', '/faq']
+      routes: ['/calculator', '/faq', '/ua/calculator', '/ua/faq']
     }]
   ],
 

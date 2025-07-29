@@ -1,12 +1,8 @@
 User-agent: *
 Allow: /
 
-# Important pages
-Allow: /calculator
-Allow: /faq
+# Sitemap
+Sitemap: https://www.investing-space.tech/sitemap.xml
 
-# Block dev files
-Disallow: /_nuxt/
-Disallow: /api/
-
-Sitemap: https://www.investing-space.tech/sitemap.xml 
+# Crawl-delay
+Crawl-delay: 1 

@@ -54,6 +54,10 @@ export const useSeo = (pageKey: 'home' | 'calculator' | 'faq') => {
     ],
     link: [
       {
+        rel: 'canonical',
+        href: `https://investing-space.tech/${currentLocale === 'ua' ? 'ua/' : ''}${pageKey === 'home' ? '' : pageKey}`
+      },
+      {
         rel: 'alternate',
         hreflang: 'uk',
         href: `https://investing-space.tech/ua/${pageKey === 'home' ? '' : pageKey}`
@@ -61,7 +65,7 @@ export const useSeo = (pageKey: 'home' | 'calculator' | 'faq') => {
       {
         rel: 'alternate',
         hreflang: 'en',
-        href: `https://investing-space.tech/en/${pageKey === 'home' ? '' : pageKey}`
+        href: `https://investing-space.tech/${pageKey === 'home' ? '' : pageKey}`
       },
       {
         rel: 'alternate',
