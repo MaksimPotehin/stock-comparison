@@ -127,8 +127,9 @@
             <path d="M19 9l-7 7-7-7" />
           </svg>
         </button>
+
         <div
-          v-show="item.isOpen"
+          v-if="item.isOpen"
           class="p-3 md:p-6 pt-0"
         >
           <p class="text-white-400 text-[14px] md:text-base leading-6 md:leading-7">{{ $t(item.answer) }}</p>

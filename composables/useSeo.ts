@@ -121,7 +121,7 @@ export const useSeo = (pageKey: 'home' | 'calculator' | 'faq') => {
       },
       {
         property: 'og:image',
-        content: `${baseUrl}/og-image.jpg`
+        content: `${baseUrl}/og-image.svg`
       },
       {
         property: 'og:image:width',
@@ -154,7 +154,7 @@ export const useSeo = (pageKey: 'home' | 'calculator' | 'faq') => {
       },
       {
         name: 'twitter:image',
-        content: `${baseUrl}/og-image.jpg`
+        content: `${baseUrl}/og-image.svg`
       }
     ],
     link: [
