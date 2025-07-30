@@ -1,0 +1,366 @@
+{
+  "project": {
+    "name": "Investment Calculator",
+    "description": "Professional compound interest calculator with multi-language support",
+    "domain": "https://www.investing-space.tech",
+    "tech_stack": "Nuxt 3 + Vue 3 + TypeScript + Element Plus + Tailwind CSS",
+    "status": "Production Ready",
+    "last_updated": "2024-01-28"
+  },
+  
+  "file_structure": {
+    "root": {
+      "app.vue": {
+        "purpose": "Main app component with Element Plus provider",
+        "lines": 19,
+        "status": "complete"
+      },
+      "nuxt.config.ts": {
+        "purpose": "Nuxt configuration with SSR, i18n, SEO, analytics",
+        "lines": 107,
+        "features": ["SSR", "prerendering", "analytics", "sitemap", "security"]
+      },
+      "tailwind.config.ts": {
+        "purpose": "Tailwind CSS configuration with custom theme",
+        "lines": 180,
+        "theme": "dark with #00bff5 accent"
+      },
+      "package.json": {
+        "purpose": "Dependencies and scripts",
+        "main_dependencies": ["nuxt", "vue", "typescript", "element-plus", "chart.js"]
+      }
+    },
+    
+    "pages": {
+      "index.vue": {
+        "purpose": "Home page (redirects to /calculator)",
+        "lines": 11,
+        "route": "/",
+        "seo": "home"
+      },
+      "faq.vue": {
+        "purpose": "FAQ page with investment Q&A",
+        "lines": 228,
+        "route": "/faq",
+        "features": ["accordion UI", "11 FAQ items", "CTA buttons"],
+        "seo": "faq"
+      },
+      "calculator/": {
+        "index.vue": {
+          "purpose": "Main investment calculator page",
+          "lines": 167,
+          "route": "/calculator",
+          "features": ["form inputs", "charts", "tables", "real-time calculations"],
+          "seo": "calculator"
+        },
+        "types.ts": {
+          "purpose": "TypeScript interfaces for calculator",
+          "lines": 54,
+          "exports": ["IFormModel", "IInvestmentResult", "EDurationUnit"]
+        },
+        "components/": {
+          "CalculatorForm.vue": {
+            "purpose": "Investment parameters input form",
+            "lines": 70,
+            "fields": ["initial deposit", "regular contributions", "interest rate", "duration", "reinvestment"]
+          },
+          "CalculatorTable.vue": {
+            "purpose": "Results table with period-by-period breakdown",
+            "lines": 164,
+            "features": ["sortable columns", "responsive design"]
+          },
+          "CalculatorChart.vue": {
+            "purpose": "Interactive charts using Chart.js",
+            "lines": 96,
+            "chart_types": ["line chart", "growth visualization"]
+          },
+          "types.ts": {
+            "purpose": "Component-specific types",
+            "lines": 31
+          }
+        }
+      },
+      "empty_directories": {
+        "news/": "Prepared for news API integration",
+        "comparison/": "Future investment comparison tools",
+        "calendar/": "Financial calendar features",
+        "profile/": "User profiles functionality"
+      }
+    },
+    
+    "layouts": {
+      "default.vue": {
+        "purpose": "Main layout with header, navigation, language switcher",
+        "lines": 150,
+        "features": [
+          "responsive header",
+          "mobile menu",
+          "language switcher (EN/UA)",
+          "navigation with active states",
+          "commented search functionality"
+        ]
+      }
+    },
+    
+    "components": {
+      "global": {
+        "AdBlock.vue": {
+          "purpose": "Advertisement placeholder component",
+          "lines": 41,
+          "status": "template ready"
+        },
+        "TableModule.vue": {
+          "purpose": "Reusable table component",
+          "lines": 183,
+          "features": ["sortable", "responsive", "configurable columns"]
+        },
+        "Compute.vue": {
+          "purpose": "Minimal compute component",
+          "lines": 10,
+          "status": "basic"
+        }
+      }
+    },
+    
+    "composables": {
+      "useSeo.ts": {
+        "purpose": "SEO optimization composable",
+        "lines": 172,
+        "features": [
+          "dynamic meta tags",
+          "Open Graph tags",
+          "Twitter Cards",
+          "canonical URLs",
+          "hreflang tags",
+          "structured data"
+        ]
+      },
+      "useStructuredData.ts": {
+        "purpose": "Schema.org structured data",
+        "lines": 67,
+        "schemas": ["WebApplication", "FAQPage", "SoftwareApplication"]
+      },
+      "useGeoLocale.ts": {
+        "purpose": "Geolocation-based language detection",
+        "lines": 94,
+        "features": ["IP-based country detection", "browser language fallback", "24h caching"]
+      },
+      "useAnalytics.ts": {
+        "purpose": "Google Analytics integration",
+        "lines": 43,
+        "events": ["language_switch", "navigation", "calculator_usage"]
+      },
+      "locale-router.ts": {
+        "purpose": "Localized routing utilities",
+        "lines": 6
+      },
+      "filters.ts": {
+        "purpose": "Data filtering utilities",
+        "lines": 11
+      },
+      "form-config.ts": {
+        "purpose": "Form configuration helpers",
+        "lines": 33
+      }
+    },
+    
+    "i18n": {
+      "structure": {
+        "languages": ["en", "ua"],
+        "strategy": "prefix_except_default",
+        "default_locale": "en",
+        "fallback_locale": "en"
+      },
+      "i18n.config.ts": {
+        "purpose": "i18n configuration",
+        "lines": 29
+      },
+      "locales.config.ts": {
+        "purpose": "Locale definitions",
+        "lines": 20
+      },
+      "messages": {
+        "en/": {
+          "calculator.messages.ts": "Calculator interface translations",
+          "faq.messages.ts": "FAQ questions and answers",
+          "navigation.messages.ts": "Navigation menu items",
+          "common.messages.ts": "Common UI elements",
+          "general.messages.ts": "General text"
+        },
+        "ua/": {
+          "structure": "Identical to EN with Ukrainian translations"
+        }
+      }
+    },
+    
+    "utils": {
+      "investment-calculator.ts": {
+        "purpose": "Core investment calculation engine",
+        "lines": 155,
+        "functions": [
+          "simulateInvestment()",
+          "convertDurationToWeeks()",
+          "getIntervalInWeeks()",
+          "validateDisplayPeriods()"
+        ],
+        "features": [
+          "compound interest calculations",
+          "reinvestment options",
+          "regular contributions",
+          "multiple time periods",
+          "data validation"
+        ]
+      }
+    },
+    
+    "types": {
+      "enums.ts": "Frequency and duration enumerations",
+      "investment.ts": "Investment-related type definitions"
+    },
+    
+    "assets": {
+      "styles/": {
+        "main.scss": "Main stylesheet entry point",
+        "_base.scss": "Base styles",
+        "variables/colors.scss": "Color scheme definitions",
+        "element-reset/": "Element Plus component resets"
+      },
+      "icons/": {
+        "files": ["eye-test.svg", "gb-flag.svg", "knife.svg", "ukraine-flag.svg"]
+      },
+      "logos/": "Brand logo assets"
+    },
+    
+    "public": {
+      "robots.txt": {
+        "purpose": "SEO crawler directives",
+        "lines": 25,
+        "features": ["sitemap reference", "crawl delay", "blocked paths"]
+      },
+      "og-image.jpg": {
+        "purpose": "Social media sharing image (placeholder)",
+        "status": "needs replacement with real image"
+      },
+      "favicon/": {
+        "files": [
+          "favicon.ico",
+          "favicon-16x16.png",
+          "favicon-32x32.png",
+          "apple-touch-icon.png",
+          "android-chrome-192x192.png",
+          "android-chrome-512x512.png",
+          "site.webmanifest"
+        ],
+        "status": "complete PWA icon set"
+      }
+    }
+  },
+  
+  "functionality": {
+    "core_features": {
+      "investment_calculator": {
+        "compound_interest": true,
+        "reinvestment_options": true,
+        "regular_contributions": true,
+        "time_periods": ["weeks", "months", "years"],
+        "visualization": ["charts", "tables"],
+        "real_time_calculations": true
+      },
+      "multilingual": {
+        "languages": ["en", "ua"],
+        "auto_detection": true,
+        "geo_based": "Ukraine users get Ukrainian by default",
+        "seo_optimized": true
+      },
+      "responsive_design": {
+        "mobile_first": true,
+        "breakpoints": "Tailwind CSS standard",
+        "components": "Element Plus responsive"
+      }
+    },
+    
+    "seo_features": {
+      "meta_optimization": true,
+      "structured_data": true,
+      "open_graph": true,
+      "twitter_cards": true,
+      "canonical_urls": true,
+      "hreflang": true,
+      "sitemap": true,
+      "robots_txt": true,
+      "analytics": "Google Analytics 4"
+    },
+    
+    "performance": {
+      "ssr": true,
+      "prerendering": ["calculator", "faq", "ua/calculator", "ua/faq"],
+      "caching": "31536000s for static pages",
+      "pwa": true,
+      "lazy_loading": true
+    }
+  },
+  
+  "routes": {
+    "english": {
+      "/": "Home (redirects to /calculator)",
+      "/calculator": "Investment calculator",
+      "/faq": "Frequently asked questions"
+    },
+    "ukrainian": {
+      "/ua/calculator": "Інвестиційний калькулятор",
+      "/ua/faq": "Часті запитання"
+    }
+  },
+  
+  "seo_status": {
+    "technical_seo": "Complete",
+    "meta_tags": "Dynamic per page",
+    "structured_data": "Schema.org implemented",
+    "social_sharing": "Open Graph + Twitter Cards",
+    "internationalization": "hreflang configured",
+    "performance": "Optimized for Core Web Vitals",
+    "analytics": "GA4 tracking active"
+  },
+  
+  "monetization_ready": {
+    "ad_placements": "AdBlock component ready",
+    "affiliate_links": "Can be easily added",
+    "sponsored_content": "Framework in place",
+    "email_capture": "Not yet implemented"
+  },
+  
+  "development_status": {
+    "production_ready": true,
+    "deployment": "Vercel configured",
+    "domain": "investing-space.tech",
+    "ssl": true,
+    "cdn": true,
+    "monitoring": "Google Analytics"
+  },
+  
+  "future_expansion": {
+    "prepared_directories": {
+      "news/": "For financial news API integration",
+      "comparison/": "Investment comparison tools",
+      "calendar/": "Economic calendar",
+      "profile/": "User accounts and portfolios"
+    },
+    "easy_additions": [
+      "Blog section",
+      "Newsletter signup",
+      "Advanced calculators",
+      "Market data integration",
+      "User authentication"
+    ]
+  },
+  
+  "technical_debt": {
+    "minimal": "Well-structured codebase",
+    "todos": [
+      "Replace OG image placeholder",
+      "Add Privacy Policy page",
+      "Implement email capture",
+      "Add more calculator types"
+    ]
+  }
+} 

@@ -40,12 +40,21 @@ export const useSeo = (pageKey: 'home' | 'calculator' | 'faq') => {
 
   const currentLocale = locale.value === 'en' ? 'en' : 'ua'
   const baseUrl = 'https://www.investing-space.tech'
-  const canonicalUrl = `${baseUrl}/${currentLocale === 'ua' ? 'ua/' : ''}${pageKey === 'home' ? '' : pageKey}`
+
+  // Виправлена логіка canonical URL
+  let canonicalPath = ''
+  if (pageKey === 'home') {
+    // Home тепер це /calculator
+    canonicalPath = currentLocale === 'ua' ? '/ua/calculator' : '/calculator'
+  } else {
+    canonicalPath = currentLocale === 'ua' ? `/ua/${pageKey}` : `/${pageKey}`
+  }
+  const canonicalUrl = `${baseUrl}${canonicalPath}`
 
   // Структуровані дані
   const structuredData = {
     '@context': 'https://schema.org',
-    '@type': pageKey === 'calculator' ? 'WebApplication' : 'WebPage',
+    '@type': (pageKey === 'calculator' || pageKey === 'home') ? 'WebApplication' : 'WebPage',
     name: titles[pageKey][currentLocale],
     description: descriptions[pageKey][currentLocale],
     url: canonicalUrl,
@@ -55,7 +64,7 @@ export const useSeo = (pageKey: 'home' | 'calculator' | 'faq') => {
       name: 'Investing Space',
       url: baseUrl
     },
-    ...(pageKey === 'calculator' && {
+    ...((pageKey === 'calculator' || pageKey === 'home') && {
       applicationCategory: 'FinanceApplication',
       operatingSystem: 'Web Browser',
       offers: {
@@ -84,6 +93,14 @@ export const useSeo = (pageKey: 'home' | 'calculator' | 'faq') => {
       {
         name: 'keywords',
         content: keywords[currentLocale]
+      },
+      {
+        name: 'language',
+        content: currentLocale === 'ua' ? 'uk' : 'en'
+      },
+      {
+        'http-equiv': 'content-language',
+        content: currentLocale === 'ua' ? 'uk' : 'en'
       },
       // Open Graph
       {
@@ -145,20 +162,21 @@ export const useSeo = (pageKey: 'home' | 'calculator' | 'faq') => {
         rel: 'canonical',
         href: canonicalUrl
       },
+      // Виправлені hreflang links
       {
         rel: 'alternate',
         hreflang: 'uk',
-        href: `${baseUrl}/ua/${pageKey === 'home' ? '' : pageKey}`
+        href: `${baseUrl}${pageKey === 'home' ? '/ua/calculator' : `/ua/${pageKey}`}`
       },
       {
         rel: 'alternate',
         hreflang: 'en',
-        href: `${baseUrl}/${pageKey === 'home' ? '' : pageKey}`
+        href: `${baseUrl}${pageKey === 'home' ? '/calculator' : `/${pageKey}`}`
       },
       {
         rel: 'alternate',
         hreflang: 'x-default',
-        href: `${baseUrl}/${pageKey === 'home' ? '' : pageKey}`
+        href: `${baseUrl}${pageKey === 'home' ? '/calculator' : `/${pageKey}`}`
       }
     ],
     script: [

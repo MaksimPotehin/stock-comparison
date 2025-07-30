@@ -22,6 +22,7 @@ export default defineNuxtConfig({
         headers: { 'cache-control': 's-maxage=31536000' },
         prerender: true
       },
+
       '/ua/calculator': {
         headers: { 'cache-control': 's-maxage=31536000' },
         prerender: true
@@ -50,9 +51,10 @@ export default defineNuxtConfig({
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'format-detection', content: 'telephone=no' },
-        { name: 'robots', content: 'index, follow' },
+        { name: 'robots', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' },
         { name: 'author', content: 'Investing Space' },
-        { name: 'theme-color', content: '#00bff5' }
+        { name: 'theme-color', content: '#00bff5' },
+        { name: 'googlebot', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' }
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon/favicon.ico' },
@@ -91,9 +93,14 @@ export default defineNuxtConfig({
     ['@nuxtjs/sitemap', {
       hostname: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.investing-space.tech',
       gzip: true,
-      routes: ['/calculator', '/faq', '/ua/calculator', '/ua/faq'],
+      routes: [
+        '/calculator',
+        '/faq',
+        '/ua/calculator',
+        '/ua/faq'
+      ],
       defaults: {
-        changefreq: 'monthly',
+        changefreq: 'weekly',
         priority: 0.8,
         lastmod: new Date().toISOString()
       }

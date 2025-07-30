@@ -1,6 +1,6 @@
 export const useStructuredData = () => {
   const { locale } = useI18n()
-  
+
   const addFAQSchema = (faqItems: Array<{ question: string; answer: string }>) => {
     const faqSchema = {
       '@context': 'https://schema.org',
@@ -30,12 +30,12 @@ export const useStructuredData = () => {
       '@context': 'https://schema.org',
       '@type': 'SoftwareApplication',
       name: locale.value === 'ua' ? 'Інвестиційний калькулятор' : 'Investment Calculator',
-      description: locale.value === 'ua' 
+      description: locale.value === 'ua'
         ? 'Безкоштовний онлайн калькулятор для розрахунку складних відсотків та планування інвестицій'
         : 'Free online calculator for compound interest calculation and investment planning',
       applicationCategory: 'FinanceApplication',
       operatingSystem: 'Web Browser',
-      url: 'https://www.investing-space.tech/calculator',
+      url: locale.value === 'ua' ? 'https://www.investing-space.tech/ua/calculator' : 'https://www.investing-space.tech/calculator',
       offers: {
         '@type': 'Offer',
         price: '0',
@@ -47,7 +47,14 @@ export const useStructuredData = () => {
         'Regular contribution modeling',
         'Interactive charts and tables',
         'Multiple time periods'
-      ]
+      ],
+      publisher: {
+        '@type': 'Organization',
+        name: 'Investing Space',
+        url: 'https://www.investing-space.tech'
+      },
+      datePublished: '2024-01-01',
+      dateModified: new Date().toISOString().split('T')[0]
     }
 
     useHead({
@@ -64,4 +71,4 @@ export const useStructuredData = () => {
     addFAQSchema,
     addCalculatorSchema
   }
-} 
+}

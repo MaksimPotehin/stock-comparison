@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-# Important pages
+# Important pages  
 Allow: /calculator
 Allow: /faq
 Allow: /ua/calculator
@@ -12,14 +12,25 @@ Disallow: /_nuxt/
 Disallow: /api/
 Disallow: /*.json$
 Disallow: /*?*
+Disallow: /_vercel/
+Disallow: /404
 
 # Sitemap
 Sitemap: https://www.investing-space.tech/sitemap.xml
 
-# Crawl-delay (be respectful to crawlers)
+# Crawl-delay (be respectful to crawlers) 
 Crawl-delay: 1
 
 # Google-specific directives
 User-agent: Googlebot
 Allow: /
-Crawl-delay: 0 
+Crawl-delay: 0
+
+# Other search engines
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1 
