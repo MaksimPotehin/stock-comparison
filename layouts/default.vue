@@ -110,7 +110,7 @@ const { initializeLocale } = useGeoLocale()
 
 const isMobileMenuOpen = ref(false)
 
-    // Initialize locale based on geolocation
+// Initialize locale based on geolocation
 onMounted(() => {
   initializeLocale().catch(error => {
     console.warn('Locale initialization failed:', error)
@@ -139,8 +139,9 @@ const switchLanguage = async (newLocale: string) => {
   const currentLocale = locale.value
   trackLanguageSwitch(currentLocale, newLocale)
 
-      // Save user choice
-  if (process.client) {
+  // Save user choice
+  const nuxtApp = useNuxtApp()
+  if (nuxtApp.$client) {
     localStorage.setItem('nuxt-i18n-lang', newLocale)
   }
 

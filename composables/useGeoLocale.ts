@@ -10,7 +10,8 @@ export const useGeoLocale = () => {
 
   const detectUserCountry = async (): Promise<string | null> => {
     // Check cache
-    if (process.client) {
+    const nuxtApp = useNuxtApp()
+    if (nuxtApp.$client) {
       const cached = localStorage.getItem(CACHED_COUNTRY_KEY)
       if (cached) {
         const { country, timestamp } = JSON.parse(cached)
@@ -40,7 +41,8 @@ export const useGeoLocale = () => {
       const country = data.country_code
 
       // Save to cache
-      if (process.client && country) {
+      const nuxtApp = useNuxtApp()
+      if (nuxtApp.$client && country) {
         localStorage.setItem(CACHED_COUNTRY_KEY, JSON.stringify({
           country,
           timestamp: Date.now()
@@ -60,7 +62,8 @@ export const useGeoLocale = () => {
     if (country === 'UA') return 'ua'
 
     // 2. Fallback to browser language
-    if (process.client) {
+    const nuxtApp = useNuxtApp()
+    if (nuxtApp.$client) {
       const browserLang = navigator.language.toLowerCase()
       if (browserLang.startsWith('uk') || browserLang.startsWith('ua')) {
         return 'ua'
@@ -73,7 +76,8 @@ export const useGeoLocale = () => {
 
   const initializeLocale = async () => {
     // Initialize only if not already set by user
-    const hasUserPreference = process.client && localStorage.getItem('nuxt-i18n-lang')
+    const nuxtApp = useNuxtApp()
+    const hasUserPreference = nuxtApp.$client && localStorage.getItem('nuxt-i18n-lang')
     if (hasUserPreference) return
 
     const preferredLocale = await getPreferredLocale()
