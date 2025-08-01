@@ -1,12 +1,24 @@
+# Google-specific directives (most specific first)
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Other search engines  
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+# General directives for all other bots
 User-agent: *
-# Allow only actual pages (no redirects)
+Allow: /
 Allow: /calculator
 Allow: /faq
 Allow: /ua/calculator
 Allow: /ua/faq
-
-# Block root and other redirects
-Disallow: /$
 
 # Block unnecessary paths
 Disallow: /_nuxt/
@@ -16,22 +28,8 @@ Disallow: /*?*
 Disallow: /_vercel/
 Disallow: /404
 
+# Crawl-delay (be respectful to crawlers)
+Crawl-delay: 1
+
 # Sitemap
-Sitemap: https://www.investing-space.tech/sitemap.xml
-
-# Crawl-delay (be respectful to crawlers) 
-Crawl-delay: 1
-
-# Google-specific directives
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 0
-
-# Other search engines
-User-agent: Bingbot
-Allow: /
-Crawl-delay: 1
-
-User-agent: DuckDuckBot
-Allow: /
-Crawl-delay: 1 
+Sitemap: https://www.investing-space.tech/sitemap.xml 
