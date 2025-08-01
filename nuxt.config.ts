@@ -13,7 +13,7 @@ export default defineNuxtConfig({
     preset: process.env.VERCEL ? 'vercel' : undefined,
     routeRules: {
       '/': { redirect: '/calculator' },
-      // SEO та performance оптимізації
+      // SEO and performance optimizations
       '/calculator': {
         headers: { 'cache-control': 's-maxage=31536000' },
         prerender: true

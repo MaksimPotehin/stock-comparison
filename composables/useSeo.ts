@@ -41,17 +41,17 @@ export const useSeo = (pageKey: 'home' | 'calculator' | 'faq') => {
   const currentLocale = locale.value === 'en' ? 'en' : 'ua'
   const baseUrl = 'https://www.investing-space.tech'
 
-  // Виправлена логіка canonical URL
+  // Fixed canonical URL logic
   let canonicalPath = ''
   if (pageKey === 'home') {
-    // Home тепер це /calculator
+    // Home is now /calculator
     canonicalPath = currentLocale === 'ua' ? '/ua/calculator' : '/calculator'
   } else {
     canonicalPath = currentLocale === 'ua' ? `/ua/${pageKey}` : `/${pageKey}`
   }
   const canonicalUrl = `${baseUrl}${canonicalPath}`
 
-  // Структуровані дані
+  // Structured data
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': (pageKey === 'calculator' || pageKey === 'home') ? 'WebApplication' : 'WebPage',
@@ -162,7 +162,7 @@ export const useSeo = (pageKey: 'home' | 'calculator' | 'faq') => {
         rel: 'canonical',
         href: canonicalUrl
       },
-      // Виправлені hreflang links
+      // Fixed hreflang links
       {
         rel: 'alternate',
         hreflang: 'uk',

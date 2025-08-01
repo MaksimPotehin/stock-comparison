@@ -1,7 +1,7 @@
 // no import needed
 
 export default defineNuxtPlugin(() => {
-  // Глобальні структуровані дані для організації
+  // Global structured data for organization
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -12,7 +12,7 @@ export default defineNuxtPlugin(() => {
     sameAs: []
   }
 
-  // Хлібні крихти для кращої навігації
+  // Breadcrumbs for better navigation
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',

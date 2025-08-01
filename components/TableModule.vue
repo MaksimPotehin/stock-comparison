@@ -127,18 +127,18 @@ withDefaults(defineProps<{
 
 const tableRef = ref()
 
-// Метод для підсумків таблиці
+    // Method for table summaries
 function calculateSummary ({ columns, data }: { columns: ITableColumn[]; data: T[] }): string[] {
   const summary = columns.map((column: ITableColumn) => {
     if (!data?.length) return '0.00'
 
     if (column.property === 'initialDeposit') {
-      // Acc value: беремо значення з останнього рядка
+              // Acc value: take value from the last row
       const lastRow = data[data.length - 1]
       const value = lastRow?.initialDeposit
       return value !== undefined && value !== null ? value : '0.00'
     } else if (column.property === 'totalAmount') {
-      // Total amount: останнє значення або сума Acc value + всі відсотки
+              // Total amount: last value or sum of Acc value + all interest
       const lastRow = data[data.length - 1]
       if (lastRow?.totalAmount !== undefined && lastRow?.totalAmount !== null) {
         return lastRow.totalAmount
@@ -154,7 +154,7 @@ function calculateSummary ({ columns, data }: { columns: ITableColumn[]; data: T
       return (totalAccValue + totalInterest)
         .toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
     } else if (column.property === 'interestPerPeriod') {
-      // InterestPerPeriod: сума всіх відсотків
+              // InterestPerPeriod: sum of all interest
       return data.reduce((sum, row: T) => {
         const value = row?.interestPerPeriod
         return sum + (value !== undefined && value !== null ? Number(value.replace(/,/g, '')) : 0)

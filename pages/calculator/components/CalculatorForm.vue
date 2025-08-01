@@ -60,7 +60,7 @@ const { t } = useI18n()
 
 const modelValue = defineModel<IFormModel>({ required: true })
 
-// Динамічний підпис для внеску
+    // Dynamic label for contribution
 const depositLabel = computed(() => {
   if (modelValue.value.depositFrequency === EFrequency.Weekly) return t('calculator.form.weekly')
   if (modelValue.value.depositFrequency === EFrequency.Monthly) return t('calculator.form.monthly')

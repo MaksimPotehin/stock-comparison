@@ -165,7 +165,7 @@
 import { ref } from 'vue'
 import { useSeo } from '~/composables/useSeo'
 
-// SEO метадані
+// SEO metadata
 useSeo('faq')
 
 const faqItems = ref([

@@ -3,13 +3,13 @@ interface IGeoResponse {
 }
 
 const CACHED_COUNTRY_KEY = 'user_country'
-const CACHE_DURATION = 24 * 60 * 60 * 1000 // 24 години
+const CACHE_DURATION = 24 * 60 * 60 * 1000 // 24 hours
 
 export const useGeoLocale = () => {
   const { locale } = useI18n()
 
   const detectUserCountry = async (): Promise<string | null> => {
-    // Перевіряємо кеш
+    // Check cache
     if (process.client) {
       const cached = localStorage.getItem(CACHED_COUNTRY_KEY)
       if (cached) {
@@ -21,7 +21,7 @@ export const useGeoLocale = () => {
     }
 
     try {
-      // Використовуємо швидкий і надійний сервіс
+      // Use fast and reliable service
       const controller = new AbortController()
       const timeoutId = setTimeout(() => controller.abort(), 3000)
 
@@ -39,7 +39,7 @@ export const useGeoLocale = () => {
       const data: IGeoResponse = await response.json()
       const country = data.country_code
 
-      // Зберігаємо в кеш
+      // Save to cache
       if (process.client && country) {
         localStorage.setItem(CACHED_COUNTRY_KEY, JSON.stringify({
           country,
@@ -55,11 +55,11 @@ export const useGeoLocale = () => {
   }
 
   const getPreferredLocale = async (): Promise<'ua' | 'en'> => {
-    // 1. Спробуємо геолокацію
+    // 1. Try geolocation
     const country = await detectUserCountry()
     if (country === 'UA') return 'ua'
 
-    // 2. Fallback до браузерної мови
+    // 2. Fallback to browser language
     if (process.client) {
       const browserLang = navigator.language.toLowerCase()
       if (browserLang.startsWith('uk') || browserLang.startsWith('ua')) {
@@ -67,18 +67,18 @@ export const useGeoLocale = () => {
       }
     }
 
-    // 3. Дефолт - англійська
+    // 3. Default - English
     return 'en'
   }
 
   const initializeLocale = async () => {
-    // Ініціалізуємо тільки якщо ще не встановлено користувачем
+    // Initialize only if not already set by user
     const hasUserPreference = process.client && localStorage.getItem('nuxt-i18n-lang')
     if (hasUserPreference) return
 
     const preferredLocale = await getPreferredLocale()
 
-    // Змінюємо мову тільки якщо вона відрізняється
+    // Change language only if it's different
     if (locale.value !== preferredLocale) {
       const switchLocalePath = useSwitchLocalePath()
       await navigateTo(switchLocalePath(preferredLocale))

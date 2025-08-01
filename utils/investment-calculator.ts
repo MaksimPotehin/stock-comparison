@@ -4,8 +4,8 @@ import type { TTimeUnit, TFrequency, IInvestmentParameters, IInvestmentResult } 
 export function convertDurationToWeeks (duration: number, unit: TTimeUnit): number {
   switch (unit) {
     case 'weeks': return duration
-    case 'months': return duration * 4 // приблизно 4 тижні в місяці
-    case 'years': return duration * 52 // приблизно 52 тижні в році
+    case 'months': return duration * 4 // approximately 4 weeks in a month
+    case 'years': return duration * 52 // approximately 52 weeks in a year
     default: throw new Error('Invalid time unit')
   }
 }
