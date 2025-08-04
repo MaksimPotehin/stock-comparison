@@ -13,6 +13,7 @@ export default defineNuxtConfig({
     preset: process.env.VERCEL ? 'vercel' : undefined,
     routeRules: {
       '/': { redirect: '/calculator' },
+      '/ua': { redirect: '/ua/calculator' },
       // SEO and performance optimizations
       '/calculator': {
         headers: { 'cache-control': 's-maxage=31536000' },
@@ -81,6 +82,23 @@ export default defineNuxtConfig({
     }
   },
 
+  hooks: {
+    'pages:extend': (pages) => {
+      // Remove component pages from routing
+      for (let i = pages.length - 1; i >= 0; i--) {
+        if (pages[i].path?.includes('/components/')) {
+          pages.splice(i, 1)
+        }
+      }
+    },
+    'nitro:config': (nitroConfig) => {
+      // Ensure components are excluded from sitemap
+      if (!nitroConfig.prerender) nitroConfig.prerender = {}
+      if (!nitroConfig.prerender.ignore) nitroConfig.prerender.ignore = []
+      nitroConfig.prerender.ignore.push('/calculator/components/**', '/ua/calculator/components/**')
+    }
+  },
+
   modules: [
     '@vueuse/nuxt',
     ['@nuxtjs/tailwindcss', { viewer: false }],
@@ -98,6 +116,9 @@ export default defineNuxtConfig({
         '/faq',
         '/ua/calculator',
         '/ua/faq'
+      ],
+      exclude: [
+        '**/components/**'
       ],
       defaults: {
         changefreq: 'weekly',

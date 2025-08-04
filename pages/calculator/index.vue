@@ -52,10 +52,10 @@ import { useSeo } from '~/composables/useSeo'
 import { useStructuredData } from '~/composables/useStructuredData'
 import { useAnalytics } from '~/composables/useAnalytics'
 
-  // SEO metadata
+// SEO metadata
 useSeo('calculator')
 
-  // Extended structured data
+// Extended structured data
 const { addCalculatorSchema } = useStructuredData()
 onMounted(() => {
   addCalculatorSchema()
@@ -63,7 +63,7 @@ onMounted(() => {
 
 const { trackCalculatorEvent, trackNavigation } = useAnalytics()
 
-  // Initial form values
+// Initial form values
 const formModel = ref<IFormModel>({
   start: 1000,
   deposit: 0,
@@ -75,10 +75,10 @@ const formModel = ref<IFormModel>({
   reinvestmentFrequency: EFrequency.Monthly
 })
 
-  // Results display mode
+// Results display mode
 const resultViewType = ref<'chart' | 'table'>('table')
 
-  // Table headers
+// Table headers
 const headings = [
   { value: 'period', label: 'calculator.tableHeaders.period', minWidth: 80 },
   { value: 'date', label: 'calculator.tableHeaders.date', minWidth: 100 },
@@ -87,7 +87,7 @@ const headings = [
   { value: 'totalAmount', label: 'calculator.tableHeaders.totalAmount', minWidth: 150 }
 ]
 
-  // Input validation
+// Input validation
 const validateInputs = (model: IFormModel): boolean => {
   if (model.start < 0) return false
   if (model.deposit < 0) return false
@@ -96,14 +96,14 @@ const validateInputs = (model: IFormModel): boolean => {
   return true
 }
 
-  // Transform form data into simulation parameters
+// Transform form data into simulation parameters
 const simulationParams = computed<IInvestmentParameters>(() => {
-      // Determine display period based on selected duration unit
+  // Determine display period based on selected duration unit
   let displayPeriod: TTimeUnit
   if (formModel.value.durationUnit === EDurationUnit.Weeks) {
     displayPeriod = 'weeks'
   } else {
-          displayPeriod = 'months' // for both months and years we show monthly data
+    displayPeriod = 'months' // for both months and years we show monthly data
   }
 
   const params = {
@@ -131,7 +131,7 @@ const simulationParams = computed<IInvestmentParameters>(() => {
   return params
 })
 
-  // Simulation results
+// Simulation results
 const simulationResults = computed<IInvestmentResult[]>(() => {
   console.log('Simulation params changed:', simulationParams.value)
   const results = simulateInvestment(simulationParams.value)
@@ -139,7 +139,7 @@ const simulationResults = computed<IInvestmentResult[]>(() => {
   return results
 })
 
-  // Calculate data for table
+// Calculate data for table
 const tableData = computed<ITableRecord[]>(() => {
   return simulationResults.value.map(result => ({
     period: result.period,
@@ -154,12 +154,12 @@ onMounted(() => {
   trackNavigation('calculator')
 })
 
-  // Add tracking when parameters change
+// Add tracking when parameters change
 watch(simulationParams, (newParams) => {
   trackCalculatorEvent('parameter_change', JSON.stringify(newParams))
 }, { deep: true })
 
-  // Add tracking when display type changes
+// Add tracking when display type changes
 watch(resultViewType, (newType) => {
   trackCalculatorEvent('view_type_change', newType)
 })

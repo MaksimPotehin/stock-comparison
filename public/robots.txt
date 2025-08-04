@@ -27,9 +27,11 @@ Disallow: /*.json$
 Disallow: /*?*
 Disallow: /_vercel/
 Disallow: /404
+Disallow: /calculator/components/
+Disallow: /ua/calculator/components/
 
 # Crawl-delay (be respectful to crawlers)
 Crawl-delay: 1
 
 # Sitemap
-Sitemap: https://www.investing-space.tech/sitemap.xml 
+Sitemap: https://www.investing-space.tech/sitemap_index.xml 
