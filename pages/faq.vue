@@ -8,7 +8,7 @@
       </div>
 
       <NuxtLink
-        to="/calculator"
+        :to="localePath('/calculator')"
         class="self-start flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 bg-warning text-gray-900
               rounded-lg hover:bg-warning/90 transition-colors font-medium text-[14px] md:text-base"
       >
@@ -148,7 +148,7 @@
     <div class="flex flex-col items-center gap-3 md:gap-4 py-3 md:py-6 px-3 md:px-8 bg-gray-800 rounded-lg">
       <h2 class="text-warning text-base md:text-xl">{{ $t('faq.readyToStart') }}</h2>
       <NuxtLink
-        to="/calculator"
+        :to="localePath('/calculator')"
         class="flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 bg-warning text-gray-900
               rounded-lg hover:bg-warning/90 transition-colors font-medium text-[14px] md:text-base"
       >
@@ -164,6 +164,8 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { useSeo } from '~/composables/useSeo'
+
+const localePath = useLocalePath()
 
 // SEO metadata
 useSeo('faq')

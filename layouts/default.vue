@@ -144,6 +144,9 @@ const switchLanguage = async (newLocale: string) => {
   if (nuxtApp.$client) {
     localStorage.setItem('nuxt-i18n-lang', newLocale)
   }
+  // Persist via cookie for SSR and i18n redirects
+  const langCookie = useCookie<string>('i18n_redirected')
+  langCookie.value = newLocale
 
   await navigateTo(switchLocalePath(newLocale))
 }

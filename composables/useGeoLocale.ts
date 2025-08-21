@@ -75,16 +75,31 @@ export const useGeoLocale = () => {
   }
 
   const initializeLocale = async () => {
-    // Initialize only if not already set by user
+    // Initialize honoring explicit user preference first
+    const switchLocalePath = useSwitchLocalePath()
+    const userPrefCookie = useCookie<string>('i18n_redirected')
+
+    let userPreference: 'ua' | 'en' | null = null
     const nuxtApp = useNuxtApp()
-    const hasUserPreference = nuxtApp.$client && localStorage.getItem('nuxt-i18n-lang')
-    if (hasUserPreference) return
+    if (nuxtApp.$client) {
+      const ls = localStorage.getItem('nuxt-i18n-lang')
+      if (ls === 'ua' || ls === 'en') userPreference = ls
+    }
+    if (!userPreference && (userPrefCookie.value === 'ua' || userPrefCookie.value === 'en')) {
+      userPreference = userPrefCookie.value as 'ua' | 'en'
+    }
+
+    if (userPreference) {
+      if (locale.value !== userPreference) {
+        await navigateTo(switchLocalePath(userPreference))
+      }
+      return
+    }
 
     const preferredLocale = await getPreferredLocale()
 
     // Change language only if it's different
     if (locale.value !== preferredLocale) {
-      const switchLocalePath = useSwitchLocalePath()
       await navigateTo(switchLocalePath(preferredLocale))
     }
   }
