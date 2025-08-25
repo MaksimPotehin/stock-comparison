@@ -124,12 +124,20 @@ export const useSeo = (pageKey: 'home' | 'calculator' | 'faq') => {
         content: `${baseUrl}/og-image.svg`
       },
       {
+        property: 'og:image:secure_url',
+        content: `${baseUrl}/og-image.svg`
+      },
+      {
         property: 'og:image:width',
         content: '1200'
       },
       {
         property: 'og:image:height',
         content: '630'
+      },
+      {
+        property: 'og:image:alt',
+        content: 'Free Investment Calculator'
       },
       {
         property: 'og:site_name',

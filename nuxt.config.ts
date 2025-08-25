@@ -5,7 +5,8 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-25',
   runtimeConfig: {
     public: {
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.investing-space.tech'
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.investing-space.tech',
+      gscVerificationContent: process.env.NUXT_PUBLIC_GSC_VERIFICATION || ''
     }
   },
 
@@ -62,7 +63,9 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon/favicon-16x16.png' },
         { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon/favicon-32x32.png' },
         { rel: 'apple-touch-icon', href: '/favicon/apple-touch-icon.png' },
-        { rel: 'manifest', href: '/favicon/site.webmanifest' }
+        { rel: 'manifest', href: '/favicon/site.webmanifest' },
+        { rel: 'preconnect', href: 'https://www.googletagmanager.com', crossorigin: '' },
+        { rel: 'dns-prefetch', href: 'https://www.googletagmanager.com' }
       ],
       script: [
         // Google Analytics
