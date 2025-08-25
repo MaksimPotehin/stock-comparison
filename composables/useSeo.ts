@@ -5,37 +5,37 @@ export const useSeo = (pageKey: 'home' | 'calculator' | 'faq') => {
 
   const titles = {
     home: {
-      en: 'Investment Calculator | Compound Interest and Investment Returns Calculator',
+      en: 'Free Investment Calculator | Compound Interest Calculator with Monthly Contributions',
       ua: 'Інвестиційний калькулятор | Розрахунок складних відсотків та доходності інвестицій'
     },
     calculator: {
-      en: 'Compound Interest Calculator | Investment and Passive Income Planning',
+      en: 'Free Compound Interest Calculator | Investment Calculator with Regular Deposits',
       ua: 'Калькулятор складних відсотків | Планування інвестицій та пасивного доходу'
     },
     faq: {
-      en: 'FAQ | Investment Calculator | Compound Interest Planning',
+      en: 'Investment Calculator FAQ | Compound Interest Planning Questions',
       ua: 'Часті запитання | Інвестиційний калькулятор | Планування складних відсотків'
     }
   }
 
   const descriptions = {
     home: {
-      en: 'Free online calculator for investment planning. Calculate the future value of your investments with reinvestment and regular contributions.',
+      en: 'Free online investment calculator for compound interest planning. Calculate investment returns with monthly contributions, reinvestment options, and interactive charts. No registration required.',
       ua: 'Безкоштовний онлайн калькулятор для планування інвестицій. Розрахуйте майбутню вартість ваших вкладень з урахуванням реінвестування та регулярних внесків.'
     },
     calculator: {
-      en: 'Calculate potential investment returns with various parameters: initial deposit, regular contributions, interest rate, and investment period. Free compound interest calculator with charts and tables.',
+      en: 'Free compound interest calculator with monthly contributions. Calculate investment returns with regular deposits, reinvestment, and multiple time periods. View results in charts and tables.',
       ua: 'Розрахуйте потенційний дохід від інвестицій з різними параметрами: початковий внесок, регулярні поповнення, відсоткова ставка та період інвестування. Безкоштовний калькулятор складних відсотків з графіками та таблицями.'
     },
     faq: {
-      en: 'Frequently asked questions about investment calculator, compound interest, and financial planning for your investments. Learn investment basics and calculator usage.',
+      en: 'Investment calculator FAQ: Learn about compound interest, investment planning, and how to use our free online calculator. Get answers about regular contributions and long-term investing.',
       ua: 'Часті запитання про інвестиційний калькулятор, складні відсотки та фінансове планування ваших інвестицій. Дізнайтеся основи інвестування та використання калькулятора.'
     }
   }
 
   const keywords = {
-    en: 'investment calculator, compound interest calculator, investment returns calculator, financial planning, passive income, profit reinvestment, annual interest rate, regular contributions, long-term investments, financial independence, portfolio growth, retirement planning',
-    ua: 'інвестиційний калькулятор, калькулятор складних відсотків, калькулятор доходності інвестицій, фінансове планування, пасивний дохід, реінвестування прибутку, річна відсоткова ставка, регулярні внески, довгострокові інвестиції, фінансова незалежність, зростання портфеля, планування пенсії'
+    en: 'investment calculator, compound interest calculator, investment returns calculator, financial planning, passive income, profit reinvestment, annual interest rate, regular contributions, long-term investments, financial independence, portfolio growth, retirement planning, free investment calculator, online investment calculator, compound interest calculator with monthly contributions, investment calculator with regular deposits, compound interest calculator online, investment growth calculator, financial calculator compound interest, investment planning calculator, compound interest calculator with reinvestment, investment calculator with charts, compound interest calculator with table view, investment calculator for long term planning, compound interest calculator with weekly monthly yearly options',
+    ua: 'інвестиційний калькулятор, калькулятор складних відсотків, калькулятор доходності інвестицій, фінансове планування, пасивний дохід, реінвестування прибутку, річна відсоткова ставка, регулярні внески, довгострокові інвестиції, фінансова незалежність, зростання портфеля, планування пенсії, безкоштовний інвестиційний калькулятор, онлайн інвестиційний калькулятор, калькулятор складних відсотків з щомісячними внесками, калькулятор інвестицій з регулярними внесками, калькулятор складних відсотків онлайн, калькулятор зростання інвестицій, фінансовий калькулятор складні відсотки, калькулятор планування інвестицій, калькулятор складних відсотків з реінвестуванням, інвестиційний калькулятор з графіками, калькулятор складних відсотків з таблицею, інвестиційний калькулятор для довгострокового планування'
   }
 
   const currentLocale = locale.value === 'en' ? 'en' : 'ua'
@@ -138,6 +138,11 @@ export const useSeo = (pageKey: 'home' | 'calculator' | 'faq') => {
       {
         property: 'og:locale',
         content: currentLocale === 'ua' ? 'uk_UA' : 'en_US'
+      },
+      // Locale alternates for OG
+      {
+        property: 'og:locale:alternate',
+        content: currentLocale === 'ua' ? 'en_US' : 'uk_UA'
       },
       // Twitter Card
       {

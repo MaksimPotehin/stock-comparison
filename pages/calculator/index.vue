@@ -3,6 +3,29 @@
     <div>
       <h1 class="text-warning text-2xl mb-4">{{ $t('calculator.title') }}</h1>
       <p class="text-white-400 leading-7">{{ $t('calculator.description') }}</p>
+      
+      <!-- SEO Content for better indexing (EN only) -->
+      <div v-if="$i18n.locale === 'en'" class="mt-6 p-4 bg-gray-800/50 rounded-lg">
+        <h2 class="text-warning text-lg mb-3">Free Investment Calculator Features</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-white-400">
+          <div>
+            <h3 class="text-warning mb-2">Compound Interest Calculator</h3>
+            <p>Calculate compound interest with regular monthly contributions. See how your investments grow over time with our free online calculator.</p>
+          </div>
+          <div>
+            <h3 class="text-warning mb-2">Investment Planning Tool</h3>
+            <p>Plan your long-term investments with our free calculator. Input initial deposit, monthly contributions, and interest rate to see potential returns.</p>
+          </div>
+          <div>
+            <h3 class="text-warning mb-2">Interactive Charts & Tables</h3>
+            <p>View your investment growth in detailed tables or interactive charts. Track your portfolio performance over different time periods.</p>
+          </div>
+          <div>
+            <h3 class="text-warning mb-2">No Registration Required</h3>
+            <p>Use our free investment calculator without signing up. Start calculating compound interest immediately with your own investment parameters.</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="flex w-full md:space-x-8 flex-col md:flex-row gap-16 md:gap-0 md:overflow-hidden">
@@ -34,6 +57,29 @@
             v-else
             :data="simulationResults"
           />
+        </div>
+      </div>
+    </div>
+    
+    <!-- Additional SEO Content (EN only) -->
+    <div v-if="$i18n.locale === 'en'" class="mt-8 p-6 bg-gray-800/50 rounded-lg">
+      <h2 class="text-warning text-xl mb-4">About Our Free Investment Calculator</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-white-400">
+        <div>
+          <h3 class="text-warning mb-3">Best Free Investment Calculator Online</h3>
+          <p>Our free investment calculator is designed to help you understand compound interest and plan your financial future. Whether you're planning for retirement, saving for a major purchase, or building wealth through regular investments, our calculator provides accurate projections based on your specific parameters.</p>
+        </div>
+        <div>
+          <h3 class="text-warning mb-3">Compound Interest Calculator with Monthly Contributions</h3>
+          <p>Calculate compound interest with regular monthly contributions to see how small, consistent investments can grow into significant wealth over time. Our calculator shows you the power of compound interest with detailed breakdowns of your investment growth.</p>
+        </div>
+        <div>
+          <h3 class="text-warning mb-3">Investment Planning Made Simple</h3>
+          <p>Plan your investments with confidence using our comprehensive calculator. Input your initial deposit, set up regular contributions, choose your investment period, and see realistic projections of your potential returns.</p>
+        </div>
+        <div>
+          <h3 class="text-warning mb-3">Free Online Calculator - No Registration Required</h3>
+          <p>Access our investment calculator instantly without any registration or sign-up process. Start calculating compound interest immediately and explore different investment scenarios to find the best strategy for your financial goals.</p>
         </div>
       </div>
     </div>

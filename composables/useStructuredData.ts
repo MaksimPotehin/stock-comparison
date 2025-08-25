@@ -29,10 +29,10 @@ export const useStructuredData = () => {
     const calculatorSchema = {
       '@context': 'https://schema.org',
       '@type': 'SoftwareApplication',
-      name: locale.value === 'ua' ? 'Інвестиційний калькулятор' : 'Investment Calculator',
+      name: locale.value === 'ua' ? 'Інвестиційний калькулятор' : 'Free Investment Calculator',
       description: locale.value === 'ua'
         ? 'Безкоштовний онлайн калькулятор для розрахунку складних відсотків та планування інвестицій'
-        : 'Free online calculator for compound interest calculation and investment planning',
+        : 'Free online investment calculator for compound interest calculation and investment planning with monthly contributions',
       applicationCategory: 'FinanceApplication',
       operatingSystem: 'Web Browser',
       url: locale.value === 'ua' ? 'https://www.investing-space.tech/ua/calculator' : 'https://www.investing-space.tech/calculator',
@@ -45,9 +45,15 @@ export const useStructuredData = () => {
         'Compound interest calculation',
         'Investment planning',
         'Regular contribution modeling',
+        'Monthly contributions calculator',
         'Interactive charts and tables',
-        'Multiple time periods'
+        'Multiple time periods',
+        'Reinvestment options',
+        'Free online calculator'
       ],
+      keywords: locale.value === 'ua' 
+        ? 'інвестиційний калькулятор, калькулятор складних відсотків'
+        : 'investment calculator, compound interest calculator, free investment calculator, monthly contributions calculator',
       publisher: {
         '@type': 'Organization',
         name: 'Investing Space',

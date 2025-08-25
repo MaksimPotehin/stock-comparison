@@ -34,4 +34,4 @@ Disallow: /ua/calculator/components/
 Crawl-delay: 1
 
 # Sitemap
-Sitemap: https://www.investing-space.tech/sitemap_index.xml 
+Sitemap: https://www.investing-space.tech/sitemap.xml

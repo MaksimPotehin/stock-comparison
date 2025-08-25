@@ -1,14 +1,14 @@
 export const faqMessages = {
-  title: 'Frequently Asked Questions',
-  description: 'Find answers to common questions about investment calculator, compound interest, and financial planning.',
+  title: 'Investment Calculator FAQ - Free Compound Interest Calculator',
+  description: 'Find answers to common questions about our free investment calculator, compound interest calculations, and financial planning. Learn how to use the best online investment calculator.',
   startCalculating: 'Start Calculating',
   readyToStart: 'Ready to Start?',
   tryCalculator: 'Try Calculator',
 
   tips: {
     compound: {
-      title: 'Power of Compound Interest',
-      description: 'The longer you invest, the harder compound interest works for you. Even small regular contributions can lead to significant amounts over time.'
+      title: 'Power of Compound Interest in Investment Calculator',
+      description: 'The longer you invest, the harder compound interest works for you. Even small regular contributions can lead to significant amounts over time. Use our free investment calculator to see the power of compound interest with your own numbers.'
     },
     early: {
       title: 'Start as Early as Possible',
@@ -26,12 +26,12 @@ export const faqMessages = {
 
   questions: {
     compoundInterest: {
-      question: 'What is compound interest?',
-      answer: 'Compound interest is interest calculated not only on the initial principal but also on the accumulated interest. This significantly accelerates the growth of your investments over time. It\'s one of the most powerful concepts in finance, often called the "eighth wonder of the world" by Albert Einstein.'
+      question: 'What is compound interest and how does it work in investment calculator?',
+      answer: 'Compound interest is interest calculated not only on the initial principal but also on the accumulated interest. This significantly accelerates the growth of your investments over time. It\'s one of the most powerful concepts in finance, often called the "eighth wonder of the world" by Albert Einstein. Our free investment calculator shows you exactly how compound interest works with your specific investment parameters.'
     },
     calculatorUsage: {
-      question: 'How to use the calculator?',
-      answer: 'Our calculator allows you to model various investment scenarios. Enter your initial investment amount and set up regular contributions (weekly, monthly, or yearly). Set the annual interest rate and choose the investment period (in weeks, months, or years). Enable or disable income reinvestment and select its frequency. The calculator will show you a table or chart with a detailed breakdown of your investment growth, including contributions, earned interest, and total balance for each period.'
+      question: 'How to use the free investment calculator?',
+      answer: 'Our free online investment calculator allows you to model various investment scenarios. Enter your initial investment amount and set up regular contributions (weekly, monthly, or yearly). Set the annual interest rate and choose the investment period (in weeks, months, or years). Enable or disable income reinvestment and select its frequency. The calculator will show you a table or chart with a detailed breakdown of your investment growth, including contributions, earned interest, and total balance for each period. No registration required.'
     },
     reinvestment: {
       question: 'How does reinvestment differ from regular interest calculation?',

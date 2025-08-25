@@ -108,25 +108,27 @@ export default defineNuxtConfig({
       vueI18n: './i18n/i18n.config.ts'
     }],
     'unplugin-icons/nuxt',
-    ['@nuxtjs/sitemap', {
-      hostname: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.investing-space.tech',
-      gzip: true,
-      routes: [
-        '/calculator',
-        '/faq',
-        '/ua/calculator',
-        '/ua/faq'
-      ],
-      exclude: [
-        '**/components/**'
-      ],
-      defaults: {
-        changefreq: 'weekly',
-        priority: 0.8,
-        lastmod: new Date().toISOString()
-      }
-    }]
+    '@nuxtjs/sitemap'
   ],
+
+  sitemap: {
+    siteUrl: 'https://www.investing-space.tech',
+    routes: [
+      '/calculator',
+      '/faq',
+      '/ua/calculator',
+      '/ua/faq'
+    ],
+    exclude: [
+      '/404',
+      '/_nuxt/**',
+      '**/components/**'
+    ],
+    defaults: {
+      changefreq: 'weekly',
+      priority: 0.8
+    }
+  },
 
   build: {
     transpile: ['element-plus']
