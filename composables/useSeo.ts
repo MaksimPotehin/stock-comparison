@@ -1,6 +1,6 @@
 import { useI18n } from 'vue-i18n'
 
-export const useSeo = (pageKey: 'home' | 'calculator' | 'faq') => {
+export const useSeo = (pageKey: 'home' | 'calculator' | 'faq' | 'blog') => {
   const { locale } = useI18n()
 
   const titles = {
@@ -15,6 +15,10 @@ export const useSeo = (pageKey: 'home' | 'calculator' | 'faq') => {
     faq: {
       en: 'Investment Calculator FAQ | Compound Interest Planning Questions',
       ua: 'Часті запитання | Інвестиційний калькулятор | Планування складних відсотків'
+    },
+    blog: {
+      en: 'Investing Blog | Financial Literacy & Compound Interest Articles',
+      ua: 'Блог про інвестиції | Фінансова грамотність та складні відсотки'
     }
   }
 
@@ -30,6 +34,10 @@ export const useSeo = (pageKey: 'home' | 'calculator' | 'faq') => {
     faq: {
       en: 'Investment calculator FAQ: Learn about compound interest, investment planning, and how to use our free online calculator. Get answers about regular contributions and long-term investing.',
       ua: 'Часті запитання про інвестиційний калькулятор, складні відсотки та фінансове планування ваших інвестицій. Дізнайтеся основи інвестування та використання калькулятора.'
+    },
+    blog: {
+      en: 'Articles on investing, financial literacy, compound interest, and practical guides for using our investment calculator effectively.',
+      ua: 'Статті про інвестування, фінансову грамотність, складні відсотки та практичні гіди з ефективного використання нашого інвестиційного калькулятора.'
     }
   }
 
@@ -54,7 +62,7 @@ export const useSeo = (pageKey: 'home' | 'calculator' | 'faq') => {
   // Structured data
   const structuredData = {
     '@context': 'https://schema.org',
-    '@type': (pageKey === 'calculator' || pageKey === 'home') ? 'WebApplication' : 'WebPage',
+    '@type': (pageKey === 'calculator' || pageKey === 'home') ? 'WebApplication' : (pageKey === 'blog' ? 'Blog' : 'WebPage'),
     name: titles[pageKey][currentLocale],
     description: descriptions[pageKey][currentLocale],
     url: canonicalUrl,

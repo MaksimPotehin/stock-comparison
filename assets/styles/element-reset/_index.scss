@@ -34,6 +34,9 @@
     'checked-border-color':  colors.$color-info,
     'disabled-checked-fill':  theme('colors.gray.500'),
   ),
+  $select-option: (
+    'selected-text-color': getCssVar('colors.gray.200'),
+    ),
  );
 
 @use "element-plus/theme-chalk/src/var";
@@ -45,6 +48,7 @@
 @use "element-plus/theme-chalk/src/input";
 @use "element-plus/theme-chalk/src/loading";
 @use "element-plus/theme-chalk/src/select";
+@use "element-plus/theme-chalk/src/tag";
 @use "element-plus/theme-chalk/src/option";
 @use "element-plus/theme-chalk/src/date-picker";
 @use "element-plus/theme-chalk/src/col";
@@ -61,3 +65,4 @@
 @use "element-plus/theme-chalk/src/dialog";
 @use "element-plus/theme-chalk/src/message-box";
 @use "element-plus/theme-chalk/src/table";
+@use "element-plus/theme-chalk/src/pagination";

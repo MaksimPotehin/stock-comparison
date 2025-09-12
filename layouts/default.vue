@@ -123,6 +123,10 @@ const navigation = computed(() => [
     routeName: localePath('/calculator')
   },
   {
+    label: t('navigation.blog'),
+    routeName: localePath('/blog')
+  },
+  {
     label: t('navigation.faq'),
     routeName: localePath('/faq')
   }

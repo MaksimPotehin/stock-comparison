@@ -24,6 +24,10 @@ export default defineNuxtConfig({
         headers: { 'cache-control': 's-maxage=31536000' },
         prerender: true
       },
+      '/blog': {
+        headers: { 'cache-control': 's-maxage=86400' },
+        prerender: true
+      },
 
       '/ua/calculator': {
         headers: { 'cache-control': 's-maxage=31536000' },
@@ -31,6 +35,10 @@ export default defineNuxtConfig({
       },
       '/ua/faq': {
         headers: { 'cache-control': 's-maxage=31536000' },
+        prerender: true
+      },
+      '/ua/blog': {
+        headers: { 'cache-control': 's-maxage=86400' },
         prerender: true
       }
     }
@@ -119,8 +127,10 @@ export default defineNuxtConfig({
     routes: [
       '/calculator',
       '/faq',
+      '/blog',
       '/ua/calculator',
-      '/ua/faq'
+      '/ua/faq',
+      '/ua/blog'
     ],
     exclude: [
       '/404',
