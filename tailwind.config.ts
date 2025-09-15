@@ -1,8 +1,74 @@
 import type { Config } from 'tailwindcss'
 
 export default <Partial<Config>> {
+  plugins: [require('@tailwindcss/typography')],
   theme: {
     extend: {
+      typography: {
+        DEFAULT: {
+          css: {
+            h1: {
+              fontSize: 'clamp(1.5rem, 4vw, 1.75rem) !important',
+              lineHeight: '1.4',
+              fontWeight: '600',
+              marginTop: '0',
+              marginBottom: '1rem'
+            },
+            h2: {
+              fontSize: '1.25rem',
+              lineHeight: '1.4',
+              fontWeight: '600',
+              marginTop: '1.5rem',
+              marginBottom: '0.75rem'
+            },
+            h3: {
+              fontSize: '1.125rem',
+              lineHeight: '1.4',
+              fontWeight: '600',
+              marginTop: '1.25rem',
+              marginBottom: '0.5rem'
+            },
+            p: {
+              fontSize: '0.95rem',
+              lineHeight: '1.6',
+              marginTop: '0',
+              marginBottom: '1rem'
+            },
+            ul: {
+              fontSize: '0.95rem',
+              lineHeight: '1.6'
+            },
+            ol: {
+              fontSize: '0.95rem',
+              lineHeight: '1.6'
+            },
+            blockquote: {
+              fontSize: '0.95rem',
+              lineHeight: '1.6'
+            },
+            '@media (min-width: 640px)': {
+              h2: {
+                fontSize: '1.5rem'
+              },
+              h3: {
+                fontSize: '1.25rem'
+              },
+              p: {
+                fontSize: '1rem'
+              },
+              ul: {
+                fontSize: '1rem'
+              },
+              ol: {
+                fontSize: '1rem'
+              },
+              blockquote: {
+                fontSize: '1rem'
+              }
+            }
+          }
+        }
+      },
       colors: {
         transparent: 'transparent',
         current: 'currentColor',
