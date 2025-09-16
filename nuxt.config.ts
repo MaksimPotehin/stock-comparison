@@ -1,4 +1,5 @@
 import { localesConfig } from './i18n'
+import { BLOG_POSTS } from './content/blog/posts'
 
 export default defineNuxtConfig({
   ssr: true,
@@ -123,14 +124,15 @@ export default defineNuxtConfig({
   ],
 
   sitemap: {
-    siteUrl: 'https://www.investing-space.tech',
-    routes: [
+    urls: [
       '/calculator',
       '/faq',
       '/blog',
+      ...BLOG_POSTS.map(p => ({ loc: `/blog/${p.slug}`, lastmod: p.publishedAt })),
       '/ua/calculator',
       '/ua/faq',
-      '/ua/blog'
+      '/ua/blog',
+      ...BLOG_POSTS.map(p => ({ loc: `/ua/blog/${p.slug}`, lastmod: p.publishedAt }))
     ],
     exclude: [
       '/404',

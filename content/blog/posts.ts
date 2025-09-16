@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import type { IBlogPost, TBlogCategory } from '~/types/blog'
+import type { IBlogPost } from '~/types/blog'
 
 export const BLOG_POSTS: IBlogPost[] = [
   {
@@ -169,7 +169,7 @@ Start today, automate the process, minimize fees, and let time do its magic.`,
 </div>
 
 <figure class="my-6">
-<svg viewBox="0 0 600 220" width="100%" height="220" class="rounded-md bg-gray-800/80">
+<svg viewBox="0 0 600 220" width="100%" height="250" class="rounded-md bg-gray-800/80">
 <defs>
 <linearGradient id="g2" x1="0" x2="0" y1="0" y2="1">
 <stop offset="0%" stop-color="#F7A535" stop-opacity="0.6" />
@@ -282,49 +282,27 @@ Start today, automate the process, minimize fees, and let time do its magic.`,
     publishedAt: '2025-01-20',
     readingTime: 5,
     featured: true
-  },
-  {
-    id: 'investment-beginners-2025',
-    slug: 'investment-beginners-2025',
-    title: {
-      en: 'Investing for Beginners in 2025',
-      ua: 'Інвестування для початківців у 2025'
-    },
-    excerpt: {
-      en: 'Start investing with confidence using simple, proven principles.',
-      ua: 'Почніть інвестувати впевнено, використовуючи прості перевірені принципи.'
-    },
-    content: {
-      en: '<p>Focus on diversification, long-term thinking, and consistent contributions.</p>',
-      ua: '<p>Зосередьтесь на диверсифікації, довгостроковому мисленні та регулярних внесках.</p>'
-    },
-    category: 'investment-basics',
-    tags: ['beginner', 'investment-basics'],
-    author: 'Investing Space',
-    publishedAt: '2025-02-02',
-    readingTime: 6,
-    featured: false
-  },
-  ...Array.from({ length: 7 }).map((_, i) => ({
-    id: `sample-post-${i + 1}`,
-    slug: `sample-post-${i + 1}`,
-    title: {
-      en: `Sample Post ${i + 1}`,
-      ua: `Приклад статті ${i + 1}`
-    },
-    excerpt: {
-      en: 'Short excerpt for sample content to test pagination and layout.',
-      ua: 'Короткий опис для тестового контенту, щоб перевірити пагінацію і макет.'
-    },
-    content: {
-      en: '<p>Sample body for testing purposes.</p>',
-      ua: '<p>Тестовий текст для перевірки.</p>'
-    },
-    category: (i % 2 === 0 ? 'investment-tools' : 'financial-planning') as TBlogCategory,
-    tags: i % 2 === 0 ? ['tools'] : ['planning'],
-    author: 'Investing Space',
-    publishedAt: `2025-02-${String(10 + i).padStart(2, '0')}`,
-    readingTime: 4,
-    featured: false
-  }))
+  }
+  // {
+  //   id: 'investment-beginners-2025',
+  //   slug: 'investment-beginners-2025',
+  //   title: {
+  //     en: 'Investing for Beginners in 2025',
+  //     ua: 'Інвестування для початківців у 2025'
+  //   },
+  //   excerpt: {
+  //     en: 'Start investing with confidence using simple, proven principles.',
+  //     ua: 'Почніть інвестувати впевнено, використовуючи прості перевірені принципи.'
+  //   },
+  //   content: {
+  //     en: '<p>Focus on diversification, long-term thinking, and consistent contributions.</p>',
+  //     ua: '<p>Зосередьтесь на диверсифікації, довгостроковому мисленні та регулярних внесках.</p>'
+  //   },
+  //   category: 'investment-basics',
+  //   tags: ['beginner', 'investment-basics'],
+  //   author: 'Investing Space',
+  //   publishedAt: '2025-02-02',
+  //   readingTime: 6,
+  //   featured: false
+  // }
 ]

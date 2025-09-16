@@ -38,8 +38,8 @@
 import type { IBlogPost } from '~/types/blog'
 import BlogRelated from '~/components/blog/BlogRelated.vue'
 import { BLOG_POSTS } from '~/content/blog/posts'
-import { useSeo } from '~/composables/useSeo'
 import { md } from '~/utils/markdown'
+import { useBlogSeo } from '~/composables/useBlogSeo'
 
 const route = useRoute()
 const { locale } = useI18n()
@@ -97,18 +97,6 @@ onMounted(() => {
   })
 })
 
-watchEffect(() => {
-  useSeo('blog')
-  if (!post.value) return
-  const { locale } = useI18n()
-  const currentLocale = locale.value === 'ua' ? 'ua' : 'en'
-  useHead({
-    title: post.value.title[currentLocale],
-    meta: [
-      { name: 'description', content: post.value.excerpt[currentLocale] },
-      { property: 'og:title', content: post.value.title[currentLocale] },
-      { property: 'og:description', content: post.value.excerpt[currentLocale] }
-    ]
-  })
-})
+const { setupBlogPostSeo } = useBlogSeo()
+setupBlogPostSeo(post)
 </script>

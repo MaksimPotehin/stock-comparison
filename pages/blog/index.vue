@@ -39,13 +39,13 @@
 <script lang="ts" setup>
 import type { TBlogCategory, IBlogPost } from '~/types/blog'
 import { BLOG_POSTS } from '~/content/blog/posts'
-import { useSeo } from '~/composables/useSeo'
+import { useBlogSeo } from '~/composables/useBlogSeo'
 import BlogSearch from '~/components/blog/BlogSearch.vue'
 import BlogCard from '~/components/blog/BlogCard.vue'
 import BlogSidebar from '~/components/blog/BlogSidebar.vue'
 import BlogPagination from '~/components/blog/BlogPagination.vue'
 
-useSeo('blog')
+// Remove generic blog SEO to prevent duplication; handled by useBlogSeo
 
 const { locale } = useI18n()
 const localePath = useLocalePath()
@@ -92,7 +92,7 @@ const pagedPosts = computed(() => {
 
 const onPageChange = (page: number) => {
   pagination.page = page
-  if (process.client) {
+  if (import.meta.client) {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 }
@@ -101,4 +101,6 @@ watch(() => [filters.search, filters.category, filters.tags.join(',')], () => {
 })
 
 const localizedPostLink = (post: IBlogPost) => localePath(`/blog/${post.slug}`)
+const { setupBlogIndexSeo } = useBlogSeo()
+setupBlogIndexSeo(filteredPosts, pagedPosts, pagination)
 </script>
