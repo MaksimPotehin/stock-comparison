@@ -23,8 +23,6 @@ defineProps<{ items: IBlogPost[] }>()
 
 const { locale } = useI18n()
 const localePath = useLocalePath()
-const localized = (t: { en: string, ua: string }) => locale.value === 'ua' ? t.ua : t.en
+const localized = (t: { en: string; ua: string }) => locale.value === 'ua' ? t.ua : t.en
 const formatDate = (iso: string) => new Date(iso).toLocaleDateString(locale.value === 'ua' ? 'uk-UA' : 'en-US')
 </script>
-
-

@@ -1,3 +1,4 @@
+import { useI18n } from 'vue-i18n'
 interface IGeoResponse {
   country_code: string
 }

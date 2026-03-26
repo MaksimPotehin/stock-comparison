@@ -4,6 +4,9 @@ import { BLOG_POSTS } from './content/blog/posts'
 export default defineNuxtConfig({
   ssr: true,
   compatibilityDate: '2025-07-25',
+  site: {
+    url: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.investing-space.tech'
+  },
   runtimeConfig: {
     public: {
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.investing-space.tech',
@@ -13,6 +16,9 @@ export default defineNuxtConfig({
 
   nitro: {
     preset: process.env.VERCEL ? 'vercel' : undefined,
+    prerender: {
+      routes: ['/sitemap.xml', '/sitemap_index.xml']
+    },
     routeRules: {
       '/': { redirect: '/calculator' },
       '/ua': { redirect: '/ua/calculator' },
@@ -126,6 +132,7 @@ export default defineNuxtConfig({
   ],
 
   sitemap: {
+    xsl: false,
     urls: [
       '/calculator',
       '/faq',

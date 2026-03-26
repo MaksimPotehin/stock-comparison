@@ -4,9 +4,15 @@
       <div class="w-full max-w-[1440px] flex items-center justify-between m-auto px-3 md:px-5 py-2 md:py-3">
         <!-- Logo block placeholder -->
         <div class="flex items-center gap-x-12">
-          <!-- <div class="logo w-10 bg-gray-700/50 md:w-12 h-10 md:h-12" /> -->
+          <NuxtLink :to="localePath('/calculator')">
+            <img
+              src="~/assets/logos/logo.png"
+              alt="Investing Space"
+              class="w-12 h-12 md:w-14 md:h-14 rounded-xl"
+              fetchpriority="high"
+            >
+          </NuxtLink>
           <!-- Center section - Desktop navigation -->
-
           <div class="hidden md:flex items-center gap-x-3 flex-grow justify-center">
             <NuxtLink
               v-for="item in navigation"

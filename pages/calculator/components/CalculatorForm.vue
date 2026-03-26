@@ -54,13 +54,11 @@
 import { computed } from 'vue'
 import type { IFormModel } from '../types'
 import { EFrequency, EDurationUnit } from '../types'
-import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 
 const modelValue = defineModel<IFormModel>({ required: true })
 
-    // Dynamic label for contribution
 const depositLabel = computed(() => {
   if (modelValue.value.depositFrequency === EFrequency.Weekly) return t('calculator.form.weekly')
   if (modelValue.value.depositFrequency === EFrequency.Monthly) return t('calculator.form.monthly')
