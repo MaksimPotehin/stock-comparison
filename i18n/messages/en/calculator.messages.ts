@@ -15,7 +15,8 @@ export const calculatorMessages = {
     initialDeposit: 'Initial deposit',
     monthlyContribution: 'Monthly contribution',
     annualInterestRate: 'Annual interest rate',
-    duration: 'Duration'
+    duration: 'Duration',
+    invalidInput: 'Please enter valid values (positive numbers, duration > 0).'
   },
   viewMode: 'View mode',
   table: 'Table',

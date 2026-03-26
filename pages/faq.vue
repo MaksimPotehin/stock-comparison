@@ -160,47 +160,32 @@
     </div>
 
     <!-- SEO Content for better indexing (EN only) -->
-    <div v-if="$i18n.locale === 'en'" class="mt-8 p-6 bg-gray-800/50 rounded-lg">
-      <h2 class="text-warning text-xl mb-4">
-        Free Investment Calculator - Your Financial Planning Tool
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-white-400">
-        <div>
-          <h3 class="text-warning mb-3">Why Choose Our Free Investment Calculator?</h3>
-          <p>
-            Our free online investment calculator provides accurate compound interest calculations
-            with regular contributions. Whether you're planning for retirement, saving for a major
-            purchase, or building wealth through consistent investments, our calculator helps you
-            visualize your financial future.
-          </p>
-        </div>
-        <div>
-          <h3 class="text-warning mb-3">Compound Interest Calculator Features</h3>
-          <p>
-            Calculate compound interest with monthly contributions, view detailed investment growth
-            charts, and plan your long‑term financial strategy. Our calculator includes reinvestment
-            options, multiple time periods, and interactive visualizations to help you make informed
-            investment decisions.
-          </p>
-        </div>
-        <div>
-          <h3 class="text-warning mb-3">Investment Planning Made Easy</h3>
-          <p>
-            Plan your investments with confidence using our comprehensive calculator. Input your initial
-            deposit, set up regular contributions, choose your investment period, and see realistic
-            projections of your potential returns. No registration required — start calculating
-            immediately.
-          </p>
-        </div>
-        <div>
-          <h3 class="text-warning mb-3">Best Online Investment Calculator</h3>
-          <p>
-            Our free investment calculator is designed to be the most user‑friendly and comprehensive
-            tool for compound interest calculations. With features like monthly contribution planning,
-            reinvestment options, and detailed breakdowns, it's the perfect tool for serious investors
-            and beginners alike.
-          </p>
-        </div>
+    <div v-if="$i18n.locale === 'en'" class="mt-4 border-t border-gray-700/50 pt-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-white-300/50 leading-5">
+        <p>
+          Our free online investment calculator provides accurate compound interest calculations
+          with regular contributions. Whether you're planning for retirement, saving for a major
+          purchase, or building wealth through consistent investments, our calculator helps you
+          visualize your financial future.
+        </p>
+        <p>
+          Calculate compound interest with monthly contributions, view detailed investment growth
+          charts, and plan your long‑term financial strategy. Our calculator includes reinvestment
+          options, multiple time periods, and interactive visualizations to help you make informed
+          investment decisions.
+        </p>
+        <p>
+          Plan your investments with confidence using our comprehensive calculator. Input your initial
+          deposit, set up regular contributions, choose your investment period, and see realistic
+          projections of your potential returns. No registration required — start calculating
+          immediately.
+        </p>
+        <p>
+          Our free investment calculator is designed to be the most user‑friendly and comprehensive
+          tool for compound interest calculations. With features like monthly contribution planning,
+          reinvestment options, and detailed breakdowns, it's the perfect tool for serious investors
+          and beginners alike.
+        </p>
       </div>
     </div>
   </div>
@@ -208,6 +193,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useSeo } from '~/composables/useSeo'
 
 const localePath = useLocalePath()
@@ -277,4 +263,5 @@ const faqItems = ref([
 // FAQPage structured data for rich results in Google Search
 const { addFAQSchema } = useStructuredData()
 addFAQSchema(() => faqItems.value.map(item => ({ question: t(item.question), answer: t(item.answer) })))
+
 </script>

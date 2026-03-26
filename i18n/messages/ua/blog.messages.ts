@@ -4,6 +4,7 @@ export const blogMessages = {
   back: 'Повернутися до блогу',
   min: 'хв',
   searchPlaceholder: 'Пошук статей…',
+  noResults: 'Статей не знайдено. Спробуйте змінити пошуковий запит або фільтри.',
   categories: {
     all: 'Усі категорії',
     calculatorGuides: 'Гіди по калькулятору',

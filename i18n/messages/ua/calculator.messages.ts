@@ -15,7 +15,8 @@ export const calculatorMessages = {
     initialDeposit: 'Початковий депозит',
     monthlyContribution: 'Щомісячний внесок',
     annualInterestRate: 'Річна відсоткова ставка',
-    duration: 'Тривалість'
+    duration: 'Тривалість',
+    invalidInput: 'Введіть коректні значення (додатні числа, тривалість > 0).'
   },
   viewMode: 'Режим перегляду',
   table: 'Таблиця',

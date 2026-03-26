@@ -7,7 +7,12 @@
 
     <div class="flex w-full md:space-x-8 flex-col md:flex-row gap-16 md:gap-0 md:overflow-hidden">
       <!-- Форма для введення даних -->
-      <CalculatorForm v-model="formModel" class="w-full max-w-full md:max-w-[350px]" />
+      <div class="flex flex-col gap-y-2 w-full max-w-full md:max-w-[350px]">
+        <CalculatorForm v-model="formModel" class="w-full" />
+        <p v-if="!isInputValid" class="text-danger text-sm">
+          {{ $t('calculator.form.invalidInput') }}
+        </p>
+      </div>
 
       <div class="flex flex-col w-full h-full overflow-hidden">
         <div class="flex items-center gap-x-10">
@@ -96,6 +101,8 @@ const validateInputs = (model: IFormModel): boolean => {
   return true
 }
 
+const isInputValid = computed(() => validateInputs(formModel.value))
+
 // Transform form data into simulation parameters
 const simulationParams = computed<IInvestmentParameters>(() => {
   // Determine display period based on selected duration unit
@@ -133,10 +140,7 @@ const simulationParams = computed<IInvestmentParameters>(() => {
 
 // Simulation results
 const simulationResults = computed<IInvestmentResult[]>(() => {
-  console.log('Simulation params changed:', simulationParams.value)
-  const results = simulateInvestment(simulationParams.value)
-  console.log('Simulation results:', results)
-  return results
+  return simulateInvestment(simulationParams.value)
 })
 
 // Calculate data for table

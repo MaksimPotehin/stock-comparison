@@ -22,6 +22,9 @@
             :date="formatDate(post.publishedAt)"
           />
         </div>
+        <p v-if="filteredPosts.length === 0" class="text-white-400 text-center py-12">
+          {{ $t('blog.noResults') }}
+        </p>
       </div>
     </div>
 

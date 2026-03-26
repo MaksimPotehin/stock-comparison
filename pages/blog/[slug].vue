@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full flex flex-col gap-6 md:gap-8 p-3 md:p-8 overflow-y-auto">
+  <div ref="scrollContainer" class="w-full h-full flex flex-col gap-6 md:gap-8 p-3 md:p-8 overflow-y-auto">
     <!-- Reading progress bar -->
     <div
       class="fixed left-0 top-0 h-2 bg-warning z-50 transition-[width,opacity] duration-200"
@@ -58,6 +58,7 @@ const related = computed(() => {
 const localized = (t: { en: string; ua: string }) => (locale.value === 'ua' ? t.ua : t.en)
 const formatDate = (iso: string) => new Date(iso).toLocaleDateString(locale.value === 'ua' ? 'uk-UA' : 'en-US')
 
+const scrollContainer = ref<HTMLElement | null>(null)
 const progress = ref(0)
 const renderedHtml = ref('')
 
@@ -71,15 +72,14 @@ function slugify (text: string): string {
 }
 
 onMounted(() => {
+  const container = scrollContainer.value!
   const onScroll = () => {
-    const el = document.scrollingElement || document.documentElement
-    const scrollTop = el.scrollTop
-    const total = (el.scrollHeight - el.clientHeight) || 1
-    progress.value = Math.min(100, Math.max(0, (scrollTop / total) * 100))
+    const total = (container.scrollHeight - container.clientHeight) || 1
+    progress.value = Math.min(100, Math.max(0, (container.scrollTop / total) * 100))
   }
-  window.addEventListener('scroll', onScroll, { passive: true })
+  container.addEventListener('scroll', onScroll, { passive: true })
   onScroll()
-  onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
+  onBeforeUnmount(() => container.removeEventListener('scroll', onScroll))
 
   // Render markdown content
   watchEffect(() => {

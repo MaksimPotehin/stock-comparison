@@ -4,6 +4,7 @@ export const blogMessages = {
   back: 'Back to blog',
   min: 'min',
   searchPlaceholder: 'Search articles…',
+  noResults: 'No articles found. Try adjusting your search or filters.',
   categories: {
     all: 'All categories',
     calculatorGuides: 'Calculator Guides',
