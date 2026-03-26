@@ -5,20 +5,20 @@ export const useSeo = (pageKey: 'home' | 'calculator' | 'faq' | 'blog') => {
 
   const titles = {
     home: {
-      en: 'Free Investment Calculator | Compound Interest Calculator with Monthly Contributions',
-      ua: 'Інвестиційний калькулятор | Розрахунок складних відсотків та доходності інвестицій'
+      en: 'Free Investment Calculator | Compound Interest',
+      ua: 'Інвестиційний калькулятор | Складні відсотки'
     },
     calculator: {
-      en: 'Free Compound Interest Calculator | Investment Calculator with Regular Deposits',
-      ua: 'Калькулятор складних відсотків | Планування інвестицій та пасивного доходу'
+      en: 'Free Compound Interest Calculator | Plan Returns',
+      ua: 'Калькулятор складних відсотків | Безкоштовно'
     },
     faq: {
-      en: 'Investment Calculator FAQ | Compound Interest Planning Questions',
-      ua: 'Часті запитання | Інвестиційний калькулятор | Планування складних відсотків'
+      en: 'Investment Calculator FAQ | Compound Interest',
+      ua: 'FAQ: Інвестиційний калькулятор | Відповіді'
     },
     blog: {
-      en: 'Investing Blog | Financial Literacy & Compound Interest Articles',
-      ua: 'Блог про інвестиції | Фінансова грамотність та складні відсотки'
+      en: 'Investing Blog | Compound Interest & Finance',
+      ua: 'Блог про інвестиції | Фінансова грамотність'
     }
   }
 
@@ -129,11 +129,11 @@ export const useSeo = (pageKey: 'home' | 'calculator' | 'faq' | 'blog') => {
       },
       {
         property: 'og:image',
-        content: `${baseUrl}/og-image.svg`
+        content: `${baseUrl}/og-image.png`
       },
       {
         property: 'og:image:secure_url',
-        content: `${baseUrl}/og-image.svg`
+        content: `${baseUrl}/og-image.png`
       },
       {
         property: 'og:image:width',
@@ -175,7 +175,7 @@ export const useSeo = (pageKey: 'home' | 'calculator' | 'faq' | 'blog') => {
       },
       {
         name: 'twitter:image',
-        content: `${baseUrl}/og-image.svg`
+        content: `${baseUrl}/og-image.png`
       }
     ],
     link: [

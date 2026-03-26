@@ -65,13 +65,13 @@ export const useBlogSeo = () => {
           { property: 'og:type', content: 'website' },
           { property: 'og:locale', content: currentLocale === 'ua' ? 'uk_UA' : 'en_US' },
           { property: 'og:locale:alternate', content: currentLocale === 'ua' ? 'en_US' : 'uk_UA' },
-          { property: 'og:image', content: `${baseUrl}/og-image.svg` },
+          { property: 'og:image', content: `${baseUrl}/og-image.png` },
           { property: 'og:image:width', content: '1200' },
           { property: 'og:image:height', content: '630' },
           { name: 'twitter:card', content: 'summary_large_image' },
           { name: 'twitter:title', content: title },
           { name: 'twitter:description', content: description },
-          { name: 'twitter:image', content: `${baseUrl}/og-image.svg` }
+          { name: 'twitter:image', content: `${baseUrl}/og-image.png` }
         ],
         link: [
           { rel: 'canonical', href: canonicalUrl },
@@ -113,7 +113,7 @@ export const useBlogSeo = () => {
         dateModified: post.value.publishedAt,
         author: { '@type': 'Person', name: post.value.author || 'Investing Space' },
         publisher: { '@type': 'Organization', name: 'Investing Space', logo: { '@type': 'ImageObject', url: `${baseUrl}/favicon/android-chrome-192x192.png`, width: 192, height: 192 } },
-        image: [{ '@type': 'ImageObject', url: `${baseUrl}/og-image.svg`, width: 1200, height: 630 }],
+        image: [{ '@type': 'ImageObject', url: `${baseUrl}/og-image.png`, width: 1200, height: 630 }],
         keywords
       }
 
@@ -137,7 +137,7 @@ export const useBlogSeo = () => {
           { property: 'og:type', content: 'article' },
           { property: 'og:locale', content: currentLocale === 'ua' ? 'uk_UA' : 'en_US' },
           { property: 'og:locale:alternate', content: currentLocale === 'ua' ? 'en_US' : 'uk_UA' },
-          { property: 'og:image', content: `${baseUrl}/og-image.svg` },
+          { property: 'og:image', content: `${baseUrl}/og-image.png` },
           { property: 'og:image:width', content: '1200' },
           { property: 'og:image:height', content: '630' },
           { property: 'article:published_time', content: post.value.publishedAt },
@@ -147,7 +147,7 @@ export const useBlogSeo = () => {
           { name: 'twitter:card', content: 'summary_large_image' },
           { name: 'twitter:title', content: title },
           { name: 'twitter:description', content: description },
-          { name: 'twitter:image', content: `${baseUrl}/og-image.svg` }
+          { name: 'twitter:image', content: `${baseUrl}/og-image.png` }
         ],
         link: [
           { rel: 'canonical', href: canonicalUrl },

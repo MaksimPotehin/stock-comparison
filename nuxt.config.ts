@@ -56,7 +56,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       htmlAttrs: {
-        lang: 'uk'
+        lang: 'en'
       },
       meta: [
         { charset: 'utf-8' },
@@ -74,7 +74,9 @@ export default defineNuxtConfig({
         { rel: 'apple-touch-icon', href: '/favicon/apple-touch-icon.png' },
         { rel: 'manifest', href: '/favicon/site.webmanifest' },
         { rel: 'preconnect', href: 'https://www.googletagmanager.com', crossorigin: '' },
-        { rel: 'dns-prefetch', href: 'https://www.googletagmanager.com' }
+        { rel: 'dns-prefetch', href: 'https://www.googletagmanager.com' },
+        { rel: 'preconnect', href: 'https://ipapi.co' },
+        { rel: 'dns-prefetch', href: 'https://ipapi.co' }
       ],
       script: [
         // Google Analytics

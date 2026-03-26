@@ -208,9 +208,11 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useSeo } from '~/composables/useSeo'
 
 const localePath = useLocalePath()
+const { t } = useI18n()
 
 // SEO metadata
 useSeo('faq')
@@ -272,4 +274,8 @@ const faqItems = ref([
     isOpen: false
   }
 ])
+
+// FAQPage structured data for rich results in Google Search
+const { addFAQSchema } = useStructuredData()
+addFAQSchema(() => faqItems.value.map(item => ({ question: t(item.question), answer: t(item.answer) })))
 </script>

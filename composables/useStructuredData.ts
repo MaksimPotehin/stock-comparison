@@ -1,28 +1,26 @@
 export const useStructuredData = () => {
   const { locale } = useI18n()
 
-  const addFAQSchema = (faqItems: Array<{ question: string; answer: string }>) => {
-    const faqSchema = {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: faqItems.map(item => ({
-        '@type': 'Question',
-        name: item.question,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: item.answer
-        }
-      }))
-    }
-
-    useHead({
+  const addFAQSchema = (getFaqItems: () => Array<{ question: string; answer: string }>) => {
+    useHead(() => ({
       script: [
         {
           type: 'application/ld+json',
-          innerHTML: JSON.stringify(faqSchema)
+          innerHTML: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: getFaqItems().map(item => ({
+              '@type': 'Question',
+              name: item.question,
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: item.answer
+              }
+            }))
+          })
         }
       ]
-    })
+    }))
   }
 
   const addCalculatorSchema = () => {

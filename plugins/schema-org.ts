@@ -1,7 +1,6 @@
 // no import needed
 
 export default defineNuxtPlugin(() => {
-  // Global structured data for organization
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -12,18 +11,13 @@ export default defineNuxtPlugin(() => {
     sameAs: []
   }
 
-  // Breadcrumbs for better navigation
-  const breadcrumbSchema = {
+  const webSiteSchema = {
     '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: 'https://www.investing-space.tech'
-      }
-    ]
+    '@type': 'WebSite',
+    name: 'Investing Space',
+    url: 'https://www.investing-space.tech',
+    description: 'Free online investment calculator for compound interest and financial planning',
+    inLanguage: ['en-US', 'uk-UA']
   }
 
   useHead({
@@ -34,7 +28,7 @@ export default defineNuxtPlugin(() => {
       },
       {
         type: 'application/ld+json',
-        innerHTML: JSON.stringify(breadcrumbSchema)
+        innerHTML: JSON.stringify(webSiteSchema)
       }
     ]
   })

@@ -1,9 +1,9 @@
-# Google-specific directives (most specific first)
+# Google-specific directives
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 0
 
-# Other search engines  
+# Other search engines
 User-agent: Bingbot
 Allow: /
 Crawl-delay: 1
@@ -12,25 +12,37 @@ User-agent: DuckDuckBot
 Allow: /
 Crawl-delay: 1
 
+# AI crawlers — allow for citation opportunities
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
 # General directives for all other bots
 User-agent: *
 Allow: /
-Allow: /calculator
-Allow: /faq
-Allow: /ua/calculator
-Allow: /ua/faq
 
-# Block unnecessary paths
-Disallow: /_nuxt/
+# Block non-content paths
 Disallow: /api/
-Disallow: /*.json$
-Disallow: /*?*
 Disallow: /_vercel/
 Disallow: /404
 Disallow: /calculator/components/
 Disallow: /ua/calculator/components/
 
-# Crawl-delay (be respectful to crawlers)
+# NOTE: /_nuxt/ must NOT be disallowed — it contains JS/CSS assets required
+# for Google to render and index pages correctly. Blocking it causes de-indexing.
+
+# Crawl-delay for polite crawling
 Crawl-delay: 1
 
 # Sitemap
