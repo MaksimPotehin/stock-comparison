@@ -17,7 +17,7 @@ export const BLOG_POSTS: IBlogPost[] = [
       en: `
   # Compound Your Money: The Simple System That Quietly Builds Wealth
 
-<div class="my-6 p-6 rounded-lg bg-gray-800/60 border border-gray-700">
+<div class="my-4 p-4 rounded-lg bg-gray-800/60 border border-gray-700">
 <p class="text-lg leading-relaxed mb-4">
 At 25, Anna starts investing $400 a month at a 10% annual return. Her friend Sarah is skeptical: "Why start so early? It's better to wait until my salary is higher."
 </p>
@@ -149,7 +149,7 @@ Time is the only resource you can't buy, but you can use it wisely.
 Start today, automate the process, minimize fees, and let time do its magic.`,
       ua: `# Сила складних відсотків: простий підхід, що працює роками
 
-<div class="my-6 p-6 rounded-lg bg-gray-800/60 border border-gray-700">
+<div class="my-4 p-4 rounded-lg bg-gray-800/60 border border-gray-700">
 <p class="text-lg leading-relaxed mb-4">
 У 25 років Анна починає інвестувати $400 щомісяця під 10% річних. Її подруга Оксана ставиться до цього скептично: "Навіщо починати так рано? Краще зачекати, поки зарплата буде більшою."
 </p>
@@ -282,6 +282,240 @@ Start today, automate the process, minimize fees, and let time do its magic.`,
     publishedAt: '2025-01-20',
     readingTime: 5,
     featured: true
+  },
+  {
+    id: 'how-to-choose-etf-for-beginners',
+    slug: 'how-to-choose-etf-for-beginners',
+    title: {
+      en: 'How to Choose Your First ETF (Without the Paralysis)',
+      ua: 'Як вибрати перший ETF: 3 критерії що справді мають значення'
+    },
+    excerpt: {
+      en: 'Three criteria filter most ETFs for beginners: the index it tracks, the annual cost (TER under 0.30%), and fund size. Everything else can wait.',
+      ua: 'Три критерії допоможуть вибрати перший ETF: що відстежує фонд, річна плата (TER до 0,30%) і розмір фонду. Решта може почекати.'
+    },
+    content: {
+      en: `
+# Choose Your First ETF Without Spending 6 Hours on It
+
+An ETF (Exchange-Traded Fund) is a security that holds a basket of assets and trades on a stock exchange — like a stock, but instead of one company you get hundreds or thousands at once.
+
+<div class="my-8 p-4 rounded-lg bg-gray-800/60 border border-gray-700">
+<p class="text-lg leading-relaxed mb-4">
+Olena had €5,000 ready to invest. She spent six hours reading about ETFs — tracking error, synthetic replication, currency hedging, fund domicile, dividend reinvestment policy. She built a spreadsheet. Then she couldn't decide, closed the tab, and left the money in a savings account paying 1.2%.
+</p>
+<p class="text-base text-gray-300 mb-4">
+Mykola had the same €5,000. He spent 45 minutes, applied three filters, and bought a broad world index ETF with a 0.20% annual cost. He hasn't touched it since.
+</p>
+<p class="text-base text-gray-300 mb-4">
+Three years later at a 7% average annual return: Mykola's account shows <strong>€6,125</strong>. Olena's savings account shows <strong>€5,181</strong> — and after 3% average inflation over the same period, she lost purchasing power.
+</p>
+<p class="text-base text-gray-300">
+The six hours of research didn't make her eventual choice better. They prevented her from making any choice at all.
+</p>
+</div>
+
+<p class="mt-6">Mykola's 45 minutes came down to three questions. The answers haven't changed since he first asked them.</p>
+
+## The three criteria that matter
+
+### 1. What the fund tracks
+
+The index determines what you own. For a first ETF, broad beats specific.
+
+A fund tracking the MSCI World index owns shares in roughly 1,400 companies across 23 developed countries. A fund tracking "clean energy innovation" owns 40 companies in one sector. The first gives you exposure to global economic growth. The second is a concentrated bet on one industry's future.
+
+For a first investment, stick to a broad index: global equities (MSCI World, FTSE All-World), US equities (S&P 500), or European equities (EURO STOXX 600). The best ETF holds more companies than you could name in an afternoon. Sector and thematic ETFs belong later — if at all.
+
+### 2. TER — the annual cost
+
+TER stands for Total Expense Ratio. It's the percentage the fund deducts from your holdings each year automatically. You never see an invoice — the cost is reflected in the fund's price.
+
+The difference looks small. Over 30 years it isn't.
+
+<figure class="my-6">
+<svg viewBox="0 0 600 220" width="100%" height="220" class="rounded-md bg-gray-800/80">
+<defs>
+<linearGradient id="etf-g1" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#F7A535" stop-opacity="0.5" />
+<stop offset="100%" stop-color="#F7A535" stop-opacity="0.05" />
+</linearGradient>
+<linearGradient id="etf-g2" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#6b7280" stop-opacity="0.4" />
+<stop offset="100%" stop-color="#6b7280" stop-opacity="0.05" />
+</linearGradient>
+</defs>
+<rect x="0" y="0" width="600" height="220" fill="transparent" />
+<line x1="50" y1="10" x2="50" y2="185" stroke="#3f4761" stroke-width="1"/>
+<line x1="50" y1="185" x2="580" y2="185" stroke="#3f4761" stroke-width="1"/>
+<path d="M50,175 C150,168 250,150 350,122 C450,94 520,68 570,48" fill="none" stroke="#F7A535" stroke-width="3"/>
+<path d="M50,175 C150,168 250,150 350,122 C450,94 520,68 570,48 L570,185 L50,185 Z" fill="url(#etf-g1)"/>
+<path d="M50,175 C150,169 250,154 350,132 C450,108 520,86 570,68" fill="none" stroke="#6b7280" stroke-width="2"/>
+<path d="M50,175 C150,169 250,154 350,132 C450,108 520,86 570,68 L570,185 L50,185 Z" fill="url(#etf-g2)"/>
+<circle cx="380" cy="22" r="5" fill="#F7A535"/>
+<text x="392" y="26" fill="#d1d5db" font-size="12">0.07% TER → €74,600</text>
+<circle cx="380" cy="42" r="5" fill="#6b7280"/>
+<text x="392" y="46" fill="#d1d5db" font-size="12">0.50% TER → €66,100</text>
+<text x="48" y="200" fill="#9ca3af" font-size="11" text-anchor="middle">0y</text>
+<text x="200" y="200" fill="#9ca3af" font-size="11" text-anchor="middle">10y</text>
+<text x="385" y="200" fill="#9ca3af" font-size="11" text-anchor="middle">20y</text>
+<text x="570" y="200" fill="#9ca3af" font-size="11" text-anchor="middle">30y</text>
+</svg>
+<figcaption class="text-center text-gray-400 mt-2">
+€10,000 invested at 7% annual return over 30 years. The gap between a 0.07% and 0.50% TER fund: <strong>€8,500</strong> — paid in fees rather than kept as your return.
+</figcaption>
+</figure>
+
+Target a TER under 0.30%. Broad world index funds are available at 0.07–0.20%. A 0.50% fund tracking the same index as a 0.07% fund is a worse deal with no compensating benefit.
+
+### 3. Fund size
+
+Check the AUM — Assets Under Management. Two reasons this matters:
+
+**Liquidity.** Larger funds trade more volume. The spread between buy and sell price stays narrow. Small funds can cost you 0.1–0.3% extra on the bid-ask spread alone — every time you trade.
+
+**Longevity.** Funds below €100M are at risk of closure. When a fund closes, you're forced to sell at market price and reinvest — with possible tax consequences. Look for at least €100M AUM. €500M or more is comfortable.
+
+## What to stop researching
+
+Most beginner guides cover these. Few explain they matter much less than the three above, at your stage.
+
+**Tracking error** measures how closely a fund follows its index. For established ETFs, the typical gap is 0.05–0.15% per year — smaller than one bad day in a volatile market. TER explains most of tracking error anyway. Analysts publish entire reports on this difference. For a beginner choosing between two broad index ETFs from major providers, it's the least interesting number on the page.
+
+**Accumulating vs. distributing.** Accumulating funds reinvest dividends automatically; distributing funds pay them to your account. For long-term investors who plan to reinvest regardless, accumulating is simpler: no manual reinvestment step, slightly better compounding, and in many jurisdictions deferred tax on those dividends. Choose distributing only if you need the cash flow or your tax situation specifically favors it.
+
+Physical vs. synthetic replication and currency hedging are both worth understanding eventually, but neither should slow down a first purchase. Physical ETFs own the assets directly; synthetic ones use derivatives — both are regulated, both carry 40-page risk disclosures, and both are used by pension funds managing more than most countries' GDP. If either structure were to collapse, your ETF selection process would not be the interesting part of that story. Currency-hedged funds remove exposure to foreign exchange movements, but hedging costs 0.1–0.3% per year, and over a 10+ year horizon, currency effects tend to average out. For a first long-term ETF, unhedged physical on a broad index is the default for a reason.
+
+## Finding the numbers
+
+Two screeners: **[JustETF](https://www.justetf.com)** (Europe-focused) and **[ETF.com](https://www.etf.com)** (US-focused).
+
+The workflow takes 45 minutes, not six hours:
+1. Search by index name: "MSCI World", "FTSE All-World", or "S&P 500"
+2. Sort by TER, ascending
+3. Filter AUM to €100M minimum
+4. Pick any fund near the top of the remaining list
+
+Typical result after filtering: four to six funds, TERs between 0.07% and 0.20%, AUM ranging from €2B to €60B. All tracking the same index. Pick the lowest TER among funds above €500M — and close the tab. Olena is still on tab 47.
+
+---
+
+A good-enough ETF held for 15 years beats a theoretically perfect one you never buy.
+`,
+      ua: `
+# Як вибрати перший ETF без шести годин досліджень
+
+Найперше, що потрібно знати — що таке ETF. Exchange-Traded Fund (біржовий інвестиційний фонд) — це цінний папір, що тримає кошик активів і торгується на біржі, як звичайна акція. Тільки замість однієї компанії ви одразу отримуєте сотні або тисячі.
+
+<div class="my-4 p-4 rounded-lg bg-gray-800/60 border border-gray-700">
+<p class="text-lg leading-relaxed mb-4">
+Олена мала €5 000, які хотіла вкласти. Шість годин вона читала про ETF — помилка відстеження, синтетичне реплікування, валютне хеджування, юрисдикція фонду, політика реінвестування дивідендів. Склала таблицю в Excel. Так і не вирішила, закрила браузер і залишила гроші на ощадному рахунку під 1,2%.
+</p>
+<p class="text-base text-gray-300 mb-4">
+Микола мав ті самі €5 000. Витратив 45 хвилин, застосував три фільтри і купив широкий індексний ETF з річною платою 0,20%. Відтоді не чіпав.
+</p>
+<p class="text-base text-gray-300 mb-4">
+Через три роки при середньорічній дохідності 7%: на рахунку Миколи <strong>€6 125</strong>. На ощадному рахунку Олени — <strong>€5 181</strong>, і з урахуванням інфляції 3% вона втратила купівельну спроможність.
+</p>
+<p class="text-base text-gray-300">
+Шість годин досліджень не зробили б її вибір кращим. Вони взагалі завадили їй щось вибрати.
+</p>
+</div>
+
+<p class="mt-6">45 хвилин Миколи звелись до трьох питань. Відповіді на них не змінились відтоді.</p>
+
+## Три критерії що справді мають значення
+
+### 1. Що відстежує фонд
+
+Індекс визначає те, чим ви фактично володієте. Для першого ETF широкий завжди краще за вузький.
+
+Фонд, що відстежує індекс MSCI World, тримає акції приблизно 1 400 компаній з 23 розвинених країн. Фонд "чиста енергетична інновація" — 40 компаній з одного сектору. Перший дає доступ до глобального економічного зростання. Другий — це концентрована ставка на майбутнє однієї галузі.
+
+Для першої інвестиції тримайтесь широкого індексу: глобальних акцій (MSCI World, FTSE All-World), американських (S&P 500) або європейських (EURO STOXX 600). Найкращий ETF тримає більше компаній, ніж ви встигнете назвати за день. Секторні та тематичні ETF — на потім, якщо взагалі.
+
+### 2. TER — річна плата
+
+TER (Total Expense Ratio, коефіцієнт загальних витрат) — це відсоток, який фонд автоматично вираховує з ваших вкладень щороку. Рахунку ви не отримаєте — плата відображається у ціні фонду.
+
+Різниця здається маленькою. За 30 років — ні.
+
+<figure class="my-6">
+<svg viewBox="0 0 600 220" width="100%" height="220" class="rounded-md bg-gray-800/80">
+<defs>
+<linearGradient id="etf-g1-ua" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#F7A535" stop-opacity="0.5" />
+<stop offset="100%" stop-color="#F7A535" stop-opacity="0.05" />
+</linearGradient>
+<linearGradient id="etf-g2-ua" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#6b7280" stop-opacity="0.4" />
+<stop offset="100%" stop-color="#6b7280" stop-opacity="0.05" />
+</linearGradient>
+</defs>
+<rect x="0" y="0" width="600" height="220" fill="transparent" />
+<line x1="50" y1="10" x2="50" y2="185" stroke="#3f4761" stroke-width="1"/>
+<line x1="50" y1="185" x2="580" y2="185" stroke="#3f4761" stroke-width="1"/>
+<path d="M50,175 C150,168 250,150 350,122 C450,94 520,68 570,48" fill="none" stroke="#F7A535" stroke-width="3"/>
+<path d="M50,175 C150,168 250,150 350,122 C450,94 520,68 570,48 L570,185 L50,185 Z" fill="url(#etf-g1-ua)"/>
+<path d="M50,175 C150,169 250,154 350,132 C450,108 520,86 570,68" fill="none" stroke="#6b7280" stroke-width="2"/>
+<path d="M50,175 C150,169 250,154 350,132 C450,108 520,86 570,68 L570,185 L50,185 Z" fill="url(#etf-g2-ua)"/>
+<circle cx="380" cy="22" r="5" fill="#F7A535"/>
+<text x="392" y="26" fill="#d1d5db" font-size="12">TER 0,07% → €74 600</text>
+<circle cx="380" cy="42" r="5" fill="#6b7280"/>
+<text x="392" y="46" fill="#d1d5db" font-size="12">TER 0,50% → €66 100</text>
+<text x="48" y="200" fill="#9ca3af" font-size="11" text-anchor="middle">0р</text>
+<text x="200" y="200" fill="#9ca3af" font-size="11" text-anchor="middle">10р</text>
+<text x="385" y="200" fill="#9ca3af" font-size="11" text-anchor="middle">20р</text>
+<text x="570" y="200" fill="#9ca3af" font-size="11" text-anchor="middle">30р</text>
+</svg>
+<figcaption class="text-center text-gray-400 mt-2">
+€10 000 інвестованих при 7% річній дохідності протягом 30 років. Різниця між фондом з TER 0,07% і 0,50%: <strong>€8 500</strong> — виплачено у комісіях замість вашого доходу.
+</figcaption>
+</figure>
+
+Орієнтир для початківця: TER до 0,30%. Широкі світові індексні ETF доступні за 0,07–0,20%. Фонд з TER 0,50%, що відстежує той самий індекс що й фонд за 0,07%, — просто гірша угода без жодних компенсуючих переваг.
+
+### 3. Розмір фонду
+
+Перевірте AUM — активи під управлінням (Assets Under Management). Два аргументи:
+
+**Ліквідність.** Більші фонди торгуються активніше. Спред (різниця між ціною купівлі і продажу) залишається вузьким. Маленькі фонди можуть додатково коштувати вам 0,1–0,3% на спреді — щоразу при торгівлі.
+
+**Довговічність.** Фонди нижче €100 млн можуть закрити. Коли фонд закривається, ви змушені продати за поточною ринковою ціною і реінвестувати — з можливими податковими наслідками. Мінімум — €100 млн AUM. €500 млн і більше — комфортно.
+
+## Що можна перестати досліджувати
+
+Більшість посібників для початківців згадують ці критерії. Рідко хто пояснює, що для початківця це другорядне порівняно з трьома попередніми.
+
+**Помилка відстеження** (tracking error) показує, наскільки точно фонд слідує за індексом. Для усталених ETF типова різниця — 0,05–0,15% на рік, що менше ніж звичайний денний рух ринку. TER і так пояснює більшу частину цієї різниці. Аналітики пишуть про неї цілі звіти. Для початківця, який обирає між двома широкими індексними ETF від великих провайдерів, це найнецікавіша цифра на сторінці.
+
+**Накопичувальний чи розподільний.** Накопичувальні фонди автоматично реінвестують дивіденди; розподільні — виплачують їх на рахунок. Хто все одно планує реінвестувати, тому накопичувальний простіший: не треба робити це вручну, трохи краще складне нарахування, і в багатьох країнах — відстрочений податок на дивіденди. Розподільний вибирайте, тільки якщо вам потрібен грошовий потік або ваша податкова ситуація конкретно цьому сприяє.
+
+Фізичне та синтетичне реплікування і валютне хеджування варто розуміти з часом, але жодне з них не повинно гальмувати перше рішення про купівлю. Фізичні ETF тримають активи напряму; синтетичні використовують деривативи (інструменти що копіюють поведінку активів без прямого володіння ними) — обидва регульовані, обидва мають 40-сторінкові проспекти ризиків, і обидва використовують пенсійні фонди, що управляють більшими сумами ніж ВВП більшості країн. Якщо така структура колись впаде — вибір типу реплікування буде найнецікавішою частиною тієї новини. Фонди з валютним хеджуванням усувають вплив курсових коливань, але хеджування коштує 0,1–0,3% на рік, і на горизонті 10+ років валютні ефекти зазвичай вирівнюються. Саме тому більшість початківців починають з нехеджованих фізичних фондів на широкий індекс — і не без підстав.
+
+## Де знайти цифри
+
+Два скринери: **[JustETF](https://www.justetf.com)** (орієнтований на Європу) і **[ETF.com](https://www.etf.com)** (США).
+
+Процес займає 45 хвилин, не шість годин:
+1. Пошук за назвою індексу: "MSCI World", "FTSE All-World" або "S&P 500"
+2. Сортування за TER за зростанням
+3. Фільтр AUM — мінімум €100 млн
+4. Будь-який фонд близько до вершини списку що залишився
+
+Типовий результат після фільтрації: чотири-шість фондів, TER від 0,07% до 0,20%, AUM від €2 млрд до €60 млрд. Усі відстежують той самий індекс. Обираємо з найнижчим TER серед фондів від €500 млн — і закриваємо браузер. Олена досі на вкладці 47.
+
+---
+
+Достатньо хороший ETF, що тримається 15 років, виграє у теоретично ідеального, який так і не купили.
+`
+    },
+    category: 'investment-tools',
+    tags: ['etf', 'index-fund', 'beginner', 'ter', 'passive-investing', 'portfolio'],
+    author: 'Investing Space',
+    publishedAt: '2026-04-01',
+    readingTime: 5,
+    featured: false
   }
   // {
   //   id: 'investment-beginners-2025',
