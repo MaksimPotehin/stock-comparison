@@ -11,7 +11,8 @@
     <!-- Dropdown results -->
     <div
       v-if="isOpen && (results.length > 0 || isLoading || errorMsg)"
-      class="absolute z-50 top-[calc(100%+4px)] left-0 right-0 bg-gray-700 rounded-xl border border-gray-600 shadow-xl overflow-hidden"
+      class="absolute z-50 top-[calc(100%+4px)] left-0 right-0
+       bg-gray-700 rounded-xl border border-gray-600 shadow-xl overflow-hidden"
     >
       <!-- Loading -->
       <div v-if="isLoading" class="px-4 py-3 text-sm text-gray-400 flex items-center gap-x-2">
@@ -44,7 +45,7 @@
 </template>
 
 <script setup lang="ts">
-import { useDebounceFn, onClickOutside } from '@vueuse/core'
+import { onClickOutside } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 import type { IStockSearchResult } from '~/types/stock'
 import { searchStocks } from '../stock.service'
@@ -70,7 +71,10 @@ onClickOutside(containerRef, () => {
   isOpen.value = false
 })
 
-const search = useDebounceFn(async () => {
+const SEARCH_DEBOUNCE_MS = 600
+let searchDebounceId: ReturnType<typeof setTimeout> | null = null
+
+async function runSearch () {
   if (query.value.length < 3) {
     results.value = []
     isOpen.value = false
@@ -90,20 +94,34 @@ const search = useDebounceFn(async () => {
   } finally {
     isLoading.value = false
   }
-}, 600)
+}
 
-function onInput() {
+function scheduleSearch () {
+  if (searchDebounceId !== null) clearTimeout(searchDebounceId)
+  searchDebounceId = setTimeout(() => {
+    searchDebounceId = null
+    void runSearch()
+  }, SEARCH_DEBOUNCE_MS)
+}
+
+function onInput () {
   errorMsg.value = ''
-  search()
+  scheduleSearch()
 }
 
-function onEnter() {
-  // Cancel pending debounce and run immediately
-  search.cancel()
-  search()
+function onEnter () {
+  if (searchDebounceId !== null) {
+    clearTimeout(searchDebounceId)
+    searchDebounceId = null
+  }
+  void runSearch()
 }
 
-function select(item: IStockSearchResult) {
+onBeforeUnmount(() => {
+  if (searchDebounceId !== null) clearTimeout(searchDebounceId)
+})
+
+function select (item: IStockSearchResult) {
   query.value = `${item.symbol} – ${item.name}`
   isOpen.value = false
   results.value = []

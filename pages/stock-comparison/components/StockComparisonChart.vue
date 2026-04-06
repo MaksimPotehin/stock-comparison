@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Chart, type ChartData, type ChartOptions } from 'chart.js/auto'
+import { Chart, type ChartDataset, type ChartOptions } from 'chart.js/auto'
 import type { IStockComparisonData, IStockHistoricalPoint } from '~/types/stock'
 import { STOCK_COLORS, SPY_COLOR } from '../constants'
 
@@ -45,7 +45,7 @@ function makeDataset(
   label: string,
   data: number[],
   color: string
-): ChartData['datasets'][number] {
+): ChartDataset<'line'> {
   return {
     label,
     data,
@@ -91,7 +91,7 @@ function createChart() {
 
   const labels = h1.map(p => formatDate(p.date))
 
-  const datasets: ChartData['datasets'] = [
+  const datasets: ChartDataset<'line'>[] = [
     makeDataset(props.stock1.symbol, normalizeToPercent(h1.map(p => p.close)), STOCK_COLORS[0])
   ]
 
