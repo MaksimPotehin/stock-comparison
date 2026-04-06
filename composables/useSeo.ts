@@ -1,6 +1,6 @@
 import { useI18n } from 'vue-i18n'
 
-export const useSeo = (pageKey: 'home' | 'calculator' | 'faq' | 'blog') => {
+export const useSeo = (pageKey: 'home' | 'calculator' | 'faq' | 'blog' | 'stock-comparison') => {
   const { locale } = useI18n()
 
   const titles = {
@@ -19,6 +19,10 @@ export const useSeo = (pageKey: 'home' | 'calculator' | 'faq' | 'blog') => {
     blog: {
       en: 'Investing Blog | Compound Interest & Finance',
       ua: 'Блог про інвестиції | Фінансова грамотність'
+    },
+    'stock-comparison': {
+      en: 'Stock Comparison Chart | Compare Stocks Side by Side',
+      ua: 'Порівняння акцій | Графік порівняння двох акцій'
     }
   }
 
@@ -38,6 +42,10 @@ export const useSeo = (pageKey: 'home' | 'calculator' | 'faq' | 'blog') => {
     blog: {
       en: 'Articles on investing, financial literacy, compound interest, and practical guides for using our investment calculator effectively.',
       ua: 'Статті про інвестування, фінансову грамотність, складні відсотки та практичні гіди з ефективного використання нашого інвестиційного калькулятора.'
+    },
+    'stock-comparison': {
+      en: 'Compare any two stocks on a normalized chart. Analyze return %, volatility, and max drawdown over 1M, 3M, 6M, YTD, 1Y, and 5Y periods. Free, no signup needed.',
+      ua: 'Порівнюйте будь-які дві акції на графіку. Аналізуйте прибутковість, волатильність та просадку за 1М, 3М, 6М, 1Р та 5Р. Безкоштовно, без реєстрації.'
     }
   }
 
@@ -62,7 +70,7 @@ export const useSeo = (pageKey: 'home' | 'calculator' | 'faq' | 'blog') => {
   // Structured data
   const structuredData = {
     '@context': 'https://schema.org',
-    '@type': (pageKey === 'calculator' || pageKey === 'home') ? 'WebApplication' : (pageKey === 'blog' ? 'Blog' : 'WebPage'),
+    '@type': (pageKey === 'calculator' || pageKey === 'home' || pageKey === 'stock-comparison') ? 'WebApplication' : (pageKey === 'blog' ? 'Blog' : 'WebPage'),
     name: titles[pageKey][currentLocale],
     description: descriptions[pageKey][currentLocale],
     url: canonicalUrl,
@@ -72,7 +80,7 @@ export const useSeo = (pageKey: 'home' | 'calculator' | 'faq' | 'blog') => {
       name: 'Investing Space',
       url: baseUrl
     },
-    ...((pageKey === 'calculator' || pageKey === 'home') && {
+    ...((pageKey === 'calculator' || pageKey === 'home' || pageKey === 'stock-comparison') && {
       applicationCategory: 'FinanceApplication',
       operatingSystem: 'Web Browser',
       offers: {

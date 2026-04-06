@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     url: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.investing-space.tech'
   },
   runtimeConfig: {
+    twelveDataApiKey: process.env.NUXT_TWELVE_DATA_API_KEY || '',
     public: {
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.investing-space.tech',
       gscVerificationContent: process.env.NUXT_PUBLIC_GSC_VERIFICATION || ''
@@ -47,7 +48,10 @@ export default defineNuxtConfig({
       '/ua/blog': {
         headers: { 'cache-control': 's-maxage=86400' },
         prerender: true
-      }
+      },
+
+      '/stock-comparison': { ssr: true },
+      '/ua/stock-comparison': { ssr: true }
     }
   },
 
@@ -138,6 +142,8 @@ export default defineNuxtConfig({
       '/faq',
       '/blog',
       ...BLOG_POSTS.map(p => ({ loc: `/blog/${p.slug}`, lastmod: p.publishedAt })),
+      '/stock-comparison',
+      '/ua/stock-comparison',
       '/ua/calculator',
       '/ua/faq',
       '/ua/blog',

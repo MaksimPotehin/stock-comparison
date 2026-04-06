@@ -33,6 +33,16 @@ pages/
       CalculatorForm.vue
       CalculatorChart.vue
       CalculatorTable.vue
+  stock-comparison/
+    index.vue                  # Stock comparison page (dynamic, SSR, no prerender)
+    stock.service.ts           # API calls: searchStocks(), fetchStockHistory()
+    constants.ts               # STOCK_COLORS shared across chart + table
+    components/                # Co-located, NOT auto-routed
+      StockSearch.vue          # Search with autocomplete — wraps AppSearch + el-dropdown
+      StockSearchField.vue     # StockSearch + StockBadge compound field
+      StockBadge.vue           # Selected ticker badge with remove button
+      StockComparisonChart.vue # Normalized % line chart (Chart.js), 1-2 stocks
+      StockMetricsTable.vue    # Return%, volatility, max drawdown, high/low
   blog/
     index.vue                  # Blog listing
     [slug].vue                 # Blog post detail
@@ -61,6 +71,7 @@ utils/
 types/                         # App-level types (shared across features)
   blog.ts                      # IBlogPost, IBlogLocalizedText, IBlogFilter, IBlogPagination
   investment.ts                # IInvestmentParams, IInvestmentResult (app-level)
+  stock.ts                     # IStockSearchResult, IStockHistoricalPoint, IStockComparisonData, TStockPeriod
   enums.ts                     # EFrequency, ETimeUnit, etc.
 
 content/
@@ -68,6 +79,9 @@ content/
 
 server/
   routes/rss.xml.get.ts        # RSS feed (English only)
+  api/stock/
+    search.get.ts              # Proxy → Twelve Data /symbol_search (in-memory cache 60min)
+    history.get.ts             # Proxy → Twelve Data /time_series (in-memory cache 10min)
 
 plugins/
   schema-org.ts                # Global Organization + Breadcrumb Schema.org on mount
@@ -94,6 +108,7 @@ assets/
 |-------|-------------|-------|
 | `/` | Redirect → `/calculator` | — |
 | `/calculator` | Calculator (prerendered) | 1 year |
+| `/stock-comparison` | Stock comparison (SSR, dynamic) | no cache |
 | `/blog` | Blog listing (prerendered) | 1 day |
 | `/blog/[slug]` | Blog post detail | 1 day |
 | `/faq` | FAQ (prerendered) | 1 year |
@@ -230,6 +245,16 @@ Checklist for new Nuxt pages:
 
 ---
 
+## Service Layer (enforced)
+
+All API calls (`$fetch`, `useFetch`) must live in a **service file**, never directly in components or pages.
+
+- Place services co-located with the feature: `pages/stock-comparison/stock.service.ts`
+- Export plain async functions: `export async function searchStocks(q: string): Promise<...>`
+- Components only call service functions — they never construct API URLs or call `$fetch` directly
+
+---
+
 ## Caching & Cache Invalidation
 
 Pages are prerendered at build time and cached on Vercel's CDN:
@@ -247,7 +272,29 @@ There is no runtime cache invalidation — all updates require a new deployment.
 |----------|---------|---------|
 | `NUXT_PUBLIC_SITE_URL` | `https://www.investing-space.tech` | Base URL for sitemap, canonical, OG |
 | `NUXT_PUBLIC_GSC_VERIFICATION` | `''` | Google Search Console meta content |
+| `NUXT_TWELVE_DATA_API_KEY` | `''` | Twelve Data API key (server-side only, add to `.env.local`) |
 | `VERCEL` | auto-detected | Switches Nitro preset to `'vercel'` |
+
+---
+
+## Service Layer (enforced)
+
+All API calls (`$fetch`, `useFetch`) must live in a **service file**, never directly in components or pages.
+
+- Place services co-located with the feature: `pages/stock-comparison/stock.service.ts`
+- Export plain async functions: `export async function searchStocks(q: string): Promise<...>`
+- Components only call service functions — they never construct API URLs or call `$fetch` directly
+
+---
+
+## Component Reuse Rules (enforced)
+
+**Before creating any UI element — search first:**
+
+1. **Icons**: always use the unplugin-icons system via `AppIcon*` naming (e.g. `AppIconGbFlag`). SVG files live in `assets/icons/`. **Never** put raw `<svg>` blocks or unicode symbols (✕, →) directly in templates.
+2. **Existing components**: check `components/` (auto-imported globally) and the page's own `components/` folder before writing new markup. Key reusables: `AppSearch`, `TableModule`, `AdBlock`.
+3. **Repeated blocks**: if the same UI block appears more than once in a template, extract it into a component immediately — even within the same page's `components/` folder.
+4. **Shared constants**: colors, z-indexes, or other values used in multiple files go into a shared constants file — never hardcode the same value in two places.
 
 ---
 

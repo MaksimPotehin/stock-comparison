@@ -4,6 +4,7 @@ import { navigationMessages as navigation } from './navigation.messages'
 import { calculatorMessages as calculator } from './calculator.messages'
 import { faqMessages as faq } from './faq.messages'
 import { blogMessages as blog } from './blog.messages'
+import { stockComparisonMessages as stockComparison } from './stock-comparison.messages'
 
 export const ua = {
   el: ukLocale.el,
@@ -11,5 +12,6 @@ export const ua = {
   navigation,
   calculator,
   faq,
-  blog
+  blog,
+  stockComparison
 }

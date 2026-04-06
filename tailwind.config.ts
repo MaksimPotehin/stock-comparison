@@ -2,6 +2,10 @@ import type { Config } from 'tailwindcss'
 
 export default <Partial<Config>> {
   plugins: [require('@tailwindcss/typography')],
+  safelist: [
+    'text-success-800',
+    'text-error-700'
+  ],
   theme: {
     extend: {
       typography: {

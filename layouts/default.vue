@@ -18,7 +18,7 @@
               v-for="item in navigation"
               :key="item.label"
               :to="item.routeName"
-              class="text-base leading-6 font-medium text-white hover:text-warning transition-colors"
+              class="text-base leading-6 text-white hover:text-warning transition-colors"
               active-class="!text-warning"
               @click="handleNavigation(item.routeName)"
             >
@@ -97,7 +97,7 @@
 
     <div class="max-w-[1440px] w-full flex flex-col flex-grow overflow-auto m-auto p-3 md:p-5">
       <!-- MAIN -->
-      <main class="flex w-full flex-grow overflow-hidden bg-gray-800 p-3 md:p-5 rounded-md">
+      <main class="flex w-full flex-grow">
         <slot />
       </main>
     </div>
@@ -125,6 +125,10 @@ onMounted(() => {
 })
 
 const navigation = computed(() => [
+  {
+    label: t('navigation.comparison'),
+    routeName: localePath('/stock-comparison')
+  },
   {
     label: t('navigation.calculator'),
     routeName: localePath('/calculator')

@@ -1,4 +1,5 @@
 <template>
+  <ClientOnly />
   <div class="w-full flex flex-col gap-y-8 overflow-auto md:overflow-hidden">
     <div>
       <h1 class="text-warning text-2xl mb-4">{{ $t('calculator.title') }}</h1>

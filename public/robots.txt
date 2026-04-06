@@ -38,6 +38,8 @@ Disallow: /_vercel/
 Disallow: /404
 Disallow: /calculator/components/
 Disallow: /ua/calculator/components/
+Disallow: /stock-comparison/components/
+Disallow: /ua/stock-comparison/components/
 
 # NOTE: /_nuxt/ must NOT be disallowed — it contains JS/CSS assets required
 # for Google to render and index pages correctly. Blocking it causes de-indexing.
