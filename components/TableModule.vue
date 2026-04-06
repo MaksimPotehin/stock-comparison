@@ -127,18 +127,18 @@ withDefaults(defineProps<{
 
 const tableRef = ref()
 
-    // Method for table summaries
+// Method for table summaries
 function calculateSummary ({ columns, data }: { columns: ITableColumn[]; data: T[] }): string[] {
   const summary = columns.map((column: ITableColumn) => {
     if (!data?.length) return '0.00'
 
     if (column.property === 'initialDeposit') {
-              // Acc value: take value from the last row
+      // Acc value: take value from the last row
       const lastRow = data[data.length - 1]
       const value = lastRow?.initialDeposit
       return value !== undefined && value !== null ? value : '0.00'
     } else if (column.property === 'totalAmount') {
-              // Total amount: last value or sum of Acc value + all interest
+      // Total amount: last value or sum of Acc value + all interest
       const lastRow = data[data.length - 1]
       if (lastRow?.totalAmount !== undefined && lastRow?.totalAmount !== null) {
         return lastRow.totalAmount
@@ -154,7 +154,7 @@ function calculateSummary ({ columns, data }: { columns: ITableColumn[]; data: T
       return (totalAccValue + totalInterest)
         .toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
     } else if (column.property === 'interestPerPeriod') {
-              // InterestPerPeriod: sum of all interest
+      // InterestPerPeriod: sum of all interest
       return data.reduce((sum, row: T) => {
         const value = row?.interestPerPeriod
         return sum + (value !== undefined && value !== null ? Number(value.replace(/,/g, '')) : 0)
@@ -174,7 +174,7 @@ defineSlots<{
 
 <style lang="scss">
 .el-checkbox .el-checkbox__inner {
-  @apply w-16 h-16 #{!important};
+  @apply w-4 h-4 #{!important};
 }
 .el-table__empty-block {
   @apply min-h-[200px];

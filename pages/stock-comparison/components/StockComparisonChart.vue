@@ -7,15 +7,18 @@
 <script lang="ts" setup>
 import { Chart, type ChartData, type ChartOptions } from 'chart.js/auto'
 import type { IStockComparisonData, IStockHistoricalPoint } from '~/types/stock'
-import { STOCK_COLORS } from '../constants'
+import { STOCK_COLORS, SPY_COLOR } from '../constants'
 
 const props = defineProps<{
   stock1: IStockComparisonData | null
   stock2: IStockComparisonData | null
+  spyHistory?: IStockHistoricalPoint[]
 }>()
 
 const chartRef = ref<HTMLCanvasElement | null>(null)
 let chart: Chart | null = null
+
+// ─── Helpers ─────────────────────────────────────────────────────────────────
 
 function alignByDates(
   h1: IStockHistoricalPoint[],
@@ -35,96 +38,92 @@ function normalizeToPercent(prices: number[]): number[] {
 }
 
 function formatDate(dateStr: string): string {
-  const d = new Date(dateStr)
-  return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: '2-digit' })
+  return new Date(dateStr).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: '2-digit' })
 }
 
-const createChart = () => {
-  if (!chartRef.value) return
+function makeDataset(
+  label: string,
+  data: number[],
+  color: string
+): ChartData['datasets'][number] {
+  return {
+    label,
+    data,
+    borderColor: color,
+    backgroundColor: `${color}14`,
+    fill: true,
+    tension: 0.3,
+    pointRadius: 0,
+    pointHoverRadius: 4,
+    borderWidth: 2
+  }
+}
+
+// ─── Chart build ─────────────────────────────────────────────────────────────
+
+function createChart() {
+  if (!chartRef.value || !props.stock1 || props.stock1.history.length === 0) return
 
   const ctx = chartRef.value.getContext('2d')
   if (!ctx) return
 
-  if (chart) {
-    chart.destroy()
-    chart = null
-  }
-
-  if (!props.stock1 || props.stock1.history.length === 0) return
+  chart?.destroy()
+  chart = null
 
   let h1 = props.stock1.history
   let h2 = props.stock2?.history ?? []
+  let hSpy = props.spyHistory ?? []
 
-  // Align dates when both stocks present
+  // Align all series to the same dates (step by step)
   if (props.stock2 && h2.length > 0) {
     ;[h1, h2] = alignByDates(h1, h2)
   }
 
+  if (hSpy.length > 0) {
+    ;[h1, hSpy] = alignByDates(h1, hSpy)
+    if (h2.length > 0) {
+      ;[h2, hSpy] = alignByDates(h2, hSpy)
+      // Re-align h1 to the intersection of h1 and h2 after SPY trim
+      ;[h1, h2] = alignByDates(h1, h2)
+      ;[h1, hSpy] = alignByDates(h1, hSpy)
+    }
+  }
+
   const labels = h1.map(p => formatDate(p.date))
-  const prices1 = normalizeToPercent(h1.map(p => p.close))
 
   const datasets: ChartData['datasets'] = [
-    {
-      label: props.stock1.symbol,
-      data: prices1,
-      borderColor: STOCK_COLORS[0],
-      backgroundColor: `${STOCK_COLORS[0]}14`,
-      fill: true,
-      tension: 0.3,
-      pointRadius: 0,
-      pointHoverRadius: 4,
-      borderWidth: 2
-    }
+    makeDataset(props.stock1.symbol, normalizeToPercent(h1.map(p => p.close)), STOCK_COLORS[0])
   ]
 
   if (props.stock2 && h2.length > 0) {
-    const prices2 = normalizeToPercent(h2.map(p => p.close))
-    datasets.push({
-      label: props.stock2.symbol,
-      data: prices2,
-      borderColor: STOCK_COLORS[1],
-      backgroundColor: `${STOCK_COLORS[1]}14`,
-      fill: true,
-      tension: 0.3,
-      pointRadius: 0,
-      pointHoverRadius: 4,
-      borderWidth: 2
-    })
+    datasets.push(makeDataset(props.stock2.symbol, normalizeToPercent(h2.map(p => p.close)), STOCK_COLORS[1]))
+  }
+
+  if (hSpy.length > 0) {
+    datasets.push(makeDataset('SPY', normalizeToPercent(hSpy.map(p => p.close)), SPY_COLOR))
   }
 
   const options: ChartOptions<'line'> = {
     responsive: true,
     maintainAspectRatio: false,
-    interaction: {
-      mode: 'index',
-      intersect: false
-    },
+    interaction: { mode: 'index', intersect: false },
     plugins: {
       legend: {
         position: 'top',
-        labels: {
-          color: '#d1d5db',
-          usePointStyle: true,
-          pointStyleWidth: 10
-        }
+        labels: { color: '#d1d5db', usePointStyle: true, pointStyleWidth: 10 }
       },
       tooltip: {
         callbacks: {
           label: (ctx) => {
-            const val = ctx.parsed.y
-            const sign = val >= 0 ? '+' : ''
-            return ` ${ctx.dataset.label}: ${sign}${val.toFixed(2)}%`
+            const v = ctx.parsed.y
+            return ` ${ctx.dataset.label}: ${v >= 0 ? '+' : ''}${v.toFixed(2)}%`
           }
         }
       }
     },
     scales: {
       x: {
-        ticks: {
-          color: '#9ca3af',
-          maxTicksLimit: 8,
-          maxRotation: 0
-        },
+        ticks: { color: '#9ca3af', maxTicksLimit: 8, maxRotation: 0 },
         grid: { color: 'rgba(255,255,255,0.05)' }
       },
       y: {
@@ -143,14 +142,14 @@ const createChart = () => {
   chart = new Chart(ctx, { type: 'line', data: { labels, datasets }, options })
 }
 
+// ─── Lifecycle ───────────────────────────────────────────────────────────────
+
 onMounted(() => createChart())
 
 watch(
-  [() => props.stock1?.history, () => props.stock2?.history],
+  [() => props.stock1?.history, () => props.stock2?.history, () => props.spyHistory],
   () => createChart()
 )
 
-onBeforeUnmount(() => {
-  chart?.destroy()
-})
+onBeforeUnmount(() => chart?.destroy())
 </script>

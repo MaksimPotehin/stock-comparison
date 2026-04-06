@@ -1,6 +1,12 @@
 <template>
   <div class="flex flex-col w-full gap-y-4 min-h-0 overflow-auto">
-    <!-- Controls row -->
+    <!-- Page heading -->
+    <div>
+      <h1 class="text-xl font-bold text-white">{{ $t('stockComparison.pageTitle') }}</h1>
+      <p class="text-gray-400 text-sm mt-1">{{ $t('stockComparison.pageSubtitle') }}</p>
+    </div>
+
+    <!-- Controls -->
     <div class="flex flex-col gap-y-3">
       <!-- Stock search inputs -->
       <div class="flex flex-col md:flex-row gap-3">
@@ -22,19 +28,32 @@
         />
       </div>
 
-      <!-- Period selector -->
-      <div v-if="stock1" class="flex items-center gap-x-1 flex-wrap">
-        <button
-          v-for="p in PERIODS"
-          :key="p"
-          class="px-3 py-1 rounded-lg text-sm font-medium transition-colors"
-          :class="selectedPeriod === p
-            ? 'bg-primary text-white'
-            : 'text-gray-400 hover:text-white hover:bg-gray-700'"
-          @click="selectedPeriod = p"
-        >
-          {{ $t(`stockComparison.periods.${p}`) }}
-        </button>
+      <!-- Period selector + SPY checkbox in one row -->
+      <div v-if="stock1" class="flex flex-col gap-y-1">
+        <div class="flex items-center justify-between gap-x-3 flex-wrap gap-y-2">
+          <!-- Period buttons -->
+          <div class="flex items-center gap-x-1 flex-wrap">
+            <button
+              v-for="p in PERIODS"
+              :key="p"
+              class="px-3 py-1 rounded-lg text-sm font-medium transition-colors"
+              :class="selectedPeriod === p
+                ? 'bg-primary text-white'
+                : 'text-gray-400 hover:text-gray-200 hover:bg-gray-700/50'"
+              @click="selectedPeriod = p"
+            >
+              {{ $t(`stockComparison.periods.${p}`) }}
+            </button>
+          </div>
+
+          <!-- SPY benchmark checkbox -->
+          <el-checkbox v-model="showSpy" size="small" class="spy-checkbox" :disabled="isSpyLoading">
+            {{ $t('stockComparison.spy.label') }}
+          </el-checkbox>
+        </div>
+
+        <!-- Date range -->
+        <p v-if="dateRangeLabel" class="text-xs text-gray-500">{{ dateRangeLabel }}</p>
       </div>
     </div>
 
@@ -50,7 +69,7 @@
 
     <!-- Chart area -->
     <template v-if="stock1">
-      <!-- Loading state -->
+      <!-- Loading -->
       <div v-if="isLoading" class="flex items-center justify-center h-64 rounded-xl bg-gray-700/30">
         <span class="inline-block w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
       </div>
@@ -65,7 +84,11 @@
 
       <!-- Chart -->
       <div v-else class="flex-shrink-0 h-64 md:h-80 w-full rounded-xl overflow-hidden bg-gray-700/20 p-3">
-        <StockComparisonChart :stock1="stock1" :stock2="stock2" />
+        <StockComparisonChart
+          :stock1="stock1"
+          :stock2="stock2"
+          :spy-history="showSpy ? spyHistory : undefined"
+        />
       </div>
 
       <!-- Normalized note -->
@@ -81,6 +104,20 @@
       <!-- Disclaimer -->
       <p class="text-gray-600 text-xs mt-auto pt-2">{{ $t('stockComparison.disclaimer') }}</p>
     </template>
+
+    <!-- How to use -->
+    <section class="mt-2 bg-gray-700/10 rounded-xl p-4 md:p-5">
+      <h2 class="text-base font-semibold text-white mb-3">{{ $t('stockComparison.howTo.title') }}</h2>
+      <ol class="list-decimal list-inside space-y-1.5">
+        <li
+          v-for="(step, i) in $tm('stockComparison.howTo.steps')"
+          :key="i"
+          class="text-gray-400 text-sm"
+        >
+          {{ step }}
+        </li>
+      </ol>
+    </section>
   </div>
 </template>
 
@@ -88,7 +125,7 @@
 import { useDebounceFn } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 import type { RouteLocationRaw } from 'vue-router'
-import type { IStockComparisonData, IStockSearchResult, TStockPeriod } from '~/types/stock'
+import type { IStockComparisonData, IStockHistoricalPoint, IStockSearchResult, TStockPeriod } from '~/types/stock'
 import { searchStocks, fetchStockHistory } from './stock.service'
 import { STOCK_COLORS } from './constants'
 import StockSearchField from './components/StockSearchField.vue'
@@ -97,6 +134,7 @@ import StockMetricsTable from './components/StockMetricsTable.vue'
 
 useSeo('stock-comparison')
 const { t } = useI18n()
+
 const PERIODS: TStockPeriod[] = ['1m', '3m', '6m', 'ytd', '1y', '5y']
 
 const route = useRoute()
@@ -108,10 +146,25 @@ const selectedPeriod = ref<TStockPeriod>('1y')
 const isLoading = ref(false)
 const loadError = ref('')
 
+const showSpy = ref(false)
+const spyHistory = ref<IStockHistoricalPoint[]>([])
+const isSpyLoading = ref(false)
+
 const field1Ref = ref<InstanceType<typeof StockSearchField> | null>(null)
 const field2Ref = ref<InstanceType<typeof StockSearchField> | null>(null)
 
-// Request counter — guards against race conditions when period changes rapidly
+// ─── Date range label ─────────────────────────────────────────────────────────
+
+const dateRangeLabel = computed(() => {
+  const history = stock1.value?.history
+  if (!history || history.length < 2) return ''
+  const from = new Date(history[0].date).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })
+  const to = new Date(history[history.length - 1].date).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })
+  return t('stockComparison.dateRange', { from, to })
+})
+
+// ─── Race condition guard ─────────────────────────────────────────────────────
+
 let loadSeq = 0
 
 async function loadHistories () {
@@ -127,7 +180,6 @@ async function loadHistories () {
       stock2.value ? fetchStockHistory(stock2.value.symbol, selectedPeriod.value) : Promise.resolve(null)
     ])
 
-    // Discard result if a newer request already started
     if (seq !== loadSeq) return
 
     stock1.value = { ...stock1.value, history: h1 }
@@ -143,7 +195,25 @@ async function loadHistories () {
   }
 }
 
+async function loadSpy () {
+  if (!showSpy.value) {
+    spyHistory.value = []
+    return
+  }
+
+  isSpyLoading.value = true
+  try {
+    spyHistory.value = await fetchStockHistory('SPY', selectedPeriod.value)
+  } catch {
+    spyHistory.value = []
+  } finally {
+    isSpyLoading.value = false
+  }
+}
+
 const debouncedLoad = useDebounceFn(loadHistories, 400)
+
+// ─── Stock selection ──────────────────────────────────────────────────────────
 
 function onSelectStock1 (result: IStockSearchResult) {
   stock1.value = { symbol: result.symbol, name: result.name, exchange: result.exchange, history: [] }
@@ -161,6 +231,7 @@ function removeStock1 () {
   field1Ref.value?.clear()
   field2Ref.value?.clear()
   loadError.value = ''
+  spyHistory.value = []
 }
 
 function removeStock2 () {
@@ -168,10 +239,15 @@ function removeStock2 () {
   field2Ref.value?.clear()
 }
 
-// Reload on period change (debounced)
-watch(selectedPeriod, () => debouncedLoad())
+// ─── Watchers ─────────────────────────────────────────────────────────────────
 
-// Sync URL state
+watch(selectedPeriod, () => {
+  debouncedLoad()
+  if (showSpy.value) loadSpy()
+})
+
+watch(showSpy, () => loadSpy())
+
 watch([stock1, stock2, selectedPeriod], () => {
   router.replace({
     query: {
@@ -182,7 +258,8 @@ watch([stock1, stock2, selectedPeriod], () => {
   } as RouteLocationRaw)
 })
 
-// Restore state from URL on mount
+// ─── URL restore on mount ──────────────────────────────────────────────────────
+
 onMounted(async () => {
   const { s1, s2, period } = route.query
 
@@ -190,32 +267,39 @@ onMounted(async () => {
     selectedPeriod.value = period as TStockPeriod
   }
 
-  if (s1) {
+  async function resolveStock (symbol: string): Promise<IStockComparisonData> {
     try {
-      const results = await searchStocks(s1 as string)
-      const match = results.find(r => r.symbol === (s1 as string).toUpperCase())
-      stock1.value = match
+      const results = await searchStocks(symbol)
+      const match = results.find(r => r.symbol === symbol.toUpperCase())
+      return match
         ? { symbol: match.symbol, name: match.name, exchange: match.exchange, history: [] }
-        : { symbol: s1 as string, name: s1 as string, exchange: '', history: [] }
+        : { symbol, name: symbol, exchange: '', history: [] }
     } catch {
-      stock1.value = { symbol: s1 as string, name: s1 as string, exchange: '', history: [] }
+      return { symbol, name: symbol, exchange: '', history: [] }
     }
   }
 
-  if (s2) {
-    try {
-      const results = await searchStocks(s2 as string)
-      const match = results.find(r => r.symbol === (s2 as string).toUpperCase())
-      stock2.value = match
-        ? { symbol: match.symbol, name: match.name, exchange: match.exchange, history: [] }
-        : { symbol: s2 as string, name: s2 as string, exchange: '', history: [] }
-    } catch {
-      stock2.value = { symbol: s2 as string, name: s2 as string, exchange: '', history: [] }
-    }
-  }
+  if (s1) stock1.value = await resolveStock(s1 as string)
+  if (s2) stock2.value = await resolveStock(s2 as string)
 
-  if (stock1.value) {
-    await loadHistories()
-  }
+  if (stock1.value) await loadHistories()
 })
 </script>
+
+<style scoped>
+.spy-checkbox :deep(.el-checkbox__inner) {
+  width: 16px;
+  height: 16px;
+}
+
+.spy-checkbox :deep(.el-checkbox__label) {
+  font-size: 12px;
+  color: rgb(156 163 175); /* gray-400 */
+  padding-left: 8px;
+}
+
+.spy-checkbox :deep(.el-checkbox__input.is-checked .el-checkbox__inner) {
+  background-color: var(--el-color-primary);
+  border-color: var(--el-color-primary);
+}
+</style>
