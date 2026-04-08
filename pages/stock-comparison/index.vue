@@ -8,6 +8,13 @@
 
     <!-- Controls -->
     <div class="flex flex-col gap-y-3">
+      <!-- Popular tickers -->
+      <PopularTickers
+        :stock1-symbol="stock1?.symbol"
+        :stock2-symbol="stock2?.symbol"
+        @select="onSelectPopular"
+      />
+
       <!-- Stock search inputs -->
       <div class="flex flex-col md:flex-row gap-3">
         <StockSearchField
@@ -29,7 +36,7 @@
       </div>
 
       <!-- Period selector + SPY checkbox in one row -->
-      <div v-if="stock1" class="flex flex-col gap-y-1">
+      <div v-if="stock1 || stock2" class="flex flex-col gap-y-1">
         <div class="flex items-center justify-between gap-x-3 flex-wrap gap-y-2">
           <!-- Period buttons -->
           <div class="flex items-center gap-x-1 flex-wrap">
@@ -59,7 +66,7 @@
 
     <!-- Empty state -->
     <div
-      v-if="!stock1"
+      v-if="!stock1 && !stock2"
       class="flex flex-col items-center justify-center flex-grow text-center py-10 gap-y-3"
     >
       <AppIconChartUp class="w-12 h-12 text-gray-600" />
@@ -68,7 +75,7 @@
     </div>
 
     <!-- Chart area -->
-    <template v-if="stock1">
+    <template v-if="stock1 || stock2">
       <!-- Loading -->
       <div v-if="isLoading" class="flex items-center justify-center h-64 rounded-xl bg-gray-700/30">
         <span class="inline-block w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
@@ -140,6 +147,7 @@ import { STOCK_COLORS } from './constants'
 import StockSearchField from './components/StockSearchField.vue'
 import StockComparisonChart from './components/StockComparisonChart.vue'
 import StockMetricsTable from './components/StockMetricsTable.vue'
+import PopularTickers from './components/PopularTickers.vue'
 
 useSeo('stock-comparison')
 const { t } = useI18n()
@@ -179,7 +187,7 @@ const newsLinkLabel = computed(() => {
 // ─── Date range label ─────────────────────────────────────────────────────────
 
 const dateRangeLabel = computed(() => {
-  const history = stock1.value?.history
+  const history = (stock1.value ?? stock2.value)?.history
   if (!history || history.length < 2) return ''
   const from = new Date(history[0].date).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })
   const to = new Date(history[history.length - 1].date).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })
@@ -191,7 +199,7 @@ const dateRangeLabel = computed(() => {
 let loadSeq = 0
 
 async function loadHistories () {
-  if (!stock1.value) return
+  if (!stock1.value && !stock2.value) return
 
   const seq = ++loadSeq
   isLoading.value = true
@@ -199,16 +207,14 @@ async function loadHistories () {
 
   try {
     const [h1, h2] = await Promise.all([
-      fetchStockHistory(stock1.value.symbol, selectedPeriod.value),
+      stock1.value ? fetchStockHistory(stock1.value.symbol, selectedPeriod.value) : Promise.resolve(null),
       stock2.value ? fetchStockHistory(stock2.value.symbol, selectedPeriod.value) : Promise.resolve(null)
     ])
 
     if (seq !== loadSeq) return
 
-    stock1.value = { ...stock1.value, history: h1 }
-    if (stock2.value && h2) {
-      stock2.value = { ...stock2.value, history: h2 }
-    }
+    if (stock1.value && h1) stock1.value = { ...stock1.value, history: h1 }
+    if (stock2.value && h2) stock2.value = { ...stock2.value, history: h2 }
   } catch (err: unknown) {
     if (seq !== loadSeq) return
     const fetchErr = err as { data?: { message?: string } }
@@ -250,16 +256,40 @@ function onSelectStock2 (result: IStockSearchResult) {
 
 function removeStock1 () {
   stock1.value = null
-  stock2.value = null
   field1Ref.value?.clear()
-  field2Ref.value?.clear()
-  loadError.value = ''
-  spyHistory.value = []
+  if (!stock2.value) {
+    loadError.value = ''
+    spyHistory.value = []
+  }
 }
 
 function removeStock2 () {
   stock2.value = null
   field2Ref.value?.clear()
+  if (!stock1.value) {
+    loadError.value = ''
+    spyHistory.value = []
+  }
+}
+
+function onSelectPopular (symbol: string, name: string) {
+  if (stock1.value?.symbol === symbol) {
+    removeStock1()
+    return
+  }
+  if (stock2.value?.symbol === symbol) {
+    removeStock2()
+    return
+  }
+  const data = { symbol, name, exchange: '', history: [] }
+  if (!stock1.value) {
+    stock1.value = data
+  } else if (!stock2.value) {
+    stock2.value = data
+  } else {
+    return
+  }
+  debouncedLoad()
 }
 
 // ─── Watchers ─────────────────────────────────────────────────────────────────
@@ -305,7 +335,7 @@ onMounted(async () => {
   if (s1) stock1.value = await resolveStock(s1 as string)
   if (s2) stock2.value = await resolveStock(s2 as string)
 
-  if (stock1.value) await loadHistories()
+  if (stock1.value || stock2.value) await loadHistories()
 })
 </script>
 

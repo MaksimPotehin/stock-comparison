@@ -5,6 +5,9 @@ export const stockComparisonMessages = {
   addStock: 'Add stock to compare',
   emptyTitle: 'Compare any two stocks',
   emptySubtitle: 'Enter a ticker symbol or company name to get started',
+  popularTickers: {
+    label: 'Popular:'
+  },
   pageTitle: 'Stock Comparison Chart',
   pageSubtitle: 'Compare the performance of two stocks side by side. Enter tickers to see a normalized return chart and key metrics — no signup needed.',
   periods: {

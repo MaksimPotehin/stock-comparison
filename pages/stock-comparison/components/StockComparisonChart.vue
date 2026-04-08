@@ -62,7 +62,8 @@ function makeDataset(
 // ─── Chart build ─────────────────────────────────────────────────────────────
 
 function createChart() {
-  if (!chartRef.value || !props.stock1 || props.stock1.history.length === 0) return
+  const baseStock = props.stock1 ?? props.stock2
+  if (!chartRef.value || !baseStock || baseStock.history.length === 0) return
 
   const ctx = chartRef.value.getContext('2d')
   if (!ctx) return
@@ -70,12 +71,15 @@ function createChart() {
   chart?.destroy()
   chart = null
 
-  let h1 = props.stock1.history
-  let h2 = props.stock2?.history ?? []
+  const baseColor = props.stock1 ? STOCK_COLORS[0] : STOCK_COLORS[1]
+  const secondStock = props.stock1 ? props.stock2 : null
+
+  let h1 = baseStock.history
+  let h2 = secondStock?.history ?? []
   let hSpy = props.spyHistory ?? []
 
   // Align all series to the same dates (step by step)
-  if (props.stock2 && h2.length > 0) {
+  if (secondStock && h2.length > 0) {
     ;[h1, h2] = alignByDates(h1, h2)
   }
 
@@ -92,11 +96,11 @@ function createChart() {
   const labels = h1.map(p => formatDate(p.date))
 
   const datasets: ChartDataset<'line'>[] = [
-    makeDataset(props.stock1.symbol, normalizeToPercent(h1.map(p => p.close)), STOCK_COLORS[0])
+    makeDataset(baseStock.symbol, normalizeToPercent(h1.map(p => p.close)), baseColor)
   ]
 
-  if (props.stock2 && h2.length > 0) {
-    datasets.push(makeDataset(props.stock2.symbol, normalizeToPercent(h2.map(p => p.close)), STOCK_COLORS[1]))
+  if (secondStock && h2.length > 0) {
+    datasets.push(makeDataset(secondStock.symbol, normalizeToPercent(h2.map(p => p.close)), STOCK_COLORS[1]))
   }
 
   if (hSpy.length > 0) {
