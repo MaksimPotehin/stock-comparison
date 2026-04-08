@@ -9,6 +9,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     twelveDataApiKey: process.env.NUXT_TWELVE_DATA_API_KEY || '',
+    finnhubApiKey: process.env.NUXT_FINNHUB_API_KEY || '',
     public: {
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.investing-space.tech',
       gscVerificationContent: process.env.NUXT_PUBLIC_GSC_VERIFICATION || ''
@@ -51,7 +52,9 @@ export default defineNuxtConfig({
       },
 
       '/stock-comparison': { ssr: true },
-      '/ua/stock-comparison': { ssr: true }
+      '/ua/stock-comparison': { ssr: true },
+      '/news': { ssr: true },
+      '/ua/news': { ssr: true }
     }
   },
 
@@ -86,7 +89,8 @@ export default defineNuxtConfig({
         { rel: 'preconnect', href: 'https://www.googletagmanager.com', crossorigin: '' },
         { rel: 'dns-prefetch', href: 'https://www.googletagmanager.com' },
         { rel: 'preconnect', href: 'https://ipapi.co' },
-        { rel: 'dns-prefetch', href: 'https://ipapi.co' }
+        { rel: 'dns-prefetch', href: 'https://ipapi.co' },
+        { rel: 'dns-prefetch', href: 'https://finnhub.io' }
       ],
       script: [
         // Google Analytics
@@ -147,7 +151,9 @@ export default defineNuxtConfig({
       '/ua/calculator',
       '/ua/faq',
       '/ua/blog',
-      ...BLOG_POSTS.map(p => ({ loc: `/ua/blog/${p.slug}`, lastmod: p.publishedAt }))
+      ...BLOG_POSTS.map(p => ({ loc: `/ua/blog/${p.slug}`, lastmod: p.publishedAt })),
+      { loc: '/news', changefreq: 'hourly', priority: 0.7 },
+      { loc: '/ua/news', changefreq: 'hourly', priority: 0.7 }
     ],
     exclude: [
       '/404',

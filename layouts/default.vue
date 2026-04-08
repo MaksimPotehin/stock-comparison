@@ -130,6 +130,10 @@ const navigation = computed(() => [
     routeName: localePath('/stock-comparison')
   },
   {
+    label: t('navigation.news'),
+    routeName: localePath('/news')
+  },
+  {
     label: t('navigation.calculator'),
     routeName: localePath('/calculator')
   },

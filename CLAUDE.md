@@ -43,6 +43,13 @@ pages/
       StockBadge.vue           # Selected ticker badge with remove button
       StockComparisonChart.vue # Normalized % line chart (Chart.js), 1-2 stocks
       StockMetricsTable.vue    # Return%, volatility, max drawdown, high/low
+  news/
+    index.vue                  # News page (SSR, dynamic)
+    news.service.ts            # fetchNewsFeed(), fetchNewsSentiment()
+    components/
+      NewsCard.vue             # Article card with timeAgo + symbol badge
+      NewsFilters.vue          # Category pill filters
+      NewsSkeleton.vue         # Loading placeholder
   blog/
     index.vue                  # Blog listing
     [slug].vue                 # Blog post detail
@@ -72,6 +79,7 @@ types/                         # App-level types (shared across features)
   blog.ts                      # IBlogPost, IBlogLocalizedText, IBlogFilter, IBlogPagination
   investment.ts                # IInvestmentParams, IInvestmentResult (app-level)
   stock.ts                     # IStockSearchResult, IStockHistoricalPoint, IStockComparisonData, TStockPeriod
+  news.ts                      # INewsArticle, INewsSentiment, TNewsCategory
   enums.ts                     # EFrequency, ETimeUnit, etc.
 
 content/
@@ -82,6 +90,9 @@ server/
   api/stock/
     search.get.ts              # Proxy → Twelve Data /symbol_search (in-memory cache 60min)
     history.get.ts             # Proxy → Twelve Data /time_series (in-memory cache 10min)
+  api/news/
+    feed.get.ts                # Proxy → Finnhub market/company news (in-memory cache 15min)
+    sentiment.get.ts           # Proxy → Finnhub news-sentiment (in-memory cache 30min)
 
 plugins/
   schema-org.ts                # Global Organization + Breadcrumb Schema.org on mount
@@ -109,6 +120,7 @@ assets/
 | `/` | Redirect → `/calculator` | — |
 | `/calculator` | Calculator (prerendered) | 1 year |
 | `/stock-comparison` | Stock comparison (SSR, dynamic) | no cache |
+| `/news` | Financial news (SSR, dynamic) | no cache |
 | `/blog` | Blog listing (prerendered) | 1 day |
 | `/blog/[slug]` | Blog post detail | 1 day |
 | `/faq` | FAQ (prerendered) | 1 year |
@@ -273,6 +285,7 @@ There is no runtime cache invalidation — all updates require a new deployment.
 | `NUXT_PUBLIC_SITE_URL` | `https://www.investing-space.tech` | Base URL for sitemap, canonical, OG |
 | `NUXT_PUBLIC_GSC_VERIFICATION` | `''` | Google Search Console meta content |
 | `NUXT_TWELVE_DATA_API_KEY` | `''` | Twelve Data API key (server-side only, add to `.env.local`) |
+| `NUXT_FINNHUB_API_KEY` | `''` | Finnhub API key (server-side only, add to `.env.local`) |
 | `VERCEL` | auto-detected | Switches Nitro preset to `'vercel'` |
 
 ---

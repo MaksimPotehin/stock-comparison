@@ -101,6 +101,15 @@
         <StockMetricsTable :stock1="stock1" :stock2="stock2" />
       </div>
 
+      <!-- News link -->
+      <NuxtLink
+        v-if="!isLoading && !loadError"
+        :to="newsPageLink"
+        class="flex items-center gap-x-1 text-sm text-gray-400 hover:text-white transition-colors"
+      >
+        {{ $t('stockComparison.readNewsLink', { symbols: newsLinkLabel }) }}
+      </NuxtLink>
+
       <!-- Disclaimer -->
       <p class="text-gray-600 text-xs mt-auto pt-2">{{ $t('stockComparison.disclaimer') }}</p>
     </template>
@@ -134,6 +143,7 @@ import StockMetricsTable from './components/StockMetricsTable.vue'
 
 useSeo('stock-comparison')
 const { t } = useI18n()
+const localePath = useLocalePath()
 
 const PERIODS: TStockPeriod[] = ['1m', '3m', '6m', 'ytd', '1y', '5y']
 
@@ -152,6 +162,19 @@ const isSpyLoading = ref(false)
 
 const field1Ref = ref<InstanceType<typeof StockSearchField> | null>(null)
 const field2Ref = ref<InstanceType<typeof StockSearchField> | null>(null)
+
+// ─── News link ────────────────────────────────────────────────────────────────
+
+const newsPageLink = computed(() => {
+  const query: Record<string, string> = {}
+  if (stock1.value) query.s1 = stock1.value.symbol
+  if (stock2.value) query.s2 = stock2.value.symbol
+  return localePath({ path: '/news', query })
+})
+
+const newsLinkLabel = computed(() => {
+  return [stock1.value?.symbol, stock2.value?.symbol].filter(Boolean).join(' & ')
+})
 
 // ─── Date range label ─────────────────────────────────────────────────────────
 

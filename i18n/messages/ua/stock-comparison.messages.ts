@@ -90,5 +90,6 @@ export const stockComparisonMessages = {
     unavailable: 'Дані тимчасово недоступні. Спробуйте пізніше.',
     generic: 'Не вдалося завантажити дані'
   },
-  disclaimer: 'Дані надані Twelve Data. Лише для інформаційних цілей. Не є фінансовою порадою.'
+  disclaimer: 'Дані надані Twelve Data. Лише для інформаційних цілей. Не є фінансовою порадою.',
+  readNewsLink: 'Новини {symbols} →'
 }

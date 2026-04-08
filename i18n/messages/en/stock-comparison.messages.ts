@@ -90,5 +90,6 @@ export const stockComparisonMessages = {
     unavailable: 'Data temporarily unavailable. Please try again later.',
     generic: 'Failed to load data'
   },
-  disclaimer: 'Data provided by Twelve Data. For informational purposes only. Not financial advice.'
+  disclaimer: 'Data provided by Twelve Data. For informational purposes only. Not financial advice.',
+  readNewsLink: 'Read news for {symbols} →'
 }

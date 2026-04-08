@@ -1,6 +1,6 @@
 import { useI18n } from 'vue-i18n'
 
-export const useSeo = (pageKey: 'home' | 'calculator' | 'faq' | 'blog' | 'stock-comparison') => {
+export const useSeo = (pageKey: 'home' | 'calculator' | 'faq' | 'blog' | 'stock-comparison' | 'news') => {
   const { locale } = useI18n()
 
   const titles = {
@@ -23,6 +23,10 @@ export const useSeo = (pageKey: 'home' | 'calculator' | 'faq' | 'blog' | 'stock-
     'stock-comparison': {
       en: 'Stock Comparison Chart | Compare Stocks Side by Side',
       ua: 'Порівняння акцій | Графік порівняння двох акцій'
+    },
+    news: {
+      en: 'Financial News | Investing Space',
+      ua: 'Фінансові новини | Investing Space'
     }
   }
 
@@ -46,6 +50,10 @@ export const useSeo = (pageKey: 'home' | 'calculator' | 'faq' | 'blog' | 'stock-
     'stock-comparison': {
       en: 'Compare any two stocks on a normalized chart. Analyze return %, volatility, and max drawdown over 1M, 3M, 6M, YTD, 1Y, and 5Y periods. Free, no signup needed.',
       ua: 'Порівнюйте будь-які дві акції на графіку. Аналізуйте прибутковість, волатильність та просадку за 1М, 3М, 6М, 1Р та 5Р. Безкоштовно, без реєстрації.'
+    },
+    news: {
+      en: 'Latest stock market news, company updates, and financial events. Follow market trends and stay informed about your investments.',
+      ua: 'Актуальні новини фондового ринку, оновлення компаній та фінансові події. Стежте за ринковими трендами та своїми інвестиціями.'
     }
   }
 

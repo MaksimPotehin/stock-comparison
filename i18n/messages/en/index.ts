@@ -5,6 +5,7 @@ import { calculatorMessages as calculator } from './calculator.messages'
 import { faqMessages as faq } from './faq.messages'
 import { blogMessages as blog } from './blog.messages'
 import { stockComparisonMessages as stockComparison } from './stock-comparison.messages'
+import { newsMessages as news } from './news.messages'
 
 export const en = {
   el: enLocale.el,
@@ -13,5 +14,6 @@ export const en = {
   calculator,
   faq,
   blog,
-  stockComparison
+  stockComparison,
+  news
 }
