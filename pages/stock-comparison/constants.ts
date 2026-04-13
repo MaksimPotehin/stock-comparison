@@ -1,5 +1,7 @@
-export const STOCK_COLORS = ['#00bff5', '#f59e0b'] as const
-export const SPY_COLOR = '#6b7280' as const
+// Brand chart color sequence (Snowball Analytics palette)
+export const STOCK_COLORS = ['#3699ff', '#1bc5bd'] as const
+// SPY is a neutral benchmark — violet keeps it clearly distinct from both stock colors
+export const SPY_COLOR = '#9a6afa' as const
 
 export const POPULAR_STOCKS = [
   { symbol: 'AAPL', name: 'Apple' },

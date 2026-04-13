@@ -114,7 +114,7 @@ function createChart() {
     plugins: {
       legend: {
         position: 'top',
-        labels: { color: '#d1d5db', usePointStyle: true, pointStyleWidth: 10 }
+        labels: { color: '#b5b5c3', usePointStyle: true, pointStyleWidth: 10 }
       },
       tooltip: {
         callbacks: {
@@ -127,18 +127,18 @@ function createChart() {
     },
     scales: {
       x: {
-        ticks: { color: '#9ca3af', maxTicksLimit: 8, maxRotation: 0 },
-        grid: { color: 'rgba(255,255,255,0.05)' }
+        ticks: { color: '#7e8299', maxTicksLimit: 8, maxRotation: 0 },
+        grid: { color: 'rgba(73,80,87,0.5)' }
       },
       y: {
         ticks: {
-          color: '#9ca3af',
+          color: '#7e8299',
           callback: (value) => {
             const v = Number(value)
             return (v >= 0 ? '+' : '') + v.toFixed(1) + '%'
           }
         },
-        grid: { color: 'rgba(255,255,255,0.05)' }
+        grid: { color: 'rgba(73,80,87,0.5)' }
       }
     }
   }

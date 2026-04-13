@@ -2,8 +2,8 @@
   <ClientOnly />
   <div class="w-full flex flex-col gap-y-8 overflow-auto md:overflow-hidden">
     <div>
-      <h1 class="text-warning text-2xl mb-4">{{ $t('calculator.title') }}</h1>
-      <p class="text-white-400 leading-7">{{ $t('calculator.description') }}</p>
+      <h1 class="text-gradient text-2xl font-semibold mb-4">{{ $t('calculator.title') }}</h1>
+      <p class="text-sb-secondary leading-7">{{ $t('calculator.description') }}</p>
     </div>
 
     <div class="flex w-full md:space-x-8 flex-col md:flex-row gap-16 md:gap-0 md:overflow-hidden">
@@ -18,8 +18,8 @@
       <div class="flex flex-col w-full h-full overflow-hidden">
         <div class="flex items-center gap-x-10">
           <div class="flex items-center gap-x-3 mb-3">
-            <h2 class="text-lg mr-2">{{ $t('calculator.results') }}</h2>
-            <p>{{ $t('calculator.viewMode') }}:</p>
+            <h2 class="text-lg font-semibold text-sb-text mr-2">{{ $t('calculator.results') }}</h2>
+            <p class="text-sb-muted text-sm">{{ $t('calculator.viewMode') }}:</p>
             <el-radio-group v-model="resultViewType">
               <el-radio-button value="table">{{ $t('calculator.table') }}</el-radio-button>
               <el-radio-button value="chart">{{ $t('calculator.chart') }}</el-radio-button>

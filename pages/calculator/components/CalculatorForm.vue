@@ -1,13 +1,13 @@
 <template>
-  <div class="flex-shrink-0 border-r-0 md:border-r border-gray-500 md:pr-8">
-    <p class="mb-4">{{ $t('calculator.form.enterData') }}</p>
+  <div class="flex-shrink-0 border-r-0 md:border-r border-sb-border md:pr-8">
+    <p class="mb-4 text-sb-secondary">{{ $t('calculator.form.enterData') }}</p>
     <el-form v-model="modelValue" label-position="top" class="w-full">
       <!-- Реінвестування -->
       <el-form-item class="mb-3" :label="$t('calculator.form.reinvestment')">
         <div class="flex flex-col gap-y-2">
           <el-switch
             v-model="modelValue.reinvestment"
-            style="--el-switch-on-color: #00bff5; --el-switch-off-color: #adb5bd"
+            style="--el-switch-on-color: #00aff5; --el-switch-off-color: #495057"
           />
           <el-radio-group v-model="modelValue.reinvestmentFrequency" :disabled="!modelValue.reinvestment">
             <el-radio-button :value="EFrequency.Weekly">{{ $t('calculator.form.weekly') }}</el-radio-button>

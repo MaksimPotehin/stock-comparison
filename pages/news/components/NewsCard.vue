@@ -3,11 +3,11 @@
     :href="article.url"
     target="_blank"
     rel="noopener noreferrer"
-    class="rounded-xl bg-gray-700/20 overflow-hidden hover:bg-gray-700/40 transition-colors cursor-pointer block"
+    class="rounded-lg bg-card border border-sb-border overflow-hidden hover:bg-sb-hover transition-colors cursor-pointer block shadow-card"
     @click="handleClick"
   >
     <!-- Image -->
-    <div class="aspect-video bg-gray-700/40 overflow-hidden">
+    <div class="aspect-video bg-surface overflow-hidden">
       <img
         v-if="article.imageUrl"
         :src="article.imageUrl"
@@ -16,14 +16,14 @@
         loading="lazy"
       >
       <div v-else class="w-full h-full flex items-center justify-center">
-        <AppIconInfo class="w-8 h-8 text-gray-600" />
+        <AppIconInfo class="w-8 h-8 text-sb-subtle" />
       </div>
     </div>
 
     <!-- Content -->
     <div class="p-4 flex flex-col gap-y-2">
       <!-- Meta row -->
-      <div class="flex items-center gap-x-2 text-xs text-gray-400 flex-wrap gap-y-1">
+      <div class="flex items-center gap-x-2 text-xs text-sb-muted flex-wrap gap-y-1">
         <span
           v-if="article.symbol"
           class="px-1.5 py-0.5 rounded text-xs font-medium"
@@ -37,12 +37,12 @@
       </div>
 
       <!-- Headline -->
-      <p class="text-white text-sm font-medium leading-snug line-clamp-2">
+      <p class="text-sb-text text-sm font-medium leading-snug line-clamp-2">
         {{ article.headline }}
       </p>
 
       <!-- Summary -->
-      <p class="text-gray-400 text-sm line-clamp-3">
+      <p class="text-sb-muted text-sm line-clamp-3">
         {{ article.summary }}
       </p>
     </div>
@@ -75,8 +75,8 @@ const symbolStyle = computed(() => {
     }
   }
   return {
-    backgroundColor: 'rgb(75 85 99 / 0.4)',
-    color: 'rgb(209 213 219)'
+    backgroundColor: 'var(--sb-input-bg)',
+    color: 'var(--sb-text-dark65)'
   }
 })
 
@@ -90,7 +90,7 @@ const timeAgoText = computed(() => {
 })
 
 function handleClick () {
-  trackEvent('news_article_click', {
+  trackEvent('news', 'news_article_click', {
     symbol: props.article.symbol,
     source: props.article.source,
     headline: props.article.headline.slice(0, 60)

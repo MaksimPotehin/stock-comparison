@@ -68,8 +68,8 @@
       <!-- no data -->
       <template #empty>
         <div v-if="showPlaceholderIcon" class="flex flex-col items-center justify-center h-[200px]">
-          <el-icon class="text-gray-400 mb-4" :size="48"><Document /></el-icon>
-          <p class="text-gray-400">No data</p>
+          <el-icon class="text-sb-muted mb-4" :size="48"><Document /></el-icon>
+          <p class="text-sb-muted">No data</p>
         </div>
       </template>
     </el-table>

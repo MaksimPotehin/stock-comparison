@@ -5,13 +5,14 @@ declare global {
 }
 
 export const useAnalytics = () => {
-  const trackEvent = (category: string, action: string, label?: string, value?: number) => {
+  const trackEvent = (category: string, action: string, label?: string | Record<string, string | number | boolean | undefined>, value?: number) => {
     if (typeof window !== 'undefined' && (window as unknown as IWindow).gtag) {
-      (window as unknown as IWindow).gtag('event', action, {
+      const extraProps = typeof label === 'object' ? label : { event_label: label }
+      ;(window as unknown as IWindow).gtag('event', action, {
         event_category: category,
-        event_label: label,
         value,
-        non_interaction: false
+        non_interaction: false,
+        ...extraProps
       })
     }
   }

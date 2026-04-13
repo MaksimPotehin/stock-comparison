@@ -23,7 +23,7 @@ const props = withDefaults(defineProps<{
   size: 'large',
   clearable: true,
   centered: false,
-  radius: 30
+  radius: 8
 })
 
 const model = defineModel<string>({ default: '' })
@@ -35,7 +35,7 @@ const containerStyle = computed(() => ({ '--app-search-radius': `${props.radius}
 <style scoped>
 .app-search :deep(.el-input__wrapper) {
   height: 50px;
-  border-radius: var(--app-search-radius, 12px);
+  border-radius: var(--app-search-radius, 6px);
   box-shadow: none;
 }
 </style>

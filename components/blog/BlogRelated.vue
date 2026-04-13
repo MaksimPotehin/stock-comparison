@@ -1,6 +1,6 @@
 <template>
   <div class="mt-10">
-    <h2 class="text-warning text-xl mb-4">{{ $t('blog.related') }}</h2>
+    <h2 class="text-sb-text text-xl mb-4">{{ $t('blog.related') }}</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <BlogCard
         v-for="p in items"
@@ -9,7 +9,7 @@
         :title="localized(p.title)"
         :excerpt="localized(p.excerpt)"
         :date="formatDate(p.publishedAt)"
-        :reading="p.readingTime"
+        :featured="p.featured"
       />
     </div>
   </div>

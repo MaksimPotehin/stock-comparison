@@ -1,14 +1,14 @@
 <template>
   <div class="w-full h-full flex flex-col gap-6 md:gap-8 overflow-y-auto">
     <div class="flex flex-col gap-3">
-      <h1 class="text-warning text-2xl">{{ $t('blog.title') }}</h1>
-      <p class="text-white-400">{{ $t('blog.description') }}</p>
+      <h1 class="text-gradient text-2xl font-semibold">{{ $t('blog.title') }}</h1>
+      <p class="text-sb-secondary">{{ $t('blog.description') }}</p>
     </div>
 
     <BlogSearch v-model="filters.search" />
 
     <div class="flex flex-col md:flex-row gap-6">
-      <div class="w-full md:w-72 shrink-0 md:border-l md:border-gray-700 md:pl-6 order-1 md:order-2">
+      <div class="w-full md:w-72 shrink-0 md:border-l md:border-sb-border md:pl-6 order-1 md:order-2">
         <BlogSidebar v-model="filters" :tags="allTags" />
       </div>
       <div class="flex-1 order-2 md:order-1">
@@ -20,9 +20,10 @@
             :title="localized(post.title)"
             :excerpt="localized(post.excerpt)"
             :date="formatDate(post.publishedAt)"
+            :featured="post.featured"
           />
         </div>
-        <p v-if="filteredPosts.length === 0" class="text-white-400 text-center py-12">
+        <p v-if="filteredPosts.length === 0" class="text-sb-secondary text-center py-12">
           {{ $t('blog.noResults') }}
         </p>
       </div>

@@ -2,30 +2,31 @@
   <div ref="scrollContainer" class="w-full h-full flex flex-col gap-6 md:gap-8 p-3 md:p-8 overflow-y-auto">
     <!-- Reading progress bar -->
     <div
-      class="fixed left-0 top-0 h-2 bg-warning z-50 transition-[width,opacity] duration-200"
+      class="fixed left-0 top-0 h-1 z-50 transition-[width,opacity] duration-200"
+      style="background: linear-gradient(to right, var(--sb-primary), var(--sb-info))"
       :style="{ width: progress + '%', opacity: progress > 5 ? 1 : 0 }"
     />
 
-    <NuxtLink :to="localePath('/blog')" class="text-warning hover:underline text-sm">{{ $t('blog.back') }}</NuxtLink>
+    <NuxtLink :to="localePath('/blog')" class="text-primary hover:underline text-sm">{{ $t('blog.back') }}</NuxtLink>
 
     <article v-if="post" class="prose prose-invert max-w-3xl mx-auto article-content">
-      <h1 class="text-warning mb-2">{{ localized(post.title) }}</h1>
-      <div class="flex flex-wrap items-center gap-2 text-[12px] text-white-400 mb-3">
+      <h1 class="text-gradient mb-2">{{ localized(post.title) }}</h1>
+      <div class="flex flex-wrap items-center gap-2 text-[12px] text-sb-muted mb-3">
         <span>{{ formatDate(post.publishedAt) }}</span>
         <template v-if="post.tags?.length">
           <span class="mx-1">·</span>
           <span
             v-for="t in post.tags"
             :key="t"
-            class="px-2 py-0.5 rounded-full bg-gray-700/70 text-gray-200 border
-             border-gray-700 hover:bg-gray-600/70 transition-colors"
+            class="px-2 py-0.5 rounded-full bg-surface text-sb-secondary border
+             border-sb-border hover:bg-sb-hover transition-colors"
           >
             {{ t }}
           </span>
         </template>
       </div>
 
-      <div class="mt-6 text-white-300 leading-8">
+      <div class="mt-6 text-sb-secondary leading-8">
         <div v-html="renderedHtml" />
       </div>
     </article>
@@ -72,14 +73,17 @@ function slugify (text: string): string {
 }
 
 onMounted(() => {
-  const container = scrollContainer.value!
+  const el = scrollContainer.value!
+
   const onScroll = () => {
-    const total = (container.scrollHeight - container.clientHeight) || 1
-    progress.value = Math.min(100, Math.max(0, (container.scrollTop / total) * 100))
+    const rect = el.getBoundingClientRect()
+    const total = rect.height - window.innerHeight
+    progress.value = total > 0 ? Math.min(100, Math.max(0, (-rect.top / total) * 100)) : 0
   }
-  container.addEventListener('scroll', onScroll, { passive: true })
+
+  window.addEventListener('scroll', onScroll, { passive: true, capture: true })
   onScroll()
-  onBeforeUnmount(() => container.removeEventListener('scroll', onScroll))
+  onBeforeUnmount(() => window.removeEventListener('scroll', onScroll, { capture: true }))
 
   // Render markdown content
   watchEffect(() => {

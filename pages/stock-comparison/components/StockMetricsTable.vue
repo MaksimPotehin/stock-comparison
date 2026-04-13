@@ -2,8 +2,8 @@
   <div class="overflow-x-auto">
     <table class="w-full text-sm">
       <thead>
-        <tr class="border-b border-gray-600">
-          <th class="text-left py-2.5 pr-4 text-gray-400 font-medium w-1/3">
+        <tr class="border-b border-sb-border">
+          <th class="text-left py-2.5 pr-4 text-sb-muted font-medium w-1/3">
             {{ $t('stockComparison.metrics.title') }}
           </th>
           <th v-if="stock1" class="text-right py-2.5 px-3 font-semibold" :style="{ color: STOCK_COLORS[0] }">
@@ -18,14 +18,14 @@
         <tr
           v-for="row in visibleRows"
           :key="row.key"
-          class="border-b border-gray-700/50 hover:bg-gray-700/20 transition-colors"
+          class="border-b border-sb-border hover:bg-sb-hover transition-colors"
         >
           <!-- Label + tooltip -->
-          <td class="py-2.5 pr-4 text-gray-400">
+          <td class="py-2.5 pr-4 text-sb-muted">
             <div class="flex items-center gap-x-1.5">
               <span>{{ row.label }}</span>
               <AppTooltip v-if="row.tooltip" :content="row.tooltip" placement="top">
-                <AppIconInfo class="w-3.5 h-3.5 text-gray-500 hover:text-gray-300 cursor-help flex-shrink-0 transition-colors" />
+                <AppIconInfo class="w-3.5 h-3.5 text-sb-subtle hover:text-sb-muted cursor-help flex-shrink-0 transition-colors" />
               </AppTooltip>
             </div>
           </td>
@@ -34,7 +34,7 @@
           <td v-if="stock1" class="text-right py-2.5 px-3 font-mono" :class="row.colorClass?.(metrics1)">
             <template v-if="row.subline1">
               <div>{{ row.format(metrics1) }}</div>
-              <div class="text-xs text-gray-500">{{ row.subline1(metrics1) }}</div>
+              <div class="text-xs text-sb-subtle">{{ row.subline1(metrics1) }}</div>
             </template>
             <template v-else>{{ row.format(metrics1) }}</template>
           </td>
@@ -47,7 +47,7 @@
           >
             <template v-if="row.subline2">
               <div>{{ row.format(metrics2) }}</div>
-              <div class="text-xs text-gray-500">{{ row.subline2(metrics2) }}</div>
+              <div class="text-xs text-sb-subtle">{{ row.subline2(metrics2) }}</div>
             </template>
             <template v-else>{{ row.format(metrics2) }}</template>
           </td>
@@ -56,13 +56,13 @@
         <!-- Correlation row (only when both stocks present) -->
         <tr
           v-if="stock2 && metrics2 && correlation !== null"
-          class="border-b border-gray-700/50 hover:bg-gray-700/20 transition-colors"
+          class="border-b border-sb-border hover:bg-sb-hover transition-colors"
         >
-          <td class="py-2.5 pr-4 text-gray-400">
+          <td class="py-2.5 pr-4 text-sb-muted">
             <div class="flex items-center gap-x-1.5">
               <span>{{ $t('stockComparison.metrics.correlation') }}</span>
               <AppTooltip :content="$t('stockComparison.metrics.tooltips.correlation')" placement="top">
-                <AppIconInfo class="w-3.5 h-3.5 text-gray-500 hover:text-gray-300 cursor-help flex-shrink-0 transition-colors" />
+                <AppIconInfo class="w-3.5 h-3.5 text-sb-subtle hover:text-sb-muted cursor-help flex-shrink-0 transition-colors" />
               </AppTooltip>
             </div>
           </td>
@@ -209,7 +209,7 @@ function formatCorrelation(v: number): string {
 
 function pctClass(m: IMetrics, key: 'returnPct' | 'cagrPct'): string {
   const v = key === 'cagrPct' ? m.cagrPct : m.returnPct
-  if (v === null) return 'text-gray-500'
+  if (v === null) return 'text-sb-subtle'
   if (v > 0) return 'text-success-800'
   if (v < 0) return 'text-error-700'
   return 'text-white'
@@ -231,7 +231,7 @@ const correlation = computed<number | null>(() => {
 })
 
 const correlationClass = computed(() => {
-  if (correlation.value === null) return 'text-gray-500'
+  if (correlation.value === null) return 'text-sb-subtle'
   if (correlation.value >= 0.7) return 'text-warning'
   if (correlation.value <= -0.3) return 'text-success-800'
   return 'text-white'

@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col h-full overflow-hidden">
-    <header class="gap-x-6 shadow-[0px_1px_0px_0px_#2e3448]">
+    <header class="gap-x-6 border-b border-sb-border">
       <div class="w-full max-w-[1440px] flex items-center justify-between m-auto px-3 md:px-5 py-2 md:py-3">
         <!-- Logo block placeholder -->
         <div class="flex items-center gap-x-12">
@@ -18,8 +18,8 @@
               v-for="item in navigation"
               :key="item.label"
               :to="item.routeName"
-              class="text-base leading-6 text-white hover:text-warning transition-colors"
-              active-class="!text-warning"
+              class="text-base leading-6 text-sb-text hover:text-primary transition-colors relative pb-0.5"
+              active-class="nav-active"
               @click="handleNavigation(item.routeName)"
             >
               {{ item.label }}
@@ -31,7 +31,7 @@
         <div class="flex items-center gap-x-4">
           <!-- Mobile menu button -->
           <button
-            class="md:hidden p-2 text-white hover:bg-gray-600/60 rounded-md"
+            class="md:hidden p-2 text-sb-text hover:bg-surface/60 rounded-md"
             @click="isMobileMenuOpen = !isMobileMenuOpen"
           >
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -75,7 +75,7 @@
       <!-- Mobile navigation -->
       <div
         v-show="isMobileMenuOpen"
-        class="md:hidden bg-gray-800 shadow-lg border-t border-gray-700"
+        class="md:hidden bg-card shadow-[var(--shadow-dropdown)] border-t border-sb-border"
       >
         <div class="px-3 py-2">
           <!-- Mobile navigation links -->
@@ -84,8 +84,8 @@
               v-for="item in navigation"
               :key="item.label"
               :to="item.routeName"
-              class="block px-3 py-2 text-[14px] hover:bg-gray-600/60 rounded-md transition-all"
-              active-class="bg-warning/20 text-warning"
+              class="block px-3 py-2 text-[14px] text-sb-muted hover:bg-surface/60 rounded-md transition-all"
+              active-class="bg-primary/10 text-primary"
               @click="handleNavigation(item.routeName)"
             >
               {{ item.label }}
@@ -170,3 +170,20 @@ const switchLanguage = async (newLocale: string) => {
   await navigateTo(switchLocalePath(newLocale))
 }
 </script>
+
+<style scoped>
+.nav-active {
+  color: var(--sb-primary);
+}
+
+.nav-active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--sb-primary), var(--sb-info));
+  border-radius: 1px;
+}
+</style>

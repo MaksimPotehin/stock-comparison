@@ -8,6 +8,11 @@ export default <Partial<Config>> {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        card:     'var(--shadow-card)',
+        dropdown: 'var(--shadow-dropdown)',
+        modal:    'var(--shadow-modal)',
+      },
       typography: {
         DEFAULT: {
           css: {
@@ -89,8 +94,37 @@ export default <Partial<Config>> {
           950: '#030712'
         },
 
-        primary: 'var(--color-primary)',
-        danger: 'var(--color-danger)',
+        // ── Semantic brand tokens (map to CSS variables) ──────────────────────
+        primary:  'var(--color-primary)',
+        danger:   'var(--color-danger)',
+
+        // Surface / layout
+        card:       'var(--card-bg)',
+        surface:    'var(--sb-input-bg)',
+        'page-bg':  'var(--main-bg)',
+
+        // Text
+        'sb-text':      'var(--sb-dark)',
+        'sb-secondary': 'var(--sb-text-dark65)',
+        'sb-muted':     'var(--sb-text-dark50)',
+        'sb-subtle':    'var(--sb-muted)',
+
+        // Borders
+        'sb-border':       'var(--sb-border-color)',
+        'sb-border-light': 'var(--sb-light-border)',
+
+        // Interactive
+        'sb-hover':    'var(--sb-row-hovered-bg)',
+        'sb-selected': 'var(--sb-row-selected-bg)',
+
+        // Brand palette (direct access)
+        'sb-primary':    'var(--sb-primary)',
+        'sb-success':    'var(--sb-success)',
+        'sb-warning':    'var(--sb-warning)',
+        'sb-danger':     'var(--sb-danger)',
+        'sb-info':       'var(--sb-info)',
+        'sb-turquoise':  'var(--sb-turquoise)',
+        'sb-magenta':    'var(--sb-magenta)',
         success: {
           DEFAULT: 'var(--color-success)',
           900: '#40BB54',

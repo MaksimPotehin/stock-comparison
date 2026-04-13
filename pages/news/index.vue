@@ -2,15 +2,15 @@
   <div class="flex flex-col w-full gap-y-4 min-h-0 overflow-auto">
     <!-- Page heading -->
     <div>
-      <h1 class="text-xl font-bold text-white">{{ $t('news.pageTitle') }}</h1>
-      <p class="text-gray-400 text-sm mt-1">{{ $t('news.pageSubtitle') }}</p>
+      <h1 class="text-2xl font-semibold text-gradient">{{ $t('news.pageTitle') }}</h1>
+      <p class="text-sb-muted text-sm mt-1">{{ $t('news.pageSubtitle') }}</p>
     </div>
 
     <!-- Filters row -->
     <div class="flex items-start justify-between gap-x-4 flex-wrap gap-y-3">
       <!-- Left: ticker search + active badges -->
       <div class="flex flex-col gap-y-2">
-        <div v-if="activeSymbols.length < MAX_SYMBOLS" class="w-64">
+        <div v-if="activeSymbols.length < MAX_SYMBOLS" class="w-80">
           <StockSearch
             ref="searchRef"
             :placeholder="$t('stockComparison.searchPlaceholder')"
@@ -46,9 +46,9 @@
       v-else-if="error"
       class="flex flex-col items-center justify-center py-12 gap-y-3 text-center"
     >
-      <p class="text-red-400 text-sm">{{ error.message }}</p>
+      <p class="text-danger text-sm">{{ error.message }}</p>
       <button
-        class="px-4 py-2 rounded-lg text-sm bg-gray-700/50 text-gray-300 hover:bg-gray-700 transition-colors"
+        class="px-4 py-2 rounded-md text-sm bg-surface/50 text-sb-secondary hover:bg-surface transition-colors"
         @click="refresh()"
       >
         Retry
@@ -60,9 +60,9 @@
       v-else-if="!visibleArticles.length"
       class="flex flex-col items-center justify-center py-12 gap-y-3 text-center"
     >
-      <AppIconInfo class="w-10 h-10 text-gray-600" />
-      <p class="text-white font-semibold">{{ $t('news.noNews') }}</p>
-      <p class="text-gray-400 text-sm max-w-xs">{{ $t('news.noNewsSubtitle') }}</p>
+      <AppIconInfo class="w-10 h-10 text-sb-subtle" />
+      <p class="text-sb-text font-semibold">{{ $t('news.noNews') }}</p>
+      <p class="text-sb-muted text-sm max-w-xs">{{ $t('news.noNewsSubtitle') }}</p>
     </div>
 
     <!-- Articles grid -->
@@ -80,7 +80,7 @@
       <!-- Load more -->
       <div v-if="hasMore" class="flex justify-center pt-2">
         <button
-          class="px-5 py-2 rounded-lg text-sm font-medium bg-gray-700/50 text-gray-300 hover:bg-gray-700 transition-colors"
+          class="btn-gradient-border text-sm"
           @click="loadMore"
         >
           {{ $t('news.loadMore') }}
@@ -103,7 +103,8 @@ import StockSearch from '~/pages/stock-comparison/components/StockSearch.vue'
 useSeo('news')
 
 const MAX_SYMBOLS = 5
-const TICKER_COLORS = ['#00bff5', '#f59e0b', '#10b981', '#f87171', '#a78bfa'] as const
+// Brand chart color sequence (Snowball Analytics palette)
+const TICKER_COLORS = ['#3699ff', '#1bc5bd', '#ffa800', '#f64e60', '#9a6afa'] as const
 
 const route = useRoute()
 const router = useRouter()
@@ -145,7 +146,7 @@ watch([activeSymbols, category], () => {
   if (category.value !== 'general') query.category = category.value
   router.replace({ query })
 
-  trackEvent('news_filter_change', {
+  trackEvent('news', 'news_filter_change', {
     symbols: activeSymbols.value.join(','),
     category: category.value
   })
@@ -163,7 +164,7 @@ function removeSymbol (idx: number) {
 }
 
 function symbolBadgeStyle (idx: number) {
-  const color = TICKER_COLORS[idx] ?? '#6b7280'
+  const color = TICKER_COLORS[idx] ?? '#7e8299'
   return {
     backgroundColor: `${color}22`,
     color,

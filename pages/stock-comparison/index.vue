@@ -2,8 +2,8 @@
   <div class="flex flex-col w-full gap-y-4 min-h-0 overflow-auto">
     <!-- Page heading -->
     <div>
-      <h1 class="text-xl font-bold text-white">{{ $t('stockComparison.pageTitle') }}</h1>
-      <p class="text-gray-400 text-sm mt-1">{{ $t('stockComparison.pageSubtitle') }}</p>
+      <h1 class="text-2xl font-semibold text-gradient">{{ $t('stockComparison.pageTitle') }}</h1>
+      <p class="text-sb-muted text-sm mt-1">{{ $t('stockComparison.pageSubtitle') }}</p>
     </div>
 
     <!-- Controls -->
@@ -43,10 +43,10 @@
             <button
               v-for="p in PERIODS"
               :key="p"
-              class="px-3 py-1 rounded-lg text-sm font-medium transition-colors"
+              class="px-3 py-1 rounded-md text-sm font-medium transition-colors"
               :class="selectedPeriod === p
                 ? 'bg-primary text-white'
-                : 'text-gray-400 hover:text-gray-200 hover:bg-gray-700/50'"
+                : 'text-sb-muted hover:text-sb-text hover:bg-surface/50'"
               @click="selectedPeriod = p"
             >
               {{ $t(`stockComparison.periods.${p}`) }}
@@ -60,7 +60,7 @@
         </div>
 
         <!-- Date range -->
-        <p v-if="dateRangeLabel" class="text-xs text-gray-500">{{ dateRangeLabel }}</p>
+        <p v-if="dateRangeLabel" class="text-xs text-sb-subtle">{{ dateRangeLabel }}</p>
       </div>
     </div>
 
@@ -69,28 +69,28 @@
       v-if="!stock1 && !stock2"
       class="flex flex-col items-center justify-center flex-grow text-center py-10 gap-y-3"
     >
-      <AppIconChartUp class="w-12 h-12 text-gray-600" />
-      <p class="text-white font-semibold text-lg">{{ $t('stockComparison.emptyTitle') }}</p>
-      <p class="text-gray-400 text-sm max-w-xs">{{ $t('stockComparison.emptySubtitle') }}</p>
+      <AppIconChartUp class="w-12 h-12 text-sb-subtle" />
+      <p class="text-sb-text font-semibold text-lg">{{ $t('stockComparison.emptyTitle') }}</p>
+      <p class="text-sb-muted text-sm max-w-xs">{{ $t('stockComparison.emptySubtitle') }}</p>
     </div>
 
     <!-- Chart area -->
     <template v-if="stock1 || stock2">
       <!-- Loading -->
-      <div v-if="isLoading" class="flex items-center justify-center h-64 rounded-xl bg-gray-700/30">
+      <div v-if="isLoading" class="flex items-center justify-center h-64 rounded-lg bg-card">
         <span class="inline-block w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
       </div>
 
       <!-- Error -->
       <div
         v-else-if="loadError"
-        class="flex items-center justify-center h-32 rounded-xl bg-gray-700/30 text-red-400 text-sm"
+        class="flex items-center justify-center h-32 rounded-lg bg-card text-danger text-sm"
       >
         {{ loadError }}
       </div>
 
       <!-- Chart -->
-      <div v-else class="flex-shrink-0 h-64 md:h-80 w-full rounded-xl overflow-hidden bg-gray-700/20 p-3">
+      <div v-else class="flex-shrink-0 h-64 md:h-80 w-full rounded-lg overflow-hidden bg-card p-3 shadow-card">
         <StockComparisonChart
           :stock1="stock1"
           :stock2="stock2"
@@ -99,12 +99,12 @@
       </div>
 
       <!-- Normalized note -->
-      <p class="text-gray-500 text-xs -mt-2">
+      <p class="text-sb-subtle text-xs -mt-2">
         {{ $t('stockComparison.chart.normalized') }}
       </p>
 
       <!-- Metrics table -->
-      <div v-if="!isLoading && !loadError" class="bg-gray-700/20 rounded-xl p-3 md:p-4">
+      <div v-if="!isLoading && !loadError" class="bg-card rounded-lg p-3 md:p-4 shadow-card border border-sb-border">
         <StockMetricsTable :stock1="stock1" :stock2="stock2" />
       </div>
 
@@ -112,23 +112,23 @@
       <NuxtLink
         v-if="!isLoading && !loadError"
         :to="newsPageLink"
-        class="flex items-center gap-x-1 text-sm text-gray-400 hover:text-white transition-colors"
+        class="flex items-center gap-x-1 text-sm text-sb-muted hover:text-sb-text transition-colors"
       >
         {{ $t('stockComparison.readNewsLink', { symbols: newsLinkLabel }) }}
       </NuxtLink>
 
       <!-- Disclaimer -->
-      <p class="text-gray-600 text-xs mt-auto pt-2">{{ $t('stockComparison.disclaimer') }}</p>
+      <p class="text-sb-subtle text-xs mt-auto pt-2">{{ $t('stockComparison.disclaimer') }}</p>
     </template>
 
     <!-- How to use -->
-    <section class="mt-2 bg-gray-700/10 rounded-xl p-4 md:p-5">
-      <h2 class="text-base font-semibold text-white mb-3">{{ $t('stockComparison.howTo.title') }}</h2>
+    <section class="mt-2 bg-card rounded-lg p-4 md:p-5 border border-sb-border shadow-card">
+      <h2 class="text-base font-semibold text-sb-text mb-3">{{ $t('stockComparison.howTo.title') }}</h2>
       <ol class="list-decimal list-inside space-y-1.5">
         <li
           v-for="(step, i) in $tm('stockComparison.howTo.steps')"
           :key="i"
-          class="text-gray-400 text-sm"
+          class="text-sb-muted text-sm"
         >
           {{ step }}
         </li>
@@ -347,7 +347,7 @@ onMounted(async () => {
 
 .spy-checkbox :deep(.el-checkbox__label) {
   font-size: 12px;
-  color: rgb(156 163 175); /* gray-400 */
+  color: var(--sb-text-dark50);
   padding-left: 8px;
 }
 

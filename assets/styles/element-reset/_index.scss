@@ -22,16 +22,16 @@
     ),
   ),
   $input: (
-    'text-color': theme('colors.primary'),
-    'border-color':  theme('colors.gray.600'),
-    'hover-border-color': theme('colors.gray.500'),
-    'focus-border-color': theme('colors.gray.500'),
-    'bg-color': theme('colors.gray.600'),
+    'text-color': #d7d7d7,
+    'border-color': #495057,
+    'hover-border-color': #6e7781,
+    'focus-border-color': #00aff5,
+    'bg-color': #424451,
   ),
   $radio-button: (
-    'checked-bg-color':  colors.$color-info,
+    'checked-bg-color':  colors.$color-primary,
     'checked-text-color':  #FFFFFF,
-    'checked-border-color':  colors.$color-info,
+    'checked-border-color':  colors.$color-primary,
     'disabled-checked-fill':  theme('colors.gray.500'),
   ),
   $select-option: (

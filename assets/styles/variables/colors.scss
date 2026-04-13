@@ -1,17 +1,65 @@
-$color-primary: #adb5bd;
-$color-secondary: #D0D5DD;
-$color-success: #5bd49a;
-$color-warning: #fda135;
-$color-danger: #f27363;
-$color-error: #c23616;
-$color-info: #00bff5;
+// ─── Brand SCSS variables (used by Element Plus theming) ─────────────────────
+$color-primary:   #00aff5;  // Cyan Blue (was #adb5bd)
+$color-secondary: #6c757d;
+$color-success:   #1bc5bd;  // Teal Green (was #5bd49a)
+$color-warning:   #fea135;  // Amber
+$color-danger:    #f27362;  // Coral Red
+$color-error:     #f27362;
+$color-info:      #8950fc;  // Violet (was #00bff5)
 
+// ─── CSS custom properties ────────────────────────────────────────────────────
 :root {
-  --color-primary: #{$color-primary};
-  --color-secondary: #{$color-secondary};
-  --color-success: #{$color-success};
-  --color-warning: #{$color-warning};
-  --color-danger: #{$color-danger};
-  --color-error: #{$color-error};
-  --color-info: #{$color-info};
+  // Brand semantic colors
+  --color-primary:    #{$color-primary};
+  --color-secondary:  #{$color-secondary};
+  --color-success:    #{$color-success};
+  --color-warning:    #{$color-warning};
+  --color-danger:     #{$color-danger};
+  --color-error:      #{$color-error};
+  --color-info:       #{$color-info};
+
+  // Full brand palette (--sb-*)
+  --sb-primary:      #3699ff;
+  --sb-success:      #5ac098;
+  --sb-danger:       #f64e60;
+  --sb-warning:      #ffa800;
+  --sb-info:         #9a6afa;
+  --sb-magenta:      #f72585;
+  --sb-turquoise:    #56cfe1;
+
+  // Backgrounds & surfaces
+  --main-bg:               #282832;
+  --card-bg:               #32323e;
+  --sb-input-bg:           #424451;
+  --sb-dropdown-bg:        #32323e;
+  --sb-biginput-bg:        #1e1e2d;
+
+  // Text
+  --sb-dark:           #d7d7d7;   // primary text
+  --sb-text-dark65:    #ced4da;   // secondary text / labels
+  --sb-text-dark50:    #adb5bd;   // muted text / captions
+  --sb-muted:          #b5b5c3;   // disabled / placeholder
+  --sb-placeholder:    #b5b5c3;
+  --sb-text-muted:     #7e8299;   // very muted (legend, meta)
+
+  // Borders & dividers
+  --sb-border-color:   #495057;
+  --sb-light-border:   #6e7781;
+
+  // Interactive states
+  --sb-row-hovered-bg:     #4d505f;
+  --sb-row-selected-bg:    #2c3844;
+  --sb-symbol-hover-color: #424451;
+
+  // Light / badge variants
+  --sb-light-primary:  #78c9ea2e;
+  --sb-danger-light:   #f2736285;
+  --sb-success-light:  #1bc5bd8a;
+  --sb-info-light:     #9a6afa1a;
+  --sb-primary-light:  #3699ff8a;
+
+  // Shadows
+  --shadow-card:     0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-dropdown: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-modal:    0 8px 32px rgba(0, 0, 0, 0.5);
 }

@@ -3,10 +3,10 @@
     <button
       v-for="cat in CATEGORIES"
       :key="cat"
-      class="px-3 py-1 rounded-lg text-sm font-medium transition-colors"
+      class="px-3 py-1 rounded-md text-sm font-medium transition-colors"
       :class="modelValue === cat
         ? 'bg-primary text-white'
-        : 'text-gray-400 hover:text-gray-200 hover:bg-gray-700/50'"
+        : 'text-sb-muted hover:text-sb-text hover:bg-surface/50'"
       @click="$emit('update:modelValue', cat)"
     >
       {{ $t(`news.categories.${cat}`) }}

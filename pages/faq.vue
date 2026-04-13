@@ -3,14 +3,14 @@
     <!-- Header section with CTA -->
     <div class="flex flex-col gap-4 md:gap-6">
       <div class="flex flex-col gap-3 md:gap-4">
-        <h1 class="text-warning text-xl md:text-2xl">{{ $t('faq.title') }}</h1>
-        <p class="text-white-400 text-[14px] md:text-base leading-6 md:leading-7">{{ $t('faq.description') }}</p>
+        <h1 class="text-gradient text-xl md:text-2xl font-semibold">{{ $t('faq.title') }}</h1>
+        <p class="text-sb-secondary text-[14px] md:text-base leading-6 md:leading-7">{{ $t('faq.description') }}</p>
       </div>
 
       <NuxtLink
         :to="localePath('/calculator')"
-        class="self-start flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 bg-warning text-gray-900
-              rounded-lg hover:bg-warning/90 transition-colors font-medium text-[14px] md:text-base"
+        class="self-start flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 bg-primary text-white
+              rounded-md hover:opacity-90 transition-opacity font-medium text-[14px] md:text-base"
       >
         <span>{{ $t('faq.startCalculating') }}</span>
         <svg class="w-4 h-4 md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -21,10 +21,10 @@
 
     <!-- Quick Tips Section -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-      <div class="p-3 md:p-6 bg-gray-800/50 rounded-lg flex items-start gap-3 md:gap-4">
-        <div class="p-2 md:p-3 bg-warning/10 rounded-lg">
+      <div class="p-3 md:p-6 bg-card border border-sb-border rounded-lg shadow-card flex items-start gap-3 md:gap-4">
+        <div class="p-2 md:p-3 bg-primary/10 rounded-lg">
           <svg
-            class="w-5 h-5 md:w-6 md:h-6 text-warning"
+            class="w-5 h-5 md:w-6 md:h-6 text-primary"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -34,15 +34,15 @@
           </svg>
         </div>
         <div>
-          <h3 class="text-warning mb-2 text-base md:text-lg">{{ $t('faq.tips.compound.title') }}</h3>
-          <p class="text-white-400 text-[14px] md:text-base">{{ $t('faq.tips.compound.description') }}</p>
+          <h3 class="text-primary mb-2 text-base md:text-lg font-semibold">{{ $t('faq.tips.compound.title') }}</h3>
+          <p class="text-sb-secondary text-[14px] md:text-base">{{ $t('faq.tips.compound.description') }}</p>
         </div>
       </div>
 
-      <div class="p-3 md:p-6 bg-gray-800/50 rounded-lg flex items-start gap-3 md:gap-4">
-        <div class="p-2 md:p-3 bg-warning/10 rounded-lg">
+      <div class="p-3 md:p-6 bg-card border border-sb-border rounded-lg shadow-card flex items-start gap-3 md:gap-4">
+        <div class="p-2 md:p-3 bg-primary/10 rounded-lg">
           <svg
-            class="w-5 h-5 md:w-6 md:h-6 text-warning"
+            class="w-5 h-5 md:w-6 md:h-6 text-primary"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -52,15 +52,15 @@
           </svg>
         </div>
         <div>
-          <h3 class="text-warning mb-2 text-base md:text-lg">{{ $t('faq.tips.early.title') }}</h3>
-          <p class="text-white-400 text-[14px] md:text-base">{{ $t('faq.tips.early.description') }}</p>
+          <h3 class="text-primary mb-2 text-base md:text-lg font-semibold">{{ $t('faq.tips.early.title') }}</h3>
+          <p class="text-sb-secondary text-[14px] md:text-base">{{ $t('faq.tips.early.description') }}</p>
         </div>
       </div>
 
-      <div class="p-3 md:p-6 bg-gray-800/50 rounded-lg flex items-start gap-3 md:gap-4">
-        <div class="p-2 md:p-3 bg-warning/10 rounded-lg">
+      <div class="p-3 md:p-6 bg-card border border-sb-border rounded-lg shadow-card flex items-start gap-3 md:gap-4">
+        <div class="p-2 md:p-3 bg-primary/10 rounded-lg">
           <svg
-            class="w-5 h-5 md:w-6 md:h-6 text-warning"
+            class="w-5 h-5 md:w-6 md:h-6 text-primary"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -70,15 +70,15 @@
           </svg>
         </div>
         <div>
-          <h3 class="text-warning mb-2 text-base md:text-lg">{{ $t('faq.tips.consistent.title') }}</h3>
-          <p class="text-white-400 text-[14px] md:text-base">{{ $t('faq.tips.consistent.description') }}</p>
+          <h3 class="text-primary mb-2 text-base md:text-lg font-semibold">{{ $t('faq.tips.consistent.title') }}</h3>
+          <p class="text-sb-secondary text-[14px] md:text-base">{{ $t('faq.tips.consistent.description') }}</p>
         </div>
       </div>
 
-      <div class="p-3 md:p-6 bg-gray-800/50 rounded-lg flex items-start gap-3 md:gap-4">
-        <div class="p-2 md:p-3 bg-warning/10 rounded-lg">
+      <div class="p-3 md:p-6 bg-card border border-sb-border rounded-lg shadow-card flex items-start gap-3 md:gap-4">
+        <div class="p-2 md:p-3 bg-primary/10 rounded-lg">
           <svg
-            class="w-5 h-5 md:w-6 md:h-6 text-warning"
+            class="w-5 h-5 md:w-6 md:h-6 text-primary"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -91,8 +91,8 @@
           </svg>
         </div>
         <div>
-          <h3 class="text-warning mb-2 text-base md:text-lg">{{ $t('faq.tips.diversify.title') }}</h3>
-          <p class="text-white-400 text-[14px] md:text-base">{{ $t('faq.tips.diversify.description') }}</p>
+          <h3 class="text-primary mb-2 text-base md:text-lg font-semibold">{{ $t('faq.tips.diversify.title') }}</h3>
+          <p class="text-sb-secondary text-[14px] md:text-base">{{ $t('faq.tips.diversify.description') }}</p>
         </div>
       </div>
     </div>
@@ -109,15 +109,15 @@
       <div
         v-for="(item, index) in faqItems"
         :key="index"
-        class="bg-gray-800 rounded-lg overflow-hidden"
+        class="bg-card border border-sb-border rounded-lg shadow-card overflow-hidden"
       >
         <button
-          class="w-full flex justify-between items-center p-3 md:p-6 text-left hover:bg-gray-700/50 transition-colors"
+          class="w-full flex justify-between items-center p-3 md:p-6 text-left hover:bg-sb-hover transition-colors"
           @click="item.isOpen = !item.isOpen"
         >
-          <h2 class="text-warning text-base md:text-xl">{{ $t(item.question) }}</h2>
+          <h2 class="text-sb-text text-base md:text-xl font-medium">{{ $t(item.question) }}</h2>
           <svg
-            class="w-5 h-5 md:w-6 md:h-6 text-warning transition-transform flex-shrink-0 ml-3 md:ml-4"
+            class="w-5 h-5 md:w-6 md:h-6 text-sb-muted transition-transform flex-shrink-0 ml-3 md:ml-4"
             :class="{ 'rotate-180': item.isOpen }"
             viewBox="0 0 24 24"
             fill="none"
@@ -132,7 +132,7 @@
           v-if="item.isOpen"
           class="p-3 md:p-6 pt-0"
         >
-          <p class="text-white-400 text-[14px] md:text-base leading-6 md:leading-7">{{ $t(item.answer) }}</p>
+          <p class="text-sb-secondary text-[14px] md:text-base leading-6 md:leading-7">{{ $t(item.answer) }}</p>
         </div>
       </div>
     </div>
@@ -145,12 +145,12 @@
     /> -->
 
     <!-- Bottom CTA -->
-    <div class="flex flex-col items-center gap-3 md:gap-4 py-3 md:py-6 px-3 md:px-8 bg-gray-800 rounded-lg">
-      <h2 class="text-warning text-base md:text-xl">{{ $t('faq.readyToStart') }}</h2>
+    <div class="flex flex-col items-center gap-3 md:gap-4 py-3 md:py-6 px-3 md:px-8 bg-card border border-sb-border rounded-lg shadow-card">
+      <h2 class="text-sb-text text-base md:text-xl font-semibold">{{ $t('faq.readyToStart') }}</h2>
       <NuxtLink
         :to="localePath('/calculator')"
-        class="flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 bg-warning text-gray-900
-              rounded-lg hover:bg-warning/90 transition-colors font-medium text-[14px] md:text-base"
+        class="flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 bg-primary text-white
+              rounded-lg hover:opacity-90 transition-opacity font-medium text-[14px] md:text-base"
       >
         <span>{{ $t('faq.tryCalculator') }}</span>
         <svg class="w-4 h-4 md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -160,8 +160,8 @@
     </div>
 
     <!-- SEO Content for better indexing (EN only) -->
-    <div v-if="$i18n.locale === 'en'" class="mt-4 border-t border-gray-700/50 pt-6">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-white-300/50 leading-5">
+    <div v-if="$i18n.locale === 'en'" class="mt-4 border-t border-sb-border pt-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-sb-subtle leading-5">
         <p>
           Our free online investment calculator provides accurate compound interest calculations
           with regular contributions. Whether you're planning for retirement, saving for a major

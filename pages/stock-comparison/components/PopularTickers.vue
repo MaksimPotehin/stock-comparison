@@ -1,12 +1,12 @@
 <template>
   <div class="flex items-center gap-x-2 flex-wrap gap-y-2">
-    <span class="text-xs text-gray-500 shrink-0">{{ $t('stockComparison.popularTickers.label') }}</span>
+    <span class="text-xs text-sb-subtle shrink-0">{{ $t('stockComparison.popularTickers.label') }}</span>
     <button
       v-for="stock in POPULAR_STOCKS"
       :key="stock.symbol"
       class="px-2.5 py-1 rounded-md text-xs font-mono font-semibold transition-colors border"
       :style="buttonStyles[stock.symbol]"
-      :class="!buttonStyles[stock.symbol] && 'bg-gray-700/30 border-gray-700 text-gray-300 hover:border-gray-500 hover:text-white'"
+      :class="!buttonStyles[stock.symbol] && 'bg-surface/30 border-sb-border text-sb-secondary hover:border-sb-border-light hover:text-sb-text'"
       :title="stock.name"
       @click="emit('select', stock.symbol, stock.name)"
     >
