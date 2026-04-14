@@ -281,7 +281,7 @@ Start today, automate the process, minimize fees, and let time do its magic.`,
     author: 'Investing Space',
     publishedAt: '2025-01-20',
     readingTime: 5,
-    featured: true
+    featured: false
   },
   {
     id: 'how-to-choose-etf-for-beginners',
@@ -516,7 +516,232 @@ TER (Total Expense Ratio, коефіцієнт загальних витрат) 
     publishedAt: '2026-04-01',
     readingTime: 5,
     featured: false
-  }
+  },
+  {
+    id: 'how-to-compare-stocks',
+    slug: 'how-to-compare-stocks',
+    title: {
+      en: 'How to Compare Stocks: 5 Metrics That Actually Matter',
+      ua: 'Як порівнювати акції: 5 показників перед покупкою'
+    },
+    excerpt: {
+      en: 'Most beginners look at the stock price — but price alone tells you nothing. Here are 5 numbers that actually matter before you buy.',
+      ua: 'Більшість початківців дивляться на ціну акції — але ціна сама по собі нічого не говорить. Ось 5 показників які реально важливі перед покупкою.'
+    },
+    content: {
+      en: `
+<div class="my-6 p-6 rounded-lg bg-gray-800/60 border border-gray-700">
+<p class="text-lg leading-relaxed mb-4">
+You see a stock trading at $12. Looks affordable — maybe even cheap. Then you spot another one at $340 a share. That one feels like it's already too expensive to touch.
+</p>
+<p class="text-base text-gray-300 mb-4">
+Oleg made exactly that call. He bought the $12 stock because the price seemed low. Six months later it sat at $9 — a 25% loss. The $340 stock he passed on had climbed to $410.
+</p>
+<p class="text-base text-gray-300">
+The price tag was never the point. Here's what actually tells you whether a stock is worth buying.
+</p>
+</div>
+
+## P/E Ratio: What are you actually paying for?
+
+<div class="my-4 pl-4 border-l-4 border-gray-500 text-sm text-gray-400">
+<strong class="text-gray-200">P/E ratio (Price-to-Earnings)</strong> — how much you pay for every $1 of annual profit the company generates. If a company earns $1 per share and its stock costs $20, the P/E is 20.
+</div>
+
+The share price alone is meaningless. A stock at $12 can be expensive. A stock at $340 can be cheap. P/E is the number that gives price its context.
+
+- **P/E of 10** → you're paying $10 for $1 of yearly earnings
+- **P/E of 80** → you're paying $80 for $1 of yearly earnings — a bet that profits will grow fast
+
+Neither is automatically better. A high P/E makes sense for a company doubling revenue every two years. A low P/E can signal a bargain — or a business that stopped growing. Compare a stock's P/E to the industry average. If the industry average is 20 and this company trades at 8, ask why. If it trades at 60, understand what you're betting on.
+
+P/E comes in two forms — and both matter:
+
+<div class="my-4 pl-4 border-l-4 border-gray-500 text-sm text-gray-400">
+<strong class="text-gray-200">Trailing P/E</strong> — based on the last 12 months of actual earnings. What the company already did.<br/>
+<strong class="text-gray-200">Forward P/E</strong> — based on analyst estimates for the next 12 months. What the company is expected to do.
+</div>
+
+A stock might look expensive on trailing P/E but reasonable on forward P/E if profits are projected to grow sharply. Together they tell you whether you're paying for what the company has done or what it's supposed to do next.
+
+## Revenue and Profit: Is the company actually going somewhere?
+
+A rising share price can mask a lot. Before buying, look at two numbers across the last 2–3 years:
+
+<div class="my-4 pl-4 border-l-4 border-gray-500 text-sm text-gray-400">
+<strong class="text-gray-200">Revenue</strong> — total income from sales before any costs are subtracted. Shows whether the business is growing.<br/>
+<strong class="text-gray-200">Net profit</strong> — what's left after all expenses, taxes, and interest are paid. Shows whether the business actually makes money.
+</div>
+
+Revenue up 30% year over year signals real growth. Revenue flat or declining while the stock holds its price is worth investigating. More telling: a company that grows revenue year after year but never turns a profit. That's a bet on future margins, not current performance. You might be right — but you should know that's the bet you're making.
+
+Compare that to a company with modest 8% revenue growth but consistent **net margins** of 20% — meaning 20 cents of every dollar in sales becomes actual profit. Different risk profile, different time horizon, different kind of investor it suits.
+
+One more thing to check: is the revenue growth coming from the core business, or from one-time events — asset sales, accounting adjustments, a single large contract? Sustainable growth looks like the same products selling to more customers, year after year. One-time growth looks great in the annual report and confusing in the next one.
+
+## Dividends or Growth: Two different questions
+
+**Dividends** are regular cash payouts companies make to shareholders, usually every quarter. Banks, utilities, and established consumer brands tend to be the ones that pay them. Predictable income, slower price growth.
+
+Other companies reinvest every dollar back into the business. Amazon paid no dividend for over two decades. The idea: reinvested profits grow the share price more than any quarterly payout would.
+
+Before you buy, ask yourself: do I want income now, or value later? Neither answer is wrong. But they point to completely different stocks — and mixing up the two is one of the most common ways people end up disappointed with what they bought.
+
+## Max Drawdown: Can you hold when it drops 40%?
+
+Every stock drops at some point. What varies is how far — and how long recovery takes.
+
+A stock with a max drawdown of -55% lost more than half its value at some point in its history. Investors who held through that period came out well ahead. Those who sold at the bottom locked in the loss permanently.
+
+Recovery time matters too. Some stocks bounce back in 6 months. Others take 3 years. A drawdown of -30% that recovers in 5 months is very different from a drawdown of -30% that drags on for two years — both in how it affects your portfolio and how it tests your patience.
+
+Volatility isn't the enemy. Selling during volatility is. Before buying any stock, check its historical drawdowns and ask yourself honestly: if this dropped 40% next month, would I hold or would I sell? If the honest answer is "I'd sell" — a calmer stock probably suits you better, regardless of what the growth chart looks like.
+
+## Debt: Can the company survive a bad year?
+
+One last number: **debt-to-equity ratio (D/E)** — how much the company has borrowed relative to what shareholders own. A D/E of 0.5 is relatively conservative. A D/E of 3.0 means the company has taken on $3 in debt for every $1 it owns — a much heavier load. High debt isn't automatically bad. A utility company with predictable cash flows can carry more debt safely than a young tech company with uneven revenue.
+
+The problem is stacked risk. A company with a P/E of 80, revenue still in the red, and a D/E of 4.0 is fragile in multiple directions at once. A bad quarter doesn't just hurt the stock price — it can create real financing pressure.
+
+A quick check: the **interest coverage ratio** tells you how many times the company's operating profit covers its interest payments. Below 2x is worth noting before you commit.
+
+## Putting It All Together
+
+These five metrics don't give you a verdict. They give you a story.
+
+A stock with a P/E of 60, revenue growing 35% a year, no dividend, a max drawdown of -45%, and manageable debt tells a very specific one: you're paying a premium for a high-growth company, accepting high volatility, betting the growth continues for several more years.
+
+A stock with a P/E of 12, flat revenue, a 4% dividend yield, a max drawdown of -18%, and low debt tells a different one: you're buying stability and income, not growth.
+
+Neither story is wrong. Both are honest about what you're getting. The mistake isn't picking the wrong stock — it's picking a stock without knowing which story you're in.
+
+Oleg's call wasn't wrong because $12 is a bad price. It was wrong because he never looked. A P/E of 22 against an industry average of 14, two consecutive quarters of declining revenue, and a max drawdown of -48% would have told him something different — if he'd checked.
+
+## See It All in One Place
+
+Hunting these numbers across five different websites is exactly how people give up halfway and buy on gut feeling instead.
+
+The [stock comparison tool](/stock-comparison) on this site puts historical performance, volatility, return percentage, and max drawdown for any two stocks side by side — so you can run the comparison in one place, without the tab-switching.
+
+## The Habit Matters More Than the Pick
+
+No metric will hand you a "buy this" verdict. What they do is replace a price-based gut feeling with five questions you can actually answer: P/E, revenue trend, dividend policy, max drawdown, debt load. The kind of check that takes discipline to build — and pays off every time you do it.
+
+Oleg skipped them. The $12 price felt like enough. It wasn't.
+      `,
+      ua: `
+<div class="my-6 p-6 rounded-lg bg-gray-800/60 border border-gray-700">
+<p class="text-lg leading-relaxed mb-4">
+Ти бачиш акцію за $12. Виглядає доступно — може навіть дешево. А поряд інша — $340 за штуку. Та здається вже надто дорогою щоб розглядати.
+</p>
+<p class="text-base text-gray-300 mb-4">
+Олег зробив саме такий вибір. Купив акцію за $12 бо ціна здавалась низькою. Через пів року вона впала до $9 — мінус 25%. Акція за $340 яку він оминув виросла до $410.
+</p>
+<p class="text-base text-gray-300">
+Ціна ніколи не була головною. Ось що насправді говорить про те, чи варто купувати акцію.
+</p>
+</div>
+
+## P/E: За що ти насправді платиш?
+
+<div class="my-4 pl-4 border-l-4 border-gray-500 text-sm text-gray-400">
+<strong class="text-gray-200">P/E (ціна до прибутку)</strong> — скільки ти платиш за кожен $1 річного прибутку компанії. Якщо компанія заробляє $1 на акцію, а акція коштує $20 — P/E дорівнює 20.
+</div>
+
+Ціна акції сама по собі нічого не означає. Акція за $12 може бути дорогою. Акція за $340 — дешевою. P/E — це число яке дає ціні контекст.
+
+- **P/E 10** → ти платиш $10 за $1 річних заробітків
+- **P/E 80** → ти платиш $80 за $1 заробітків — ставка на швидке зростання
+
+Ні те ні інше не є автоматично кращим. Високий P/E виправданий для компанії що подвоює виручку кожні два роки. Низький P/E — або реальна знахідка, або бізнес що зупинився у рості. Порівнюй P/E компанії з середнім по галузі. Якщо середнє по ринку 20, а ця компанія торгується по 8 — запитай чому. Якщо по 60 — зрозумій на що ставиш.
+
+P/E існує у двох формах — і обидві важливі:
+
+<div class="my-4 pl-4 border-l-4 border-gray-500 text-sm text-gray-400">
+<strong class="text-gray-200">Trailing P/E</strong> — на основі реальних заробітків за останні 12 місяців. Те що компанія вже зробила.<br/>
+<strong class="text-gray-200">Forward P/E</strong> — на основі прогнозів аналітиків на наступні 12 місяців. Те що очікується.
+</div>
+
+Акція може виглядати дорогою по trailing P/E, але розумною по forward — якщо прибуток очікується значно вищим. Разом вони кажуть: ти платиш за те що компанія вже зробила, чи за те що їй ще треба зробити.
+
+## Виручка і прибуток: компанія рухається вперед?
+
+Зростання акції може ховати багато чого. Перш ніж купувати, подивись на два числа за останні 2–3 роки:
+
+<div class="my-4 pl-4 border-l-4 border-gray-500 text-sm text-gray-400">
+<strong class="text-gray-200">Виручка</strong> — загальний дохід від продажів до вирахування будь-яких витрат. Показує чи росте бізнес.<br/>
+<strong class="text-gray-200">Чистий прибуток</strong> — те що залишається після всіх витрат, податків і відсотків. Показує чи заробляє бізнес реальні гроші.
+</div>
+
+Виручка +30% за рік — сигнал реального росту. Виручка на місці або в мінусі поки акція тримається — варто розібратись детальніше. Ще показовіший варіант: компанія нарощує продажі рік за роком але ніколи не виходить у прибуток. Це ставка на майбутні маржі, а не на поточний результат. Може ти маєш рацію — але маєш знати що саме ставиш.
+
+Порівняй з іншим сценарієм: компанія росте скромно на 8% на рік, але стабільно тримає **чисту маржу** 20% — тобто 20 центів з кожного долара продажів стає реальним прибутком. Інший профіль ризику, інший часовий горизонт, інший інвестор якому це підходить.
+
+Також перевір звідки росте виручка. З основного бізнесу — чи з разових подій, продажу активів, одного великого контракту? Стійкий ріст виглядає як ті самі продукти які продаються більшій кількості клієнтів рік за роком. Разовий ріст виглядає чудово в одному звіті і незрозуміло в наступному.
+
+## Дивіденди чи зростання: два різних питання
+
+**Дивіденди** — це регулярні грошові виплати компанії своїм акціонерам, зазвичай щокварталу. Банки, комунальні підприємства та усталені бренди здебільшого їх платять. Передбачуваний дохід, повільніше зростання ціни.
+
+Інші компанії вкладають кожен долар назад у бізнес. Amazon не платив дивідендів більше двох десятиліть. Ідея: реінвестований прибуток росте ефективніше ніж будь-які квартальні виплати.
+
+Перш ніж купити, постав собі одне питання: мені потрібен дохід зараз, чи вартість потім? Обидві відповіді правильні. Але вони вказують на зовсім різні акції — і плутати їх між собою одна з найпоширеніших причин розчарування від купленого.
+
+## Максимальне просідання: ти витримаєш якщо впаде на 40%?
+
+Будь-яка акція колись падає. Різниця — наскільки і як довго вона відновлюється.
+
+Якщо максимальне просідання -55%, акція на певному етапі втратила більше половини вартості. Ті хто тримали й не продавали — здебільшого відновились і вийшли вперед. Ті хто продали на дні — зафіксували збиток назавжди.
+
+Час відновлення теж має значення. Одні акції відновлюються за 6 місяців. Інші — три роки. Просідання -30% яке минає за 5 місяців зовсім не те саме що просідання -30% яке тягнеться два роки — і за впливом на портфель, і за тим як воно тестує витримку.
+
+Висока волатильність сама по собі не проблема. Продаж під час волатильності — ось що вбиває результат. Перш ніж купувати, перевір **історичні просідання** акції і чесно запитай себе: якщо наступного місяця вона впаде на 40% — я триматиму чи продам? Якщо чесна відповідь "продам" — спокійніша акція підійде тобі краще, незважаючи на графік зростання.
+
+## Борг: компанія витримає поганий рік?
+
+Останнє число: **коефіцієнт боргу до власного капіталу (D/E)** — скільки компанія позичила відносно того що реально належить акціонерам. D/E 0.5 — досить консервативно. D/E 3.0 означає $3 боргу на кожен $1 власного капіталу — значно важче навантаження. Високий борг сам по собі не вирок. Комунальна компанія зі стабільними грошовими потоками може безпечно нести більше боргу ніж молода технологічна з нерівномірною виручкою.
+
+Проблема — у поєднанні ризиків. Компанія з P/E 80, виручкою ще в мінусі і D/E 4.0 одночасно хистка в кількох напрямках. Поганий квартал не просто б'є по ціні акції — він може створити реальний тиск на фінансування.
+
+Швидка перевірка: **коефіцієнт покриття відсотків** показує скільки разів операційний прибуток компанії перекриває її відсоткові виплати. Менше 2x — сигнал на який варто звернути увагу.
+
+## Як читати все разом
+
+П'ять цих показників не дають вироку. Вони складають історію.
+
+Акція з P/E 60, виручкою +35% на рік, без дивідендів, максимальним просіданням -45% і керованим боргом розповідає дуже конкретну: ти платиш премію за компанію високого росту, приймаєш високу волатильність, ставиш на те що ріст продовжиться ще кілька років.
+
+Акція з P/E 12, стабільною виручкою, дивідендною дохідністю 4%, максимальним просіданням -18% і низьким боргом розповідає іншу: ти купуєш стабільність і дохід, а не зростання.
+
+Жодна з цих історій не хибна. Обидві чесно кажуть що ти отримуєш. Помилка не в тому щоб вибрати не ту акцію — а в тому щоб купити не знаючи в якій з цих двох ти опиняєшся.
+
+Помилка Олега була не в тому що $12 — погана ціна. А в тому що він не перевірив. P/E 22 при середньому по галузі 14, два квартали падіння виручки поспіль і максимальне просідання -48% сказали б йому щось інше — якби він подивився.
+
+## Побач усе в одному місці
+
+Шукати ці числа на п'яти різних сайтах — саме так люди кидають на півдорозі і купують на відчутті замість аналізу.
+
+[Інструмент порівняння акцій](/stock-comparison) на цьому сайті показує **історичну** прибутковість, волатильність, відсоток повернення і максимальне просідання для двох акцій поруч — щоб ти міг зробити порівняння в одному місці, без перемикання між вкладками.
+
+## Звичка важливіша за вибір
+
+Жоден показник не скаже тобі "купуй це". Але вони замінять вибір на основі ціни на п'ять питань на які ти можеш реально відповісти: P/E, динаміка виручки, дивідендна політика, максимальне просідання, борговий тягар. Звичка яку варто виробити — і яка окупається щоразу як її застосовуєш.
+
+Олег пропустив їх. Ціна в $12 здалась достатньою. Нею не була.
+      `
+    },
+    category: 'investment-tools',
+    tags: ['stocks', 'stock-analysis', 'p-e-ratio', 'dividends', 'beginners'],
+    author: 'Investing Space',
+    publishedAt: '2026-04-14',
+    readingTime: 7,
+    featured: true,
+    cta: {
+      href: '/stock-comparison',
+      en: 'Compare stocks now →',
+      ua: 'Порівняти акції зараз →'
+    }
+  },
   // {
   //   id: 'investment-beginners-2025',
   //   slug: 'investment-beginners-2025',

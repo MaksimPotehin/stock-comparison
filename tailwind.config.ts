@@ -4,7 +4,21 @@ export default <Partial<Config>> {
   plugins: [require('@tailwindcss/typography')],
   safelist: [
     'text-success-800',
-    'text-error-700'
+    'text-error-700',
+    // Blog article HTML content (rendered via v-html, not scanned by Tailwind)
+    'my-4', 'my-6',
+    'p-4', 'p-6',
+    'pl-4',
+    'mb-1', 'mb-2', 'mb-4',
+    'rounded-lg', 'rounded-md',
+    'border', 'border-l-4',
+    'border-gray-500', 'border-gray-600', 'border-gray-700',
+    'text-sm', 'text-base', 'text-lg',
+    'text-gray-200', 'text-gray-300', 'text-gray-400',
+    'leading-relaxed',
+    'font-semibold',
+    'flex', 'justify-center',
+    { pattern: /^bg-gray-(800|900)\/(60|80)$/ }
   ],
   theme: {
     extend: {

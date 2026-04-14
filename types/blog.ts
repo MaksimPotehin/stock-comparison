@@ -12,6 +12,12 @@ export interface IBlogLocalizedText {
   ua: string
 }
 
+export interface IBlogPostCta {
+  href: string
+  en: string
+  ua: string
+}
+
 export interface IBlogPost {
   id: string
   slug: string
@@ -25,6 +31,7 @@ export interface IBlogPost {
   readingTime: number
   featured: boolean
   image?: string
+  cta?: IBlogPostCta
 }
 
 export interface IBlogFilter {

@@ -65,7 +65,7 @@ const pagination = reactive({
   limit: 9
 })
 
-const posts = ref<IBlogPost[]>(BLOG_POSTS)
+const posts = ref<IBlogPost[]>([...BLOG_POSTS].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt)))
 const allTags = computed(() => Array.from(new Set(posts.value.flatMap(p => p.tags))).sort())
 
 const localized = (t: { en: string; ua: string }) => (locale.value === 'ua' ? t.ua : t.en)

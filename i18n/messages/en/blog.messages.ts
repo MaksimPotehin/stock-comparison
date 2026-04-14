@@ -2,6 +2,8 @@ export const blogMessages = {
   title: 'Blog',
   description: 'Articles on investing, financial literacy, and compound interest.',
   back: 'Back to blog',
+  related: 'Related articles',
+  ctaHint: 'Ready to put it into practice?',
   min: 'min',
   searchPlaceholder: 'Search articles…',
   noResults: 'No articles found. Try adjusting your search or filters.',

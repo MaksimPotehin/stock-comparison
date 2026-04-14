@@ -29,7 +29,14 @@
       <div class="mt-6 text-sb-secondary leading-8">
         <div v-html="renderedHtml" />
       </div>
+
     </article>
+
+    <div v-if="post.cta" class="max-w-3xl mx-auto my-6 flex justify-center border-t border-sb-border pt-6">
+      <AppButton :to="localePath(post.cta.href)" variant="brand-accent">
+        {{ localized(post.cta) }}
+      </AppButton>
+    </div>
 
     <BlogRelated v-if="related.length" :items="related" />
   </div>
