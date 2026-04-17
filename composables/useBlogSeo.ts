@@ -98,8 +98,8 @@ export const useBlogSeo = () => {
       const path = currentLocale === 'ua' ? `/ua/blog/${post.value.slug}` : `/blog/${post.value.slug}`
       const canonicalUrl = `${baseUrl}${path}`
 
-      const title = post.value.title[currentLocale]
-      const description = post.value.excerpt[currentLocale]
+      const title = post.value.metaTitle?.[currentLocale] ?? post.value.title[currentLocale]
+      const description = post.value.metaDescription?.[currentLocale] ?? post.value.excerpt[currentLocale]
       const keywords = (post.value.tags || []).join(', ')
 
       const articleSchema = {
@@ -110,7 +110,7 @@ export const useBlogSeo = () => {
         description,
         inLanguage: currentLocale === 'ua' ? 'uk-UA' : 'en-US',
         datePublished: post.value.publishedAt,
-        dateModified: post.value.publishedAt,
+        dateModified: post.value.updatedAt ?? post.value.publishedAt,
         author: { '@type': 'Person', name: post.value.author || 'Investing Space' },
         publisher: { '@type': 'Organization', name: 'Investing Space', logo: { '@type': 'ImageObject', url: `${baseUrl}/favicon/android-chrome-192x192.png`, width: 192, height: 192 } },
         image: [{ '@type': 'ImageObject', url: `${baseUrl}/og-image.png`, width: 1200, height: 630 }],
@@ -141,7 +141,7 @@ export const useBlogSeo = () => {
           { property: 'og:image:width', content: '1200' },
           { property: 'og:image:height', content: '630' },
           { property: 'article:published_time', content: post.value.publishedAt },
-          { property: 'article:modified_time', content: post.value.publishedAt },
+          { property: 'article:modified_time', content: post.value.updatedAt ?? post.value.publishedAt },
           ...(post.value.tags || []).map(t => ({ property: 'article:tag', content: t })),
           { property: 'article:section', content: post.value.category },
           { name: 'twitter:card', content: 'summary_large_image' },

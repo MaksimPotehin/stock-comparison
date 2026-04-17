@@ -276,6 +276,14 @@ Start today, automate the process, minimize fees, and let time do its magic.`,
 
 Складні відсотки — це найпотужніший інструмент зростання багатства, який працює тихо на задньому плані. Ключ успіху не в складних стратегіях чи високих доходах, а в часі та постійності. Анна з нашої історії довела, що $400 щомісяця протягом 20 років перемагають $800 щомісяця протягом 10 років. Час — це єдиний ресурс, який неможливо купити, але можна використати мудро. Почніть сьогодні, автоматизуйте процес, мінімізуйте комісії та дозвольте часу зробити свою магію.`
     },
+    metaTitle: {
+      en: 'Compound Interest Explained: How Time Multiplies Your Money',
+      ua: 'Складні відсотки: як час помножує ваш капітал'
+    },
+    metaDescription: {
+      en: 'See how $400/month invested early beats $800/month started 10 years later. A clear breakdown of compound interest with a free interactive calculator.',
+      ua: 'Як $400 щомісяця у 25 років перемагають $800 щомісяця у 35 — простий розбір складних відсотків і безкоштовний калькулятор.'
+    },
     category: 'calculator-guides',
     tags: ['compound-interest', 'beginner', 'calculator'],
     author: 'Investing Space',
@@ -510,6 +518,14 @@ TER (Total Expense Ratio, коефіцієнт загальних витрат) 
 Достатньо хороший ETF, що тримається 15 років, виграє у теоретично ідеального, який так і не купили.
 `
     },
+    metaTitle: {
+      en: 'How to Choose Your First ETF Without Overthinking It',
+      ua: 'Як вибрати перший ETF: 3 критерії що справді мають значення'
+    },
+    metaDescription: {
+      en: 'Most ETF guides overwhelm with 20+ factors. We cut it to 3: the index it tracks, the annual cost (TER under 0.30%), and fund size. Nothing else needed.',
+      ua: 'Більшість гідів перевантажують деталями. Три критерії що справді важливі: що відстежує фонд, річна плата TER до 0.30%, та розмір фонду.'
+    },
     category: 'investment-tools',
     tags: ['etf', 'index-fund', 'beginner', 'ter', 'passive-investing', 'portfolio'],
     author: 'Investing Space',
@@ -729,6 +745,14 @@ P/E існує у двох формах — і обидві важливі:
 
 Олег пропустив їх. Ціна в $12 здалась достатньою. Але ціна — це останнє на що варто було дивитись.
       `
+    },
+    metaTitle: {
+      en: 'How to Compare Stocks: 5 Metrics That Actually Matter',
+      ua: 'Як порівнювати акції: 5 показників перед покупкою'
+    },
+    metaDescription: {
+      en: 'Stock price tells you nothing. Check these 5 metrics before buying any stock: P/E ratio, revenue growth, debt-to-equity, dividend yield, and max drawdown.',
+      ua: 'Ціна акції нічого не говорить про її цінність. 5 показників що потрібно перевірити перед покупкою: P/E, зростання виручки, борг, дивіденди, просідання.'
     },
     category: 'investment-tools',
     tags: ['stocks', 'stock-analysis', 'p-e-ratio', 'dividends', 'beginners'],

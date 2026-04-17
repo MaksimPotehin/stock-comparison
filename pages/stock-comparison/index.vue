@@ -134,6 +134,20 @@
         </li>
       </ol>
     </section>
+
+    <!-- FAQ -->
+    <section class="bg-card rounded-lg p-4 md:p-5 border border-sb-border shadow-card">
+      <h2 class="text-base font-semibold text-sb-text mb-3">{{ $t('stockComparison.faq.title') }}</h2>
+      <dl class="space-y-4">
+        <div
+          v-for="(item, i) in $tm('stockComparison.faq.items')"
+          :key="i"
+        >
+          <dt class="text-sm font-medium text-sb-text">{{ (item as any).q }}</dt>
+          <dd class="text-sm text-sb-muted mt-1">{{ (item as any).a }}</dd>
+        </div>
+      </dl>
+    </section>
   </div>
 </template>
 
@@ -150,8 +164,16 @@ import StockMetricsTable from './components/StockMetricsTable.vue'
 import PopularTickers from './components/PopularTickers.vue'
 
 useSeo('stock-comparison')
-const { t } = useI18n()
+const { t, tm } = useI18n()
 const localePath = useLocalePath()
+
+const { addFAQSchema } = useStructuredData()
+addFAQSchema(() =>
+  (tm('stockComparison.faq.items') as Array<{ q: string; a: string }>).map(item => ({
+    question: item.q,
+    answer: item.a
+  }))
+)
 
 const PERIODS: TStockPeriod[] = ['1m', '3m', '6m', 'ytd', '1y', '5y']
 

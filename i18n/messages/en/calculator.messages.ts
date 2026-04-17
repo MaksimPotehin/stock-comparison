@@ -1,6 +1,6 @@
 export const calculatorMessages = {
-  title: 'Investment Calculator',
-  description: 'Calculate your potential investment returns with different parameters.',
+  title: 'Compound Interest Calculator',
+  description: 'Enter your initial deposit, monthly contributions, and interest rate to see how your investment grows over time.',
   results: 'Results',
   form: {
     enterData: 'Enter your investment data',
