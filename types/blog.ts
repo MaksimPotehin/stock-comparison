@@ -22,12 +22,15 @@ export interface IBlogPost {
   id: string
   slug: string
   title: IBlogLocalizedText
+  metaTitle?: IBlogLocalizedText
+  metaDescription?: IBlogLocalizedText
   excerpt: IBlogLocalizedText
   content: IBlogLocalizedText
   category: TBlogCategory
   tags: string[]
   author: string
   publishedAt: string
+  updatedAt?: string
   readingTime: number
   featured: boolean
   image?: string
